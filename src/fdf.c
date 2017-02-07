@@ -6,12 +6,11 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/07 20:39:22 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/07 21:13:21 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
 
 static int		ft_allocate_setup(t_setup *setup)
 {

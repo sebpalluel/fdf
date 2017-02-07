@@ -6,14 +6,14 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/02/06 17:34:40 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/02/07 21:23:24 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
-NAME = fillit
+NAME = fdf
 
-SRC = main.c \
-	  get_next_line.c \
+SRC =		src/fdf.c \
+			get_next_line/get_next_line.c \
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -21,8 +21,8 @@ CMP		=	gcc
 
 FLAGS	=	-Wall -Wextra -Werror
 
-LIB		=	-I /usr/X11/include -g -L libft/ -lft \
-			/usr/X11/lib -l mlx -framework OpenGL -framework AppKit
+LIB		=	-L libft/ -lft -L./mlx \
+			-lmlx -framework OpenGL -framework AppKit
 
 all : lib $(NAME)
 
@@ -45,3 +45,5 @@ fclean : clean
 	@echo "fclean done"
 
 re : fclean all
+
+.PHONY: $(NAME) all clean fclean re
