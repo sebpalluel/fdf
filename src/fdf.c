@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/07 21:53:16 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/15 18:52:40 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,61 @@ static int		usage(int mode)
 		ft_putendl("example: ./fdf map.fdf \"0,0,0\" \"255,255,255\"");
 	}
 	return (-1);
+}
+
+int				ft_key_hook(int keycode, void *param)
+{
+	t_setup		*setup;
+
+	setup = ft_use_setup(0);
+	if (setup->cam != 0 && param == &(*param))
+	{
+		if (keycode == 126)
+			setup->cam->x += 1 / 50.0;
+		if (keycode == 125)
+			setup->cam->x -= 1 / 50.0;
+		if (keycode == 123)
+			setup->cam->y += 1 / 50.0;
+		if (keycode == 124)
+			setup->cam->y -= 1 / 50.0;
+		if (keycode == 69)
+			cam_zoom(setup->cam, 0.5);
+		if (keycode == 78)
+			cam_zoom(setup->cam, -0.5);
+	}
+	if (keycode == 53)
+	{
+		ft_use_setup(2);
+		exit(1);
+	}
+	expose_hook(0);
+	return (0);
+}
+
+int				expose_hook(void *param)
+{
+	t_setup		*setup;
+	int			x;
+	int			y;
+
+	setup = ft_use_setup(0);
+	param = 0;
+	mlx_clear_window(setup->mlx_ptr, setup->win_ptr);
+	x = 0;
+	while (x < setup->map->width)
+	{
+		y = 0;
+		while (y < setup->map->height)
+		{
+			if ((x + 1) < setup->map->width)
+				render_lines(setup, x, y, 1);
+			if ((y + 1) < setup->map->height)
+				render_lines(setup, x, y, 0);
+			y++;
+		}
+		x++;
+	}
+	return (0);
 }
 
 static void		ft_mlx_process(t_setup *setup)
