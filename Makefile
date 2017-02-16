@@ -6,42 +6,52 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/02/07 21:23:24 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/02/16 13:15:39 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
 NAME = fdf
 
-SRC =		src/fdf.c \
-			get_next_line/get_next_line.c \
+SRC 		=	src/fdf.c \
+				libs/get_next_line/get_next_line.c \
 
-OBJ		=	$(SRC:.c=.o)
+EXT			=	Makefile
 
-CMP		=	gcc
+OBJ			=	$(SRC:.c=.o)
 
-FLAGS	=	-Wall -Wextra -Werror
+CMP			=	gcc
 
-LIB		=	-L libft/ -lft -L./mlx \
-			-lmlx -framework OpenGL -framework AppKit
+FLAGS		=	-Wall -Wextra -Werror
+
+LIB_DIR		=	-L libs/libft/ -L libs/minilibx
+LIBS		=	-lft -lmlx -framework OpenGL -framework AppKit
 
 all : lib $(NAME)
 
-$(NAME) :
-	@$(CMP) $(FLAGS) -o $(NAME) $(SRC) $(LIB)
+$(NAME) : $(OBJ) $(EXT)
+	@$(CMP) $(FLAGS) -o $(NAME) $(SRC) $(LIB_DIR) $(LIBS)
 	@echo "fdf compiled"
 
 lib :
-	@make re -C libft
+	@echo "compiling libft..."
+	@make -C libs/libft/ --no-print-directory
 	@echo "libft compiled"
+	@echo "compiling mlx..."
+	@make -C libs/minilibx/ --no-print-directory
+	@echo "mlx compiled"
 
 clean :
-	@rm -rf $(OBJ)
-	@make -C libft clean
+	@rm -f $(OBJ)
+	@echo "cleaning libft..."
+	@make -C libs/libft/ clean --no-print-directory
+	@echo "cleaning mlx..."
+	@make -C libs/minilibx/ clean --no-print-directory
 	@echo "clean done"
 
 fclean : clean
-	@rm -rf $(NAME)
-	@make -C libft fclean
+	@rm -f $(NAME)
+	@echo "full cleaning libft..."
+	@make -C libs/libft/ fclean --no-print-directory
 	@echo "fclean done"
 
 re : fclean all
