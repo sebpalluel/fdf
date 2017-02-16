@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/15 18:52:40 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/16 12:40:48 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int				ft_key_hook(int keycode, void *param)
 {
 	t_setup		*setup;
 
-	setup = ft_use_setup(0);
+	setup = ft_setup(1);
 	if (setup->cam != 0 && param == &(*param))
 	{
 		if (keycode == 126)
@@ -147,7 +147,7 @@ int				ft_key_hook(int keycode, void *param)
 	}
 	if (keycode == 53)
 	{
-		ft_use_setup(2);
+		ft_setup(0);
 		exit(1);
 	}
 	expose_hook(0);
@@ -209,6 +209,5 @@ int				main(int argc, char **argv)
 		ft_mlx_process(setup);
 
 	}
-
 	return (0);
 }
