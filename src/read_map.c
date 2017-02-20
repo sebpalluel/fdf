@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/20 16:44:22 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:33:28 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int			readed_to_map(int ***tab, char **readed, int size)
 	while (size - ++i + 1)
 	{
 		length = 0;
-		split_ret = ft_strsplit((char const*)readed[i], SEPARATOR);
+		split_ret = ft_strsplit((char const*)readed[i], ' ');
 		if (!check_if_number(split_ret, &length))
 			return (0);
 		tab[size - i] = (int**)malloc(sizeof(int*) * length + 1);
@@ -56,37 +56,30 @@ static int			readed_to_map(int ***tab, char **readed, int size)
 		{
 			(tab[size - i][length - j - 1]) = (int*)malloc(sizeof(int));
 			*(tab[size - i][length - j - 1]) = ft_atoi(split_ret[j]);
-			ft_strdel(&split_ret[j]);
 		}
 	}
-	free(split_ret);
+	ft_freetab(split_ret);
 	return (1);
 }
 
-int					ft_read_map(t_setup *setup, char *map_name)
+int					ft_read_map(t_setup *setup, int fd)
 {
 	int			***ret;
-	int			fd;
+	int			ret_gnl;
 	int			i;
-	char		**tab;
+	char		**tab = NULL;
 
 	i = -1;
-	tab = (char**)malloc(sizeof(char*) * TAB_SIZE_MAX);
-	fd = open(map_name, O_RDONLY);
-	while (get_next_line(fd, &(tab[++i])))
-		if (i > TAB_SIZE_MAX)
-			return (NULL);
-	if (!tab || !tab[0] || !tab[0][0])
-		return (NULL);
-	tab[i] = NULL;
+	while ((ret_gnl = get_next_line(fd, &tab[++i])))
+	{
+
+		i++;
+	}
 	ret = (int***)malloc(sizeof(int**) * i + 1);
 	ret[i] = NULL;
 	if (!readed_to_map(ret, tab, i))
-		return (NULL);
-	i = -1;
-	while (tab[++i])
-		ft_strdel(&(tab[i]));
-	free(tab);
+		return (0);
+	ft_freetab(tab);
 	close(fd);
-	return (ret);
+	return (1);
 }
