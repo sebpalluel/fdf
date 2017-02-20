@@ -6,13 +6,13 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 15:07:02 by psebasti          #+#    #+#             */
-/*   Updated: 2017/01/28 21:38:05 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/20 12:47:30 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# include "libft/libft.h"
+# include "libs/libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
