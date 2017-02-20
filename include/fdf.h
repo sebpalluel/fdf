@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/20 16:25:08 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/20 16:28:30 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "../include/fdf_struct.h"
 # include "../include/fdf_define.h"
 
-int		ft_color_input(char **argv, int argc, t_setup *setup)
+int		ft_color_input(char **argv, int argc, t_setup *setup);
+void	ft_mlx_process(t_setup *setup);
 
 #endif
