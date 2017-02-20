@@ -6,55 +6,11 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/16 12:40:48 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/20 16:44:55 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-t_color			*new_color(char r, char g, char b)
-{
-	t_color		*col;
-
-	col = (t_color*)malloc(sizeof(t_color));
-	col->r = r;
-	col->g = g;
-	col->b = b;
-	return (col);
-}
-
-static int		ft_color_parse(char *arg, t_color *color)
-{
-	char		**arg_color;
-
-	if (ft_strlen(arg) < 5 || ft_strlen(arg) > 11)
-		return (0);
-	arg_color = ft_strsplit(arg, ',');
-	if (!arg_color || !arg_color[0] || !arg_color[1] || !arg_color[2])
-		return (0);
-	color = new_color((unsigned char)ft_atoi(arg_color[0]), \
-			(unsigned char)ft_atoi(arg_color[1]), \
-			(unsigned char)ft_atoi(arg_color[2]));
-	return (1);
-}
-
-static int		ft_color_input(char **argv, int argc, t_setup *setup)
-{
-	if (argc == 4)
-	{
-		if (!ft_color_parse(argv[3], setup->lerp_in) || \
-				!ft_color_parse(argv[4], setup->lerp_out))
-			return (-1);
-	}
-	else
-	{
-		setup->lerp_in = new_color(0, 0, 0);
-		setup->lerp_out = new_color(255, 255, 255);
-	}
-	if (setup->lerp_in && setup->lerp_out)
-		return (1);
-	return (0);
-}
 
 static t_cam	*setup_cam(int width, int height)
 {
@@ -125,75 +81,6 @@ static int		usage(int mode)
 	return (-1);
 }
 
-int				ft_key_hook(int keycode, void *param)
-{
-	t_setup		*setup;
-
-	setup = ft_setup(1);
-	if (setup->cam != 0 && param == &(*param))
-	{
-		if (keycode == 126)
-			setup->cam->x += 1 / 50.0;
-		if (keycode == 125)
-			setup->cam->x -= 1 / 50.0;
-		if (keycode == 123)
-			setup->cam->y += 1 / 50.0;
-		if (keycode == 124)
-			setup->cam->y -= 1 / 50.0;
-		if (keycode == 69)
-			cam_zoom(setup->cam, 0.5);
-		if (keycode == 78)
-			cam_zoom(setup->cam, -0.5);
-	}
-	if (keycode == 53)
-	{
-		ft_setup(0);
-		exit(1);
-	}
-	expose_hook(0);
-	return (0);
-}
-
-int				expose_hook(void *param)
-{
-	t_setup		*setup;
-	int			x;
-	int			y;
-
-	setup = ft_use_setup(0);
-	param = 0;
-	mlx_clear_window(setup->mlx_ptr, setup->win_ptr);
-	x = 0;
-	while (x < setup->map->width)
-	{
-		y = 0;
-		while (y < setup->map->height)
-		{
-			if ((x + 1) < setup->map->width)
-				render_lines(setup, x, y, 1);
-			if ((y + 1) < setup->map->height)
-				render_lines(setup, x, y, 0);
-			y++;
-		}
-		x++;
-	}
-	return (0);
-}
-
-static void		ft_mlx_process(t_setup *setup)
-{
-	setup->mlx_ptr = mlx_init();
-	if (setup->mlx_ptr != 0 && (setup->win_ptr =
-				mlx_new_window(setup->mlx_ptr, setup->width,
-					setup->height, "fdf")) != 0)
-	{
-		cam_scale_to_obj(setup->cam, setup->map->width, setup->map->height);
-		mlx_key_hook(setup->win_ptr, ft_key_hook, 0);
-		mlx_expose_hook(setup->win_ptr, ft_expose_hook, 0);
-		mlx_loop(setup->mlx_ptr);
-	}
-}
-
 int				main(int argc, char **argv)
 {
 	t_setup 	*setup;
@@ -204,10 +91,8 @@ int				main(int argc, char **argv)
 	ret = ft_setup(setup, argv, argc, 1);
 	if (!ret)
 		return (usage(ret));
-	else
-	{
+	if (ft_read_map(setup, argv[1]))
 		ft_mlx_process(setup);
-
-	}
+	ft_setup(setup, argv, argc, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/20 16:28:30 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/20 16:44:43 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 
 int		ft_color_input(char **argv, int argc, t_setup *setup);
 void	ft_mlx_process(t_setup *setup);
+int		ft_read_map(t_setup *setup, char *map_name);
 
 #endif
