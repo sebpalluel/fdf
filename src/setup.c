@@ -6,25 +6,37 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 15:26:33 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 16:13:05 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-static t_cam	*setup_cam(int width, int height)
+t_vec3			*new_vec3(double x, double y, double z)
+{
+	t_vec3		*vec3;
+
+	vec3 = (t_vec3*)malloc(sizeof(t_vec3));
+	vec3->x = x;
+	vec3->y = y;
+	vec3->z = z;
+	return (vec3);
+}
+
+static void		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
 {
 	t_cam		*cam;
 
 	if ((cam = (t_cam*)ft_memalloc(sizeof(t_cam))))
 	{
-		cam->x = 0.5;
-		cam->y = 0.5;
-		cam->scale = 20;
-		cam->offset_x = width / 2.0;
-		cam->offset_y = height / 2.0;
+		cam->pos = pos;
+		cam->rot = rot;
+		cam->scale = 1.;
+		cam->fov = fov;
+		cam->offset_x = setup->width / 2.0;
+		cam->offset_y = setup->height / 2.0;
 	}
-	return (cam);
+	CAM = cam;
 }
 
 static int		ft_allocate_setup(t_setup *setup)
@@ -32,8 +44,8 @@ static int		ft_allocate_setup(t_setup *setup)
 	setup = (t_setup *)ft_memalloc(sizeof(t_setup));
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
-	if ((CAM = setup_cam(setup->width, setup->height)) && \
-			(MAP = (t_map *)ft_memalloc(sizeof(t_map))) && \
+	ft_setup_cam(setup, new_vec3(0, 0, 1500), new_vec3(0, 0, 0), 2000);
+	if (CAM && (MAP = (t_map *)ft_memalloc(sizeof(t_map))) && \
 			(MLX = (t_mlx *)ft_memalloc(sizeof(t_mlx))))
 		return (1);
 	return (0);
@@ -44,6 +56,8 @@ void			ft_delete_setup(t_setup *setup)
 	ft_memdel((void **)&(setup->lerp_in));
 	ft_memdel((void **)&(setup->lerp_out));
 	ft_memdel((void **)&(CAM));
+	ft_memdel((void **)&(CAM->pos));
+	ft_memdel((void **)&(CAM->rot));
 	ft_memdel((void **)&(MAP));
 	ft_memdel((void **)&(MLX));
 	ft_memdel((void **)&(setup));

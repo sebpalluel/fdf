@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 14:29:18 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:56:22 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ typedef struct		s_map
 
 typedef struct		s_cam
 {
-	double			x;
-	double			y;
+	t_vec3			*pos;
+	t_vec3			*rot;
 	double			scale;
+	double			fov;
 	double			offset_x;
 	double			offset_y;
 }					t_cam;
