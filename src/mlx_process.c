@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 15:12:26 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:26:59 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static int				ft_expose_hook(t_setup *setup)
 
 	mlx_clear_window(MLX->mlx_ptr, MLX->win_ptr);
 	x = 0;
-	while (x < MAP->width)
+	while (x < M_WIDTH)
 	{
 		y = 0;
-		while (y < MAP->height)
+		while (y < M_HEIGHT)
 		{
-			if ((x + 1) < MAP->width)
+			if ((x + 1) < M_WIDTH)
 				render_lines(setup, x, y, 1);
-			if ((y + 1) < MAP->height)
+			if ((y + 1) < M_HEIGHT)
 				render_lines(setup, x, y, 0);
 			y++;
 		}
@@ -69,7 +69,7 @@ void		ft_mlx_process(t_setup *setup)
 				mlx_new_window(MLX->mlx_ptr, setup->width,
 					setup->height, "fdf")) != 0)
 	{
-		cam_scale_to_obj(CAM, MAP->width, MAP->height);
+		cam_scale_to_obj(CAM, M_WIDTH, M_HEIGHT);
 		mlx_key_hook(MLX->win_ptr, ft_key_hook, setup);
 		mlx_expose_hook(MLX->win_ptr, ft_expose_hook, setup);
 		mlx_loop(MLX->mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 13:29:38 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:23:48 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # define MAX_SIZE	100000
 
 # define MAP		setup->map
+# define M_WIDTH	setup->map->width
+# define M_HEIGHT	setup->map->height
+# define M_DEPTH	setup->map->depth
 # define CAM		setup->cam
 # define MLX		setup->mlx
 

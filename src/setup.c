@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 15:14:47 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:26:33 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int				ft_setup(t_setup *setup, char **argv, int argc, int allocate)
 	if (allocate)
 	{
 		allocate = ft_allocate_setup(setup);
-		MAP->width = 0;
-		MAP->height = 0;
+		M_WIDTH = 0;
+		M_HEIGHT = 0;
 		allocate = ft_color_input(argv, argc, setup);
 	}
 	if (!allocate && setup)
