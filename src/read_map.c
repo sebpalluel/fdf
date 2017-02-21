@@ -6,11 +6,19 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/20 18:55:19 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 12:46:12 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+static int			ft_free_tmp(char **tab, int ***tab_int, int return_val)
+{
+	ft_freetab(tab);
+	ft_freetab((char **)*tab_int);
+	free(tab_int);
+	return (return_val);
+}
 
 static int			check_if_number(char **data, int *width)
 {
@@ -34,7 +42,7 @@ static int			check_if_number(char **data, int *width)
 	return (1);
 }
 
-static int			readed_to_map(t_setup *setup, int ***tab, char **readed)
+static int			ft_parse_map(t_setup *setup, int ***tab, char **readed)
 {
 	int			j;
 	int			i;
@@ -59,32 +67,26 @@ static int			readed_to_map(t_setup *setup, int ***tab, char **readed)
 			*(tab[MAP->height - i][width - j - 1]) = ft_atoi(split_ret[j]);
 		}
 	}
-	MAP->height++;
 	ft_freetab(split_ret);
 	return (1);
 }
 
 int					ft_read_map(t_setup *setup, int fd)
 {
-	int			***ret;
+	int			***tab_int;
 	int			ret_gnl;
 	char		**tab = NULL;
 
 	MAP->height = -1;
 	tab = (char**)malloc(sizeof(char*) * MAX_SIZE);
-	while ((ret_gnl = get_next_line(fd, &tab[MAP->height])))
+	while ((ret_gnl = get_next_line(fd, &tab[++MAP->height])))
 		if (MAP->height > MAX_SIZE)
 			return (0);
-	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1)
-		return (0);
 	tab[MAP->height] = NULL;
-	ret = (int***)malloc(sizeof(int**) * MAP->height + 1);
-	ret[MAP->height] = NULL;
-	if (!readed_to_map(setup, ret, tab))
-		return (0);
-	ft_freetab(tab);
-	ft_freetab((char **)*ret);
-	free(ret);
+	tab_int = (int***)malloc(sizeof(int**) * MAP->height + 1);
+	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !tab_int || \
+			!ft_parse_map(setup, tab_int, tab))
+		return(ft_free_tmp(tab, tab_int, 0));
 	close(fd);
-	return (1);
+	return(ft_free_tmp(tab, tab_int, 1));
 }
