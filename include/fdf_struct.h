@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/07 21:32:12 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 14:29:18 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,14 @@ typedef struct		s_vec3
 	double			x;
 	double			y;
 	double			z;
-	int				color;
 }					t_vec3;
+
+typedef struct		s_pix
+{
+	int				x;
+	int				y;
+	int				z;
+}					t_pix;
 
 typedef struct		s_color
 {
@@ -33,7 +39,8 @@ typedef struct		s_map
 	int				width;
 	int				height;
 	int				depth;
-	t_vec3			**vec3;
+	int				***map3D;
+	t_pix			**pix;
 }					t_map;
 
 typedef struct		s_cam
@@ -45,14 +52,19 @@ typedef struct		s_cam
 	double			offset_y;
 }					t_cam;
 
+typedef struct		s_mlx
+{
+	void			*mlx_ptr;
+	void			*win_ptr;
+}					t_mlx;
+
 typedef struct		s_setup 
 {
 	unsigned int	width;
 	unsigned int	height;
 	t_color			*lerp_in;
 	t_color			*lerp_out;
-	void			*mlx_ptr;
-	void			*win_ptr;
+	t_mlx			*mlx;
 	t_map			*map;
 	t_cam			*cam;
 }					t_setup;

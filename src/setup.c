@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/20 16:47:31 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:13:00 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ static int		ft_allocate_setup(t_setup *setup)
 	setup = (t_setup *)ft_memalloc(sizeof(t_setup));
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
-	if ((setup->cam = setup_cam(setup->width, setup->height)) && \
-			(setup->map = (t_map *)ft_memalloc(sizeof(t_map))))
+	if ((CAM = setup_cam(setup->width, setup->height)) && \
+			(MAP = (t_map *)ft_memalloc(sizeof(t_map))) && \
+			(MLX = (t_mlx *)ft_memalloc(sizeof(t_mlx))))
 		return (1);
 	return (0);
 }
@@ -42,9 +43,9 @@ static void		ft_delete_setup(t_setup *setup)
 {
 	ft_memdel((void **)&(setup->lerp_in));
 	ft_memdel((void **)&(setup->lerp_out));
-	ft_memdel((void **)&(setup->cam));
-	ft_memdel((void **)&(setup->map->vec3));
-	ft_memdel((void **)&(setup->map));
+	ft_memdel((void **)&(CAM));
+	ft_memdel((void **)&(MAP));
+	ft_memdel((void **)&(MLX));
 	ft_memdel((void **)&(setup));
 }
 
@@ -54,8 +55,8 @@ int				ft_setup(t_setup *setup, char **argv, int argc, int allocate)
 	if (allocate)
 	{
 		allocate = ft_allocate_setup(setup);
-		setup->map->width = 0;
-		setup->map->height = 0;
+		MAP->width = 0;
+		MAP->height = 0;
 		allocate = ft_color_input(argv, argc, setup);
 	}
 	if (!allocate && setup)
