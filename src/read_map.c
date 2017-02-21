@@ -6,41 +6,40 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 15:26:09 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 16:48:44 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-static int			ft_free_tmp(char **tab, int ***tab_int, int fd, int return_val)
+static void			ft_free_tmp(char **tab, int ***tab_int, int fd, int erase_tab)
 {
-	if (!return_val)
+	if (!erase_tab)
 	{
 		ft_freetab(tab);
 		ft_freetab((char **)*tab_int);
 	}
 	free(tab_int);
 	close(fd);
-	return (return_val);
 }
 
-static int			check_if_number(char **data, int *width)
+static int			ft_check_if_number(char **tab, int *width)
 {
 	int		len;
 	int		i;
 	int		j;
 
 	len = -1;
-	while (data[++len])
+	while (tab[++len])
 		;
 	*width = len;
 	i = -1;
-	while (data[++i])
+	while (tab[++i])
 	{
 		j = -1;
-		while (data[i][++j])
-			if ((data[i][j] < 48 || data[i][j] > 57)
-					&& data[i][j] != 45 && data[i][j] != ' ')
+		while (tab[i][++j])
+			if (!ft_isdigit(tab[i][j]) &&\
+						tab[i][j] != '-' && tab[i][j] != ' ')
 				return (0);
 	}
 	return (1);
@@ -60,7 +59,7 @@ static int			ft_parse_map(t_setup *setup, int ***tab_int, char **tab)
 	{
 		width = 0;
 		split_ret = ft_strsplit((char const*)tab[i], ' ');
-		if (!check_if_number(split_ret, &width))
+		if (!ft_check_if_number(split_ret, &width))
 			return (0);
 		tab_int[M_HEIGHT - i] = (int**)malloc(sizeof(int*) * width + 1);
 		tab_int[M_HEIGHT - i][width] = NULL;
@@ -75,9 +74,9 @@ static int			ft_parse_map(t_setup *setup, int ***tab_int, char **tab)
 	return (1);
 }
 
-int					ft_read_map(t_setup *setup, int fd)
+int					***ft_read_map(t_setup *setup, int fd)
 {
-	int			***tab_int;
+	int			***tab_int = NULL;
 	int			ret_gnl;
 	char		**tab = NULL;
 
@@ -90,7 +89,10 @@ int					ft_read_map(t_setup *setup, int fd)
 	tab_int = (int***)malloc(sizeof(int**) * M_HEIGHT + 1);
 	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !tab_int || \
 			!ft_parse_map(setup, tab_int, tab))
-		return(ft_free_tmp(tab, tab_int, fd, 0));
-	MAP->map3D = tab_int;
-	return(ft_free_tmp(tab, tab_int, fd, 1));
+	{
+		ft_free_tmp(tab, tab_int, fd, 0);
+		return (NULL);
+	}
+	ft_free_tmp(tab, tab_int, fd, 1);
+	return (tab_int);
 }

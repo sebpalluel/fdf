@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 16:13:05 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 16:18:40 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@ t_vec3			*new_vec3(double x, double y, double z)
 {
 	t_vec3		*vec3;
 
-	vec3 = (t_vec3*)malloc(sizeof(t_vec3));
-	vec3->x = x;
-	vec3->y = y;
-	vec3->z = z;
+	if ((vec3 = (t_vec3*)malloc(sizeof(t_vec3))))
+	{
+		vec3->x = x;
+		vec3->y = y;
+		vec3->z = z;
+	}
 	return (vec3);
 }
 
 static void		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
 {
-	t_cam		*cam;
+	t_cam		*cam = NULL;
 
-	if ((cam = (t_cam*)ft_memalloc(sizeof(t_cam))))
+	if ((cam = (t_cam*)ft_memalloc(sizeof(t_cam))) && setup && pos && rot)
 	{
 		cam->pos = pos;
 		cam->rot = rot;
@@ -55,9 +57,9 @@ void			ft_delete_setup(t_setup *setup)
 {
 	ft_memdel((void **)&(setup->lerp_in));
 	ft_memdel((void **)&(setup->lerp_out));
-	ft_memdel((void **)&(CAM));
 	ft_memdel((void **)&(CAM->pos));
 	ft_memdel((void **)&(CAM->rot));
+	ft_memdel((void **)&(CAM));
 	ft_memdel((void **)&(MAP));
 	ft_memdel((void **)&(MLX));
 	ft_memdel((void **)&(setup));
