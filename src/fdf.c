@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 17:45:37 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 22:43:24 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		usage(int mode)
 int				main(int argc, char **argv)
 {
 	t_setup 	*setup;
-	int			***map_tmp;
+	int			***tmp_map;
 	int			ret;
 	int			fd;
 
@@ -40,8 +40,8 @@ int				main(int argc, char **argv)
 	ret = ft_setup(setup, argv, argc, 1);
 	if (!ret || (fd = open(argv[1], O_RDONLY) < 3))
 		return (usage(ret));
-	if ((map_tmp = ft_read_map(setup, fd)) &&\
-			(ft_populate_map(setup, map_tmp)))
+	if ((tmp_map = ft_read_map(setup, fd)) &&\
+			(ft_populate_map(setup, tmp_map)))
 		ft_mlx_process(setup);
 	ft_setup(setup, argv, argc, 0);
 	return (0);
