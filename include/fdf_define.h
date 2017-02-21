@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 15:23:48 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 17:26:59 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define WIDTH		1920
 # define HEIGHT		1080
+
+# define STEP		2
 
 # define ESC		53
 # define LEFT		123

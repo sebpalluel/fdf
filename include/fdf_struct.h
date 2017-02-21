@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 15:56:22 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 17:33:21 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct		s_map
 	int				height;
 	int				depth;
 	int				***map3D;
-	t_pix			**pix;
+	t_pix			***pix;
 }					t_map;
 
 typedef struct		s_cam
