@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 18:58:00 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 23:09:39 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		***ft_read_map(t_setup *setup, int fd);
 int		ft_setup(t_setup *setup, char **argv, int argc, int allocate);
 void	ft_delete_setup(t_setup *setup);
 t_vec3	*ft_new_vec3(double x, double y, double z);
+t_pix	*ft_new_pix(int x, int y, int z);
 int		ft_populate_map(t_setup *setup, int ***map_tmp);
 
 double		**ft_matrix_zero(int size);

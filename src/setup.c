@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 16:18:40 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 23:09:20 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ t_vec3			*new_vec3(double x, double y, double z)
 		vec3->z = z;
 	}
 	return (vec3);
+}
+
+t_pix				*ft_new_pix(int x, int y, int z)
+{
+	t_pix		*pix;
+
+	pix = (t_pix*)malloc(sizeof(t_pix));
+	pix->x = x;
+	pix->y = y;
+	pix->z = z;
+	return (pix);
 }
 
 static void		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
