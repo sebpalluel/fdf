@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 15:13:00 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:14:47 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int		ft_allocate_setup(t_setup *setup)
 	return (0);
 }
 
-static void		ft_delete_setup(t_setup *setup)
+void			ft_delete_setup(t_setup *setup)
 {
 	ft_memdel((void **)&(setup->lerp_in));
 	ft_memdel((void **)&(setup->lerp_out));
@@ -51,7 +51,6 @@ static void		ft_delete_setup(t_setup *setup)
 
 int				ft_setup(t_setup *setup, char **argv, int argc, int allocate)
 {
-
 	if (allocate)
 	{
 		allocate = ft_allocate_setup(setup);
