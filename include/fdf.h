@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 17:47:58 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/21 18:58:00 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,14 @@ void	ft_delete_setup(t_setup *setup);
 t_vec3	*ft_new_vec3(double x, double y, double z);
 int		ft_populate_map(t_setup *setup, int ***map_tmp);
 
+double		**ft_matrix_zero(int size);
+double		**ft_matrix_translate(t_vec3 *vector);
+double		**ft_matrix_homothety(int factor);
+double		**ft_matrix_mult(double **m, double **n, int size);
+double		**ft_matrix_add(double **m, double **n, int size);
+double		**ft_matrix_rot_x(double deg);
+double		**ft_matrix_rot_y(double deg);
+double		**ft_matrix_rot_z(double deg);
+void		ft_matrix_on_point(t_vec3 *vec3, double **m);
+	
 #endif
