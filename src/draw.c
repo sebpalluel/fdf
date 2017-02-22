@@ -6,13 +6,22 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/22 16:04:21 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/22 18:24:29 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b, t_map *map)
+void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
+{
+	unsigned int	color;
+
+	color = clr->r * 65536 + clr->g * 256 + clr->b;
+	mlx_pixel_put(MLX->mlx_ptr, MLX->win_ptr, setup->width / 2 + pix->y,
+			setup->height / 2 + pix->x, color);
+}
+
+void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 {
 	double		xyzi[3];
 	int			i;
@@ -31,8 +40,8 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b, t_map *map)
 	xyzi[2] = (double)(b->z - a->z) / step;
 	while (++i < step)
 	{
-		clr = give_color(pix->z, map);
-		put_pix(mlx, pix, clr);
+		clr = ft_give_color(pix->z, MAP);
+		ft_put_pix(setup, pix, clr);
 		pix->x = a->x + round((double)i * xyzi[0]);
 		pix->y = a->y + round((double)i * xyzi[1]);
 		pix->z = a->z + round((double)i * xyzi[2]);
@@ -41,31 +50,31 @@ void			draw_line(t_mlx *mlx, t_pix *a, t_pix *b, t_map *map)
 	free(pix);
 }
 
-static void		draw_map_column(t_mlx *mlx, t_map *map, int j)
+static void		ft_draw_map_column(t_setup *setup, int j)
 {
 	int	i;
 
 	i = 0;
-	while (map->map[i + 1])
+	while (MAP->map[i + 1])
 	{
-		draw_line(mlx, map->map[i][j], map->map[i + 1][j], map);
+		ft_draw_line(setup, MAP->map[i][j], MAP->map[i + 1][j]);
 		i++;
 	}
 }
 
-static void		draw_map_line(t_mlx *mlx, t_map *map, int i)
+static void		ft_draw_map_line(t_setup *setup, int i)
 {
 	int	j;
 
 	j = 0;
-	while (map->map[i][j + 1])
+	while (MAP->map[i][j + 1])
 	{
-		draw_line(mlx, map->map[i][j], map->map[i][j + 1], map);
+		ft_draw_line(setup, MAP->map[i][j], MAP->map[i][j + 1]);
 		j++;
 	}
 }
 
-void			draw_map_point(t_mlx *mlx, t_map *map)
+void			ft_draw_map_point(t_setup *setup)
 {
 	t_pix	*pix;
 	int		i;
@@ -73,31 +82,31 @@ void			draw_map_point(t_mlx *mlx, t_map *map)
 
 	pix = ft_new_pix(0, 0, 0);
 	i = -1;
-	while (map->map[++i])
+	while (MAP->map[++i])
 	{
 		j = -1;
-		while (map->map[i][++j])
+		while (MAP->map[i][++j])
 		{
-			pix = map->map[i][j];
-			put_pix(mlx, pix, give_color(pix->z, map));
+			pix = MAP->map[i][j];
+			ft_put_pix(setup, pix, ft_give_color(pix->z, MAP));
 		}
 	}
 }
 
-void			draw_map(t_mlx *mlx, t_map *map)
+void			ft_draw_map(t_setup *setup)
 {
 	int i;
 
 	i = 0;
-	while (map->map[i])
+	while (MAP->map[i])
 	{
-		draw_map_line(mlx, map, i);
+		ft_draw_map_line(setup, i);
 		i++;
 	}
 	i = 0;
-	while (map->map[0][i])
+	while (MAP->map[0][i])
 	{
-		draw_map_column(mlx, map, i);
+		ft_draw_map_column(setup, i);
 		i++;
 	}
 }
