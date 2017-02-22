@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:22:36 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/22 16:25:36 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/22 18:00:15 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ int				ft_color_input(char **argv, int argc, t_setup *setup)
 {
 	if (argc == 4)
 	{
-		if (!ft_color_parse(argv[3], setup->lerp_in) || \
-				!ft_color_parse(argv[4], setup->lerp_out))
+		if (!ft_color_parse(argv[3], MAP->lerp_in) || \
+				!ft_color_parse(argv[4], MAP->lerp_out))
 			return (-1);
 	}
 	else
 	{
-		setup->lerp_in = ft_new_color(0, 0, 0);
-		setup->lerp_out = ft_new_color(255, 255, 255);
+		MAP->lerp_in = ft_new_color(0, 0, 0);
+		MAP->lerp_out = ft_new_color(255, 255, 255);
 	}
-	if (setup->lerp_in && setup->lerp_out)
+	if (MAP->lerp_in && MAP->lerp_out)
 		return (1);
 	return (0);
 }
@@ -62,24 +62,24 @@ t_color				*give_color(int z, t_map *map)
 	double		rgb[3];
 
 	if (z == 0)
-		return (ft_new_color(map->clr_from->r,
-					map->clr_from->g, map->clr_from->b));
+		return (ft_new_color(map->lerp_in->r,
+					map->lerp_in->g, map->lerp_in->b));
 	else if (z < 0)
 		z = -z;
-	else if (z == map->zmax)
-		return (ft_new_color(map->clr_to->r, map->clr_to->g, map->clr_to->b));
-	coef = (double)z / (double)(map->zmax);
-	if (map->clr_to->r - map->clr_from->r)
-		rgb[0] = (double)(map->clr_to->r - map->clr_from->r) * coef;
+	else if (z == map->depth)
+		return (ft_new_color(map->lerp_out->r, map->lerp_out->g, map->lerp_out->b));
+	coef = (double)z / (double)(map->depth);
+	if (map->lerp_out->r - map->lerp_in->r)
+		rgb[0] = (double)(map->lerp_out->r - map->lerp_in->r) * coef;
 	else
-		rgb[0] = map->clr_to->r;
-	if (map->clr_to->g - map->clr_from->g)
-		rgb[1] = (double)(map->clr_to->g - map->clr_from->g) * coef;
+		rgb[0] = map->lerp_out->r;
+	if (map->lerp_out->g - map->lerp_in->g)
+		rgb[1] = (double)(map->lerp_out->g - map->lerp_in->g) * coef;
 	else
-		rgb[1] = map->clr_to->g;
-	if (map->clr_to->b - map->clr_from->b)
-		rgb[2] = (double)(map->clr_to->b - map->clr_from->b) * coef;
+		rgb[1] = map->lerp_out->g;
+	if (map->lerp_out->b - map->lerp_in->b)
+		rgb[2] = (double)(map->lerp_out->b - map->lerp_in->b) * coef;
 	else
-		rgb[2] = map->clr_to->b;
+		rgb[2] = map->lerp_out->b;
 	return (ft_new_color((char)rgb[0], (char)rgb[1], (char)rgb[2]));
 }

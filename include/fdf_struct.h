@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 22:40:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/22 17:58:21 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct		s_map
 	int				width;
 	int				height;
 	int				depth;
+	t_color			*lerp_in;
+	t_color			*lerp_out;
 	int				***tmp_map;
 	t_pix			***map;
 }					t_map;
@@ -63,8 +65,6 @@ typedef struct		s_setup
 {
 	unsigned int	width;
 	unsigned int	height;
-	t_color			*lerp_in;
-	t_color			*lerp_out;
 	t_mlx			*mlx;
 	t_map			*map;
 	t_cam			*cam;
