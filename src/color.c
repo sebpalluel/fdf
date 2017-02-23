@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:22:36 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/22 18:00:15 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/22 18:09:10 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				ft_color_input(char **argv, int argc, t_setup *setup)
 	return (0);
 }
 
-t_color				*give_color(int z, t_map *map)
+t_color				*ft_give_color(int z, t_map *map)
 {
 	double		coef;
 	double		rgb[3];

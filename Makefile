@@ -6,14 +6,14 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/02/16 13:15:39 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/02/16 13:21:37 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
 NAME = fdf
 
 SRC 		=	src/fdf.c \
-				libs/get_next_line/get_next_line.c \
+				get_next_line/get_next_line.c \
 
 EXT			=	Makefile
 

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 23:09:39 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/22 23:42:35 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,18 @@ void	ft_delete_setup(t_setup *setup);
 t_vec3	*ft_new_vec3(double x, double y, double z);
 t_pix	*ft_new_pix(int x, int y, int z);
 int		ft_populate_map(t_setup *setup, int ***map_tmp);
+t_color	*ft_give_color(int z, t_map *map);
+void	ft_draw_map_point(t_setup *setup);
+void	ft_draw_map(t_setup *setup);
 
-double		**ft_matrix_zero(int size);
-double		**ft_matrix_translate(t_vec3 *vector);
-double		**ft_matrix_homothety(int factor);
-double		**ft_matrix_mult(double **m, double **n, int size);
-double		**ft_matrix_add(double **m, double **n, int size);
-double		**ft_matrix_rot_x(double deg);
-double		**ft_matrix_rot_y(double deg);
-double		**ft_matrix_rot_z(double deg);
-void		ft_matrix_on_point(t_vec3 *vec3, double **m);
+double	**ft_matrix_zero(int size);
+double	**ft_matrix_translate(t_vec3 *vector);
+double	**ft_matrix_homothety(int factor);
+double	**ft_matrix_mult(double **m, double **n, int size);
+double	**ft_matrix_add(double **m, double **n, int size);
+double	**ft_matrix_rot_x(double deg);
+double	**ft_matrix_rot_y(double deg);
+double	**ft_matrix_rot_z(double deg);
+void	ft_matrix_on_point(t_vec3 *vec3, double **m);
 	
 #endif
