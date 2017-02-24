@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/22 23:42:35 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/24 18:19:28 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,17 @@
 # include <errno.h>
 # include "../libs/minilibx/mlx.h"
 # include "../libs/libft/libft.h"
-# include "../get_next_line/get_next_line.h"
 # include "../include/fdf_struct.h"
 # include "../include/fdf_define.h"
 
 int		ft_color_input(char **argv, int argc, t_setup *setup);
-void	ft_mlx_process(t_setup *setup);
+void	ft_mlx_process(t_setup *setup, int ***tmp_map);
 int		***ft_read_map(t_setup *setup, int fd);
 int		ft_setup(t_setup *setup, char **argv, int argc, int allocate);
 void	ft_delete_setup(t_setup *setup);
 t_vec3	*ft_new_vec3(double x, double y, double z);
 t_pix	*ft_new_pix(int x, int y, int z);
-int		ft_populate_map(t_setup *setup, int ***map_tmp);
+int		ft_update_map_and_cam(t_setup *setup, int ***tmp_map);
 t_color	*ft_give_color(int z, t_map *map);
 void	ft_draw_map_point(t_setup *setup);
 void	ft_draw_map(t_setup *setup);
