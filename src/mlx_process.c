@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/24 18:05:35 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/24 18:22:52 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static int				ft_expose_hook(t_setup *setup)
 {
-	int			x;
-	int			y;
-
 	mlx_clear_window(MLX->mlx_ptr, MLX->win_ptr);
 	ft_draw_map(setup);
 	return (0);

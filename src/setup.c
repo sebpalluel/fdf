@@ -6,13 +6,13 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 23:09:20 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/24 18:26:40 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-t_vec3			*new_vec3(double x, double y, double z)
+t_vec3			*ft_new_vec3(double x, double y, double z)
 {
 	t_vec3		*vec3;
 
@@ -57,7 +57,7 @@ static int		ft_allocate_setup(t_setup *setup)
 	setup = (t_setup *)ft_memalloc(sizeof(t_setup));
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
-	ft_setup_cam(setup, new_vec3(0, 0, 1500), new_vec3(0, 0, 0), 2000);
+	ft_setup_cam(setup, ft_new_vec3(0, 0, 1500), ft_new_vec3(0, 0, 0), 2000);
 	if (CAM && (MAP = (t_map *)ft_memalloc(sizeof(t_map))) && \
 			(MLX = (t_mlx *)ft_memalloc(sizeof(t_mlx))))
 		return (1);
@@ -66,8 +66,8 @@ static int		ft_allocate_setup(t_setup *setup)
 
 void			ft_delete_setup(t_setup *setup)
 {
-	ft_memdel((void **)&(setup->lerp_in));
-	ft_memdel((void **)&(setup->lerp_out));
+	ft_memdel((void **)&(MAP->lerp_in));
+	ft_memdel((void **)&(MAP->lerp_out));
 	ft_memdel((void **)&(CAM->pos));
 	ft_memdel((void **)&(CAM->rot));
 	ft_memdel((void **)&(CAM));

@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/02/24 18:20:43 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/02/24 18:25:07 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -17,6 +17,7 @@ SRC 		=	src/fdf.c \
 				src/draw.c \
 				src/mlx_process.c \
 				src/read_map.c \
+				src/matrix.c \
 				src/setup.c \
 				src/update_map.c \
 

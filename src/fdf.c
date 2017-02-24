@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/24 18:06:03 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/24 18:22:27 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int		usage(int mode)
 
 int				main(int argc, char **argv)
 {
-	t_setup 	*setup;
-	int			***tmp_map;
+	t_setup 	*setup = NULL;
+	int			***tmp_map = NULL;
 	int			ret;
 	int			fd;
 
