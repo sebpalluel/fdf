@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/22 19:31:27 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/24 17:57:17 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int		ft_free_tmp_map(double **matrix, int **mid, t_vec3 *vec3,\
 	return (return_case);
 }
 
-int				ft_populate_map(t_setup *setup, int ***tmp_map)
+int				ft_update_map_and_cam(t_setup *setup, int ***tmp_map)
 {
 	int			xy[2];
 	int			**mid = NULL;

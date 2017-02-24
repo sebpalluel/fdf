@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/24 14:09:29 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/24 18:06:03 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,8 @@ int				main(int argc, char **argv)
 	ret = ft_setup(setup, argv, argc, 1);
 	if (!ret || (fd = open(argv[1], O_RDONLY) < 3))
 		return (usage(ret));
-	if ((tmp_map = ft_read_map(setup, fd)) &&\
-			(ft_populate_map(setup, tmp_map)))
-	{
-		ft_draw_map(setup);
-		ft_mlx_process(setup);
-	}
+	if ((tmp_map = ft_read_map(setup, fd)))
+		ft_mlx_process(setup, tmp_map);
 	ft_setup(setup, argv, argc, 0);
 	return (0);
 }
