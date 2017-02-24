@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 17:26:59 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/24 16:23:49 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define HEIGHT		1080
 
 # define STEP		2
+# define ENDIAN		0
+# define BBP		8
 
 # define ESC		53
 # define LEFT		123

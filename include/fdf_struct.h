@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/22 17:58:30 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/24 16:23:26 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct		s_mlx
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
+	void			*image;
+	char			*image_addr;
 }					t_mlx;
 
 typedef struct		s_setup 
