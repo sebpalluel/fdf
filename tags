@@ -1,0 +1,148 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+$(NAME)	Makefile	/^$(NAME) : $(OBJ) $(EXT)$/;"	t
+BLUE	include/fdf_define.h	/^# define BLUE	/;"	d
+BROWN	include/fdf_define.h	/^# define BROWN	/;"	d
+BUFF_SIZE	get_next_line/get_next_line.h	/^# define BUFF_SIZE /;"	d
+CAM	include/fdf_define.h	/^# define CAM	/;"	d
+CMP	Makefile	/^CMP			=	gcc$/;"	m
+DOWN	include/fdf_define.h	/^# define DOWN	/;"	d
+ESC	include/fdf_define.h	/^# define ESC	/;"	d
+EXT	Makefile	/^EXT			=	Makefile$/;"	m
+FDF_DEFINE_H	include/fdf_define.h	/^# define FDF_DEFINE_H$/;"	d
+FDF_H	include/fdf.h	/^# define FDF_H$/;"	d
+FDF_STRUCT_H	include/fdf_struct.h	/^# define FDF_STRUCT_H$/;"	d
+FD_MAX	get_next_line/get_next_line.h	/^# define FD_MAX	/;"	d
+FLAGS	Makefile	/^FLAGS		=	-Wall -Wextra -Werror$/;"	m
+GET_NEXT_LINE_H	get_next_line/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
+GREEN	include/fdf_define.h	/^# define GREEN	/;"	d
+HEIGHT	include/fdf_define.h	/^# define HEIGHT	/;"	d
+KEY_C	include/fdf_define.h	/^# define KEY_C	/;"	d
+LEFT	include/fdf_define.h	/^# define LEFT	/;"	d
+LIBS	Makefile	/^LIBS		=	-lft -lmlx -framework OpenGL -framework AppKit$/;"	m
+LIB_DIR	Makefile	/^LIB_DIR		=	-L libs\/libft\/ -L libs\/minilibx$/;"	m
+MAP	include/fdf_define.h	/^# define MAP	/;"	d
+MAX_SIZE	include/fdf_define.h	/^# define MAX_SIZE	/;"	d
+MINUS	include/fdf_define.h	/^# define MINUS	/;"	d
+MLX	include/fdf_define.h	/^# define MLX	/;"	d
+M_DEPTH	include/fdf_define.h	/^# define M_DEPTH	/;"	d
+M_HEIGHT	include/fdf_define.h	/^# define M_HEIGHT	/;"	d
+M_WIDTH	include/fdf_define.h	/^# define M_WIDTH	/;"	d
+NAME	Makefile	/^NAME = fdf$/;"	m
+OBJ	Makefile	/^OBJ			=	$(SRC:.c=.o)$/;"	m
+PLUS	include/fdf_define.h	/^# define PLUS	/;"	d
+READ_EOF	get_next_line/get_next_line.h	/^# define READ_EOF	/;"	d
+READ_ERR	get_next_line/get_next_line.h	/^# define READ_ERR	/;"	d
+READ_OK	get_next_line/get_next_line.h	/^# define READ_OK	/;"	d
+RIGHT	include/fdf_define.h	/^# define RIGHT	/;"	d
+SLASH	include/fdf_define.h	/^# define SLASH	/;"	d
+SRC	Makefile	/^SRC 		=	src\/fdf.c \\$/;"	m
+STAR	include/fdf_define.h	/^# define STAR	/;"	d
+STEP	include/fdf_define.h	/^# define STEP	/;"	d
+UP	include/fdf_define.h	/^# define UP	/;"	d
+WHITE	include/fdf_define.h	/^# define WHITE	/;"	d
+WIDTH	include/fdf_define.h	/^# define WIDTH	/;"	d
+all	Makefile	/^all : lib $(NAME)$/;"	t
+b	include/fdf_struct.h	/^	unsigned char	b;$/;"	m	struct:s_color	typeref:typename:unsigned char
+buffer	get_next_line/get_next_line.h	/^	t_char			*buffer;$/;"	m	struct:s_fd	typeref:typename:t_char *
+buffer_has_line	get_next_line/get_next_line.c	/^static int			buffer_has_line(t_fd *fd, char **target)$/;"	f	typeref:typename:int	file:
+c	get_next_line/get_next_line.h	/^	char			c;$/;"	m	struct:s_char	typeref:typename:char
+cam	include/fdf_struct.h	/^	t_cam			*cam;$/;"	m	struct:s_setup	typeref:typename:t_cam *
+clean	Makefile	/^clean :$/;"	t
+copy_buff	get_next_line/get_next_line.c	/^static int			copy_buff(t_fd *fd, char *src, t_char *buffer)$/;"	f	typeref:typename:int	file:
+copy_line	get_next_line/get_next_line.c	/^static void			copy_line(size_t length, t_fd *fd, char **target)$/;"	f	typeref:typename:void	file:
+depth	include/fdf_struct.h	/^	int				depth;$/;"	m	struct:s_map	typeref:typename:int
+fclean	Makefile	/^fclean : clean$/;"	t
+fov	include/fdf_struct.h	/^	double			fov;$/;"	m	struct:s_cam	typeref:typename:double
+ft_allocate_map	src/update_map.c	/^static int			ft_allocate_map(t_map **map, int *mid)$/;"	f	typeref:typename:int	file:
+ft_allocate_setup	src/setup.c	/^static int		ft_allocate_setup(t_setup *setup)$/;"	f	typeref:typename:int	file:
+ft_check_if_number	src/read_map.c	/^static int			ft_check_if_number(char **tab, int *width)$/;"	f	typeref:typename:int	file:
+ft_color_input	src/color.c	/^int				ft_color_input(char **argv, int argc, t_setup *setup)$/;"	f	typeref:typename:int
+ft_color_parse	src/color.c	/^static int		ft_color_parse(char *arg, t_color *color)$/;"	f	typeref:typename:int	file:
+ft_delete_setup	src/setup.c	/^void			ft_delete_setup(t_setup *setup)$/;"	f	typeref:typename:void
+ft_draw_line	src/draw.c	/^void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)$/;"	f	typeref:typename:void
+ft_draw_map	src/draw.c	/^void			ft_draw_map(t_setup *setup)$/;"	f	typeref:typename:void
+ft_draw_map_column	src/draw.c	/^static void		ft_draw_map_column(t_setup *setup, int j)$/;"	f	typeref:typename:void	file:
+ft_draw_map_line	src/draw.c	/^static void		ft_draw_map_line(t_setup *setup, int i)$/;"	f	typeref:typename:void	file:
+ft_draw_map_point	src/draw.c	/^void			ft_draw_map_point(t_setup *setup)$/;"	f	typeref:typename:void
+ft_expose_hook	src/mlx_process.c	/^static int				ft_expose_hook(t_setup *setup)$/;"	f	typeref:typename:int	file:
+ft_free_tmp	src/read_map.c	/^static void			ft_free_tmp(char **tab, int ***tab_int, int fd, int erase_tab)$/;"	f	typeref:typename:void	file:
+ft_free_tmp_map	src/update_map.c	/^static int		ft_free_tmp_map(double **matrix, int **mid, t_vec3 *vec3,\\$/;"	f	typeref:typename:int	file:
+ft_give_color	src/color.c	/^t_color				*ft_give_color(int z, t_map *map)$/;"	f	typeref:typename:t_color *
+ft_key_hook	src/mlx_process.c	/^static int				ft_key_hook(int keycode, t_setup *setup)$/;"	f	typeref:typename:int	file:
+ft_matrix_add	src/matrix.c	/^double		**ft_matrix_add(double **m, double **n, int size)$/;"	f	typeref:typename:double **
+ft_matrix_cam	src/update_map.c	/^static double	**ft_matrix_cam(t_cam *cam)$/;"	f	typeref:typename:double **	file:
+ft_matrix_homothety	src/matrix.c	/^double		**ft_matrix_homothety(int factor)$/;"	f	typeref:typename:double **
+ft_matrix_mult	src/matrix.c	/^double		**ft_matrix_mult(double **m, double **n, int size)$/;"	f	typeref:typename:double **
+ft_matrix_on_point	src/matrix.c	/^void		ft_matrix_on_point(t_vec3 *vec3, double **m)$/;"	f	typeref:typename:void
+ft_matrix_rot_x	src/matrix.c	/^double		**ft_matrix_rot_x(double deg)$/;"	f	typeref:typename:double **
+ft_matrix_rot_y	src/matrix.c	/^double		**ft_matrix_rot_y(double deg)$/;"	f	typeref:typename:double **
+ft_matrix_rot_z	src/matrix.c	/^double		**ft_matrix_rot_z(double deg)$/;"	f	typeref:typename:double **
+ft_matrix_translate	src/matrix.c	/^double		**ft_matrix_translate(t_vec3 *vector)$/;"	f	typeref:typename:double **
+ft_matrix_zero	src/matrix.c	/^double		**ft_matrix_zero(int size)$/;"	f	typeref:typename:double **
+ft_mlx_process	src/mlx_process.c	/^void		ft_mlx_process(t_setup *setup)$/;"	f	typeref:typename:void
+ft_new_color	src/color.c	/^static t_color	*ft_new_color(char r, char g, char b)$/;"	f	typeref:typename:t_color *	file:
+ft_new_pix	src/setup.c	/^t_pix				*ft_new_pix(int x, int y, int z)$/;"	f	typeref:typename:t_pix *
+ft_parse_map	src/read_map.c	/^static int			ft_parse_map(t_setup *setup, int ***tab_int, char **tab)$/;"	f	typeref:typename:int	file:
+ft_populate_map	src/update_map.c	/^int				ft_populate_map(t_setup *setup, int ***tmp_map)$/;"	f	typeref:typename:int
+ft_put_pix	src/draw.c	/^void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)$/;"	f	typeref:typename:void
+ft_read_map	src/read_map.c	/^int					***ft_read_map(t_setup *setup, int fd)$/;"	f	typeref:typename:int ***
+ft_setup	src/setup.c	/^int				ft_setup(t_setup *setup, char **argv, int argc, int allocate)$/;"	f	typeref:typename:int
+ft_setup_cam	src/setup.c	/^static void		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)$/;"	f	typeref:typename:void	file:
+ft_vec3_to_pix	src/update_map.c	/^static t_pix	*ft_vec3_to_pix(t_setup *setup, double **matrix,$/;"	f	typeref:typename:t_pix *	file:
+g	include/fdf_struct.h	/^	unsigned char	g;$/;"	m	struct:s_color	typeref:typename:unsigned char
+get_next_line	get_next_line/get_next_line.c	/^int					get_next_line(const int fd, char **line)$/;"	f	typeref:typename:int
+height	include/fdf_struct.h	/^	int				height;$/;"	m	struct:s_map	typeref:typename:int
+height	include/fdf_struct.h	/^	unsigned int	height;$/;"	m	struct:s_setup	typeref:typename:unsigned int
+lerp_in	include/fdf_struct.h	/^	t_color			*lerp_in;$/;"	m	struct:s_map	typeref:typename:t_color *
+lerp_out	include/fdf_struct.h	/^	t_color			*lerp_out;$/;"	m	struct:s_map	typeref:typename:t_color *
+lib	Makefile	/^lib :$/;"	t
+main	src/fdf.c	/^int				main(int argc, char **argv)$/;"	f	typeref:typename:int
+map	include/fdf_struct.h	/^	t_map			*map;$/;"	m	struct:s_setup	typeref:typename:t_map *
+map	include/fdf_struct.h	/^	t_pix			***map;$/;"	m	struct:s_map	typeref:typename:t_pix ***
+mlx	include/fdf_struct.h	/^	t_mlx			*mlx;$/;"	m	struct:s_setup	typeref:typename:t_mlx *
+mlx_ptr	include/fdf_struct.h	/^	void			*mlx_ptr;$/;"	m	struct:s_mlx	typeref:typename:void *
+new_vec3	src/setup.c	/^t_vec3			*new_vec3(double x, double y, double z)$/;"	f	typeref:typename:t_vec3 *
+next	get_next_line/get_next_line.h	/^	struct s_char	*next;$/;"	m	struct:s_char	typeref:struct:s_char *
+offset_x	include/fdf_struct.h	/^	double			offset_x;$/;"	m	struct:s_cam	typeref:typename:double
+offset_y	include/fdf_struct.h	/^	double			offset_y;$/;"	m	struct:s_cam	typeref:typename:double
+pos	include/fdf_struct.h	/^	t_vec3			*pos;$/;"	m	struct:s_cam	typeref:typename:t_vec3 *
+r	include/fdf_struct.h	/^	unsigned char	r;$/;"	m	struct:s_color	typeref:typename:unsigned char
+re	Makefile	/^re : fclean all$/;"	t
+read_buff	get_next_line/get_next_line.c	/^static int			read_buff(int fd, t_fd *fd_tab)$/;"	f	typeref:typename:int	file:
+rot	include/fdf_struct.h	/^	t_vec3			*rot;$/;"	m	struct:s_cam	typeref:typename:t_vec3 *
+s_cam	include/fdf_struct.h	/^typedef struct		s_cam$/;"	s
+s_char	get_next_line/get_next_line.h	/^typedef struct		s_char$/;"	s
+s_color	include/fdf_struct.h	/^typedef struct		s_color$/;"	s
+s_fd	get_next_line/get_next_line.h	/^typedef struct		s_fd$/;"	s
+s_map	include/fdf_struct.h	/^typedef struct		s_map$/;"	s
+s_mlx	include/fdf_struct.h	/^typedef struct		s_mlx$/;"	s
+s_pix	include/fdf_struct.h	/^typedef struct		s_pix$/;"	s
+s_setup	include/fdf_struct.h	/^typedef struct		s_setup $/;"	s
+s_vec3	include/fdf_struct.h	/^typedef struct		s_vec3$/;"	s
+scale	include/fdf_struct.h	/^	double			scale;$/;"	m	struct:s_cam	typeref:typename:double
+t_cam	include/fdf_struct.h	/^}					t_cam;$/;"	t	typeref:struct:s_cam
+t_char	get_next_line/get_next_line.h	/^}					t_char;$/;"	t	typeref:struct:s_char
+t_color	include/fdf_struct.h	/^}					t_color;$/;"	t	typeref:struct:s_color
+t_fd	get_next_line/get_next_line.h	/^}					t_fd;$/;"	t	typeref:struct:s_fd
+t_map	include/fdf_struct.h	/^}					t_map;$/;"	t	typeref:struct:s_map
+t_mlx	include/fdf_struct.h	/^}					t_mlx;$/;"	t	typeref:struct:s_mlx
+t_pix	include/fdf_struct.h	/^}					t_pix;$/;"	t	typeref:struct:s_pix
+t_setup	include/fdf_struct.h	/^}					t_setup;$/;"	t	typeref:struct:s_setup
+t_vec3	include/fdf_struct.h	/^}					t_vec3;$/;"	t	typeref:struct:s_vec3
+tmp_map	include/fdf_struct.h	/^	int				***tmp_map;$/;"	m	struct:s_map	typeref:typename:int ***
+usage	src/fdf.c	/^static int		usage(int mode)$/;"	f	typeref:typename:int	file:
+width	include/fdf_struct.h	/^	int				width;$/;"	m	struct:s_map	typeref:typename:int
+width	include/fdf_struct.h	/^	unsigned int	width;$/;"	m	struct:s_setup	typeref:typename:unsigned int
+win_ptr	include/fdf_struct.h	/^	void			*win_ptr;$/;"	m	struct:s_mlx	typeref:typename:void *
+x	include/fdf_struct.h	/^	double			x;$/;"	m	struct:s_vec3	typeref:typename:double
+x	include/fdf_struct.h	/^	int				x;$/;"	m	struct:s_pix	typeref:typename:int
+y	include/fdf_struct.h	/^	double			y;$/;"	m	struct:s_vec3	typeref:typename:double
+y	include/fdf_struct.h	/^	int				y;$/;"	m	struct:s_pix	typeref:typename:int
+z	include/fdf_struct.h	/^	double			z;$/;"	m	struct:s_vec3	typeref:typename:double
+z	include/fdf_struct.h	/^	int				z;$/;"	m	struct:s_pix	typeref:typename:int

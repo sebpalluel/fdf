@@ -70,6 +70,8 @@ void			ft_delete_setup(t_setup *setup)
 	ft_memdel((void **)&(setup->lerp_out));
 	ft_memdel((void **)&(CAM->pos));
 	ft_memdel((void **)&(CAM->rot));
+	ft_freetab(MAP->*(tmp_map));
+	free(MAP->(***tmp_map));
 	ft_memdel((void **)&(CAM));
 	ft_memdel((void **)&(MAP));
 	ft_memdel((void **)&(MLX));

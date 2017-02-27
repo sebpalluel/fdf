@@ -17,8 +17,8 @@ static int		usage(int mode)
 	if (mode == 0)
 	{
 		ft_putendl("usage: ./fdf map_name.fdf");
-		ft_putendl("alternate usage: can add color arg1 lerp_in, arg2 lerp_out");
-		ft_putendl("example: ./fdf map.fdf \"0,0,0\" \"255,255,255\"");
+		ft_putendl("usage: can add color arg1 lerp_in, arg5 lerp_out");
+		ft_putendl("example: ./fdf map.fdf 0,0,0 255,255,255");
 	}
 	if (mode == -1)
 	{
@@ -31,7 +31,6 @@ static int		usage(int mode)
 int				main(int argc, char **argv)
 {
 	t_setup 	*setup;
-	int			***tmp_map;
 	int			ret;
 	int			fd;
 
@@ -40,9 +39,9 @@ int				main(int argc, char **argv)
 	ret = ft_setup(setup, argv, argc, 1);
 	if (!ret || (fd = open(argv[1], O_RDONLY) < 3))
 		return (usage(ret));
-	if ((tmp_map = ft_read_map(setup, fd)) &&\
-			(ft_populate_map(setup, tmp_map)))
+	if (ft_read_map(setup, fd))
 	{
+		ft_populate_map(setup);
 		ft_draw_map(setup);
 		ft_mlx_process(setup);
 	}

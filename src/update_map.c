@@ -22,9 +22,9 @@ static int			ft_allocate_map(t_map **map, int *mid)
 	xy[1] = -1;
 	while ((*map)->tmp_map[++xy[1]])
 		;
-	if (!((*map)->map = (t_pix***)malloc(sizeof(t_pix**) * xy[1] + 1)))
+	if (!((*map)->map = (t_pix***)malloc(sizeof(t_pix**) * (*map)->height + 1)))
 		return(0);
-	(*map)->map[xy[1]] = NULL;
+	(*map)->map[(*map)->height] = NULL;
 	mid[0] = xy[1] / 2;
 	xy[1] = -1;
 	while ((*map)->tmp_map[++xy[1]])
@@ -92,25 +92,24 @@ static int		ft_free_tmp_map(double **matrix, int **mid, t_vec3 *vec3,\
 	return (return_case);
 }
 
-int				ft_populate_map(t_setup *setup, int ***tmp_map)
+int				ft_populate_map(t_setup *setup)
 {
 	int			xy[2];
 	int			**mid = NULL;
-	t_vec3		*vec3;
+	t_vec3		*vec3 = NULL;
 	double		**matrix = NULL;
 
-	MAP->tmp_map = tmp_map;
 	MAP->depth = 0;
 	if (!(matrix = ft_matrix_cam(CAM)) || !ft_allocate_map(&MAP, *mid))
 		return (ft_free_tmp_map(matrix, mid, vec3, 0));
 	xy[0] = -1;
-	while (tmp_map[++xy[0]])
+	while (MAP->tmp_map[++xy[0]])
 	{
 		xy[1] = -1;
-		while (tmp_map[xy[0]][++xy[1]])
+		while (MAP->tmp_map[xy[0]][++xy[1]])
 		{
 			if (!(vec3 = ft_new_vec3((xy[0] - *mid[0]) * STEP, (xy[1] - \
-								*mid[1]) * STEP, *tmp_map[xy[0]][xy[1]])) || \
+								*mid[1]) * STEP, *MAP->tmp_map[xy[0]][xy[1]])) || \
 					!(MAP->map[xy[0]][xy[1]] = \
 						ft_vec3_to_pix(setup, matrix, vec3)))
 				return (ft_free_tmp_map(matrix, mid, vec3, 0));

@@ -25,18 +25,18 @@
 
 int		ft_color_input(char **argv, int argc, t_setup *setup);
 void	ft_mlx_process(t_setup *setup);
-int		***ft_read_map(t_setup *setup, int fd);
+int		ft_read_map(t_setup *setup, int fd);
 int		ft_setup(t_setup *setup, char **argv, int argc, int allocate);
 void	ft_delete_setup(t_setup *setup);
 t_vec3	*ft_new_vec3(double x, double y, double z);
 t_pix	*ft_new_pix(int x, int y, int z);
-int		ft_populate_map(t_setup *setup, int ***map_tmp);
+int		ft_populate_map(t_setup *setup);
 t_color	*ft_give_color(int z, t_map *map);
 void	ft_draw_map_point(t_setup *setup);
 void	ft_draw_map(t_setup *setup);
 
 double	**ft_matrix_zero(int size);
-double	**ft_matrix_translate(t_vec3 *vector);
+double	**ft_matrix_homothetyt_matrix_translate(t_vec3 *vector);
 double	**ft_matrix_homothety(int factor);
 double	**ft_matrix_mult(double **m, double **n, int size);
 double	**ft_matrix_add(double **m, double **n, int size);
@@ -44,5 +44,5 @@ double	**ft_matrix_rot_x(double deg);
 double	**ft_matrix_rot_y(double deg);
 double	**ft_matrix_rot_z(double deg);
 void	ft_matrix_on_point(t_vec3 *vec3, double **m);
-	
+
 #endif

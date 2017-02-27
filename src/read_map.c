@@ -12,15 +12,13 @@
 
 #include "../include/fdf.h"
 
-static void			ft_free_tmp(char **tab, int ***tab_int, int fd, int erase_tab)
+static int			ft_free_tmp(char **tab, int fd, int return_val)
 {
-	if (!erase_tab)
-	{
+	if (tab)
 		ft_freetab(tab);
-		ft_freetab((char **)*tab_int);
-	}
-	free(tab_int);
+	if (fd)
 	close(fd);
+	return (return_val);
 }
 
 static int			ft_check_if_number(char **tab, int *width)
@@ -39,13 +37,13 @@ static int			ft_check_if_number(char **tab, int *width)
 		j = -1;
 		while (tab[i][++j])
 			if (!ft_isdigit(tab[i][j]) &&\
-						tab[i][j] != '-' && tab[i][j] != ' ')
+					tab[i][j] != '-' && tab[i][j] != ' ')
 				return (0);
 	}
 	return (1);
 }
 
-static int			ft_parse_map(t_setup *setup, int ***tab_int, char **tab)
+static int			ft_parse_map(t_setup *setup, int ***MAP->tmp_map, char **tab)
 {
 	int			j;
 	int			i;
@@ -59,24 +57,25 @@ static int			ft_parse_map(t_setup *setup, int ***tab_int, char **tab)
 	{
 		width = 0;
 		split_ret = ft_strsplit((char const*)tab[i], ' ');
-		if (!ft_check_if_number(split_ret, &width))
-			return (0);
-		tab_int[M_HEIGHT - i] = (int**)malloc(sizeof(int*) * width + 1);
-		tab_int[M_HEIGHT - i][width] = NULL;
+		if (!ft_check_if_number(split_ret, &width) || !split_ret || \
+				!(MAP->tmp_map[M_HEIGHT - i] = \
+					(int**)malloc(sizeof(int*) * width + 1)))
+			return (ft_free_tmp(split_ret, 0, 0));
+		MAP->tmp_map[M_HEIGHT - i][width] = NULL;
 		j = -1;
 		while (++j < width)
 		{
-			(tab_int[M_HEIGHT - i][width - j - 1]) = (int*)malloc(sizeof(int));
-			*(tab_int[M_HEIGHT - i][width - j - 1]) = ft_atoi(split_ret[j]);
+			if (!(MAP->tmp_map[M_HEIGHT - i][width - j - 1]) \
+					= (int*)malloc(sizeof(int)))
+				return (ft_free_tmp(split_ret, 0, 0));
+			*(MAP->tmp_map[M_HEIGHT - i][width - j - 1]) = ft_atoi(split_ret[j]);
 		}
 	}
-	ft_freetab(split_ret);
-	return (1);
+	return (ft_free_tmp(split_ret, 0, 1));
 }
 
-int					***ft_read_map(t_setup *setup, int fd)
+int					ft_read_map(t_setup *setup, int fd)
 {
-	int			***tab_int = NULL;
 	int			ret_gnl;
 	char		**tab = NULL;
 
@@ -86,13 +85,11 @@ int					***ft_read_map(t_setup *setup, int fd)
 		if (M_HEIGHT > MAX_SIZE)
 			return (0);
 	tab[M_HEIGHT] = NULL;
-	tab_int = (int***)malloc(sizeof(int**) * M_HEIGHT + 1);
-	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !tab_int || \
-			!ft_parse_map(setup, tab_int, tab))
+	MAP->tmp_map = (int***)malloc(sizeof(int**) * M_HEIGHT + 1);
+	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !MAP->tmp_map || \
+			!ft_parse_map(setup, MAP->tmp_map, tab))
 	{
-		ft_free_tmp(tab, tab_int, fd, 0);
-		return (NULL);
+		return (ft_free_tmp(tab, fd, 0));
 	}
-	ft_free_tmp(tab, tab_int, fd, 1);
-	return (tab_int);
+	return (ft_free_tmp(tab, fd, 1));
 }
