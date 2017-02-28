@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 22:42:27 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/27 19:39:13 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int			ft_check_if_number(char **tab, int *width)
 	return (1);
 }
 
-static int			ft_parse_map(t_setup *setup, int ***MAP->tmp_map, char **tab)
+static int			ft_parse_map(t_setup *setup, char **tab)
 {
 	int			j;
 	int			i;
@@ -59,17 +59,12 @@ static int			ft_parse_map(t_setup *setup, int ***MAP->tmp_map, char **tab)
 		split_ret = ft_strsplit((char const*)tab[i], ' ');
 		if (!ft_check_if_number(split_ret, &width) || !split_ret || \
 				!(MAP->tmp_map[M_HEIGHT - i] = \
-					(int**)malloc(sizeof(int*) * width + 1)))
+					(int*)malloc(sizeof(int) * M_WIDTH + 1)))
 			return (ft_free_tmp(split_ret, 0, 0));
-		MAP->tmp_map[M_HEIGHT - i][width] = NULL;
+		MAP->tmp_map[M_HEIGHT - i][width] = 0;
 		j = -1;
 		while (++j < width)
-		{
-			if (!(MAP->tmp_map[M_HEIGHT - i][width - j - 1]) \
-					= (int*)malloc(sizeof(int)))
-				return (ft_free_tmp(split_ret, 0, 0));
-			*(MAP->tmp_map[M_HEIGHT - i][width - j - 1]) = ft_atoi(split_ret[j]);
-		}
+			MAP->tmp_map[M_HEIGHT - i][width - j - 1] = ft_atoi(split_ret[j]);
 	}
 	return (ft_free_tmp(split_ret, 0, 1));
 }
@@ -85,11 +80,9 @@ int					ft_read_map(t_setup *setup, int fd)
 		if (M_HEIGHT > MAX_SIZE)
 			return (0);
 	tab[M_HEIGHT] = NULL;
-	MAP->tmp_map = (int***)malloc(sizeof(int**) * M_HEIGHT + 1);
+	MAP->tmp_map = (int**)malloc(sizeof(int*) * M_HEIGHT + 1);
 	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !MAP->tmp_map || \
-			!ft_parse_map(setup, MAP->tmp_map, tab))
-	{
+			!ft_parse_map(setup, tab))
 		return (ft_free_tmp(tab, fd, 0));
-	}
 	return (ft_free_tmp(tab, fd, 1));
 }

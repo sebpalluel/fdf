@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 23:09:20 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 16:03:43 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ t_vec3			*new_vec3(double x, double y, double z)
 	return (vec3);
 }
 
-t_pix				*ft_new_pix(int x, int y, int z)
+t_pix			*ft_new_pix(int x, int y, int z)
 {
 	t_pix		*pix;
 
-	pix = (t_pix*)malloc(sizeof(t_pix));
-	pix->x = x;
-	pix->y = y;
-	pix->z = z;
+	if ((pix = (t_pix*)malloc(sizeof(t_pix))))
+	{
+		pix->x = x;
+		pix->y = y;
+		pix->z = z;
+	}
 	return (pix);
 }
 
@@ -66,12 +68,11 @@ static int		ft_allocate_setup(t_setup *setup)
 
 void			ft_delete_setup(t_setup *setup)
 {
-	ft_memdel((void **)&(setup->lerp_in));
-	ft_memdel((void **)&(setup->lerp_out));
+	ft_memdel((void **)&(MAP->lerp_in));
+	ft_memdel((void **)&(MAP->lerp_out));
 	ft_memdel((void **)&(CAM->pos));
 	ft_memdel((void **)&(CAM->rot));
-	ft_freetab(MAP->*(tmp_map));
-	free(MAP->(***tmp_map));
+	ft_freetab((char **)MAP->tmp_map);
 	ft_memdel((void **)&(CAM));
 	ft_memdel((void **)&(MAP));
 	ft_memdel((void **)&(MLX));

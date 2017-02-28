@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/22 23:42:43 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 16:03:55 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,38 @@ void			ft_draw_map(t_setup *setup)
 		ft_draw_map_column(setup, i);
 		i++;
 	}
+}
+
+void			ft_imgdel(t_img *img, void *mlx)
+{
+	if (img)
+	{
+		if (mlx && img->image)
+			mlx_destroy_image(mlx, img->image);
+		free(img);
+	}
+}
+
+t_img				*ft_imgnew(void *mlx, size_t x, size_t y)
+{
+	int			bpp;
+	t_img		*new;
+
+	if (mlx)
+	{
+		if ((new = (t_img *)malloc(sizeof(t_img))))
+		{
+			if ((new->image = mlx_new_image(mlx, x, y)))
+			{
+				if ((new->image_addr = mlx_get_data_addr(new->image, &bpp,
+						&new->size_x, (int *)&new->endian)))
+				{
+					new->bpp = bpp / 8;
+					return (new);
+				}
+			}
+		}
+		ft_imgdel(new, mlx);
+	}
+	return (NULL);
 }

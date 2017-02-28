@@ -6,14 +6,21 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/02/16 13:21:37 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/02/27 20:24:32 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
 NAME = fdf
 
 SRC 		=	src/fdf.c \
-				get_next_line/get_next_line.c \
+				src/color.c \
+				src/draw.c \
+				src/draw_image.c \
+				src/mlx_process.c \
+				src/read_map.c \
+				src/matrix.c \
+				src/setup.c \
+				src/update_map.c \
 
 EXT			=	Makefile
 
@@ -21,7 +28,7 @@ OBJ			=	$(SRC:.c=.o)
 
 CMP			=	gcc
 
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-g -Wall -Wextra -Werror
 
 LIB_DIR		=	-L libs/libft/ -L libs/minilibx
 LIBS		=	-lft -lmlx -framework OpenGL -framework AppKit

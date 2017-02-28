@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/22 17:58:30 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 15:02:53 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ typedef struct		s_mlx
 	void			*win_ptr;
 }					t_mlx;
 
+typedef struct		s_img
+{
+	void			*image;
+	char			*image_addr;
+	int				bpp;
+	int				endian;
+	int				size_x;
+}					t_img;
+
 typedef struct		s_setup 
 {
 	unsigned int	width;
@@ -68,6 +77,7 @@ typedef struct		s_setup
 	t_mlx			*mlx;
 	t_map			*map;
 	t_cam			*cam;
+	t_img			*img;
 }					t_setup;
 
 #endif
