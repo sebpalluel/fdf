@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/27 20:19:55 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 17:17:07 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static double	**ft_matrix_cam(t_cam *cam)
 static t_pix	ft_vec3_to_pix(t_setup *setup, double **matrix,
 		t_vec3 *vec3)
 {
-	t_pix		pix;
+	t_pix		*pix;
 	int			oldz;
 
 	oldz = vec3->z;
@@ -75,7 +75,7 @@ static t_pix	ft_vec3_to_pix(t_setup *setup, double **matrix,
 	ft_matrix_on_point(vec3, matrix);
 	pix = ft_new_pix((CAM->fov / vec3->z) * vec3->x, (CAM->fov / vec3->z) \
 			* vec3->y, oldz);
-	return (pix);
+	return (*pix);
 }
 
 static int		ft_free_tmp_map(double **matrix, int **mid, t_vec3 *vec3,\

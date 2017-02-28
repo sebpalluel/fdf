@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 15:02:53 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 17:12:59 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct		s_map
 	int				depth;
 	t_color			*lerp_in;
 	t_color			*lerp_out;
-	int				***tmp_map;
-	t_pix			***map;
+	int				**tmp_map;
+	t_pix			**map;
 }					t_map;
 
 typedef struct		s_cam
@@ -74,6 +74,7 @@ typedef struct		s_setup
 {
 	unsigned int	width;
 	unsigned int	height;
+	size_t			ui;
 	t_mlx			*mlx;
 	t_map			*map;
 	t_cam			*cam;

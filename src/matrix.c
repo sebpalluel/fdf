@@ -6,11 +6,22 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:50:52 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/21 22:41:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 17:31:14 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+t_vec3		*ft_new_vec3(double x, double y, double z)
+{
+	t_vec3		*ret;
+
+	ret = (t_vec3*)malloc(sizeof(t_vec3));
+	ret->x = x;
+	ret->y = y;
+	ret->z = z;
+	return (ret);
+}
 
 double		**ft_matrix_zero(int size)
 {

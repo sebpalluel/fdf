@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 15:03:04 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 15:29:39 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define DOWN		125
 # define MINUS		78
 # define PLUS		69
-# define KEY_C		8
+# define CTRL		8
 # define STAR		67
 # define SLASH		75
 

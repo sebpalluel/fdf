@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 17:09:51 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 17:22:57 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 	int		p;
 
 	p = pix->x * 4 + pix->y * MAP->width;
-	if (pix->y > 0 && pix->y < setup->height && pix->x > 0 \
-			&& pix->x < setup->width)
+	if (pix->y > 0 && pix->y <  (int)setup->height && pix->x > 0 \
+			&& pix->x < (int)setup->width)
 	{
 		IMG->image_addr[p] = clr->b;
 		IMG->image_addr[p + 1] = clr->g;
@@ -62,7 +62,7 @@ static void		ft_draw_map_column(t_setup *setup, int j)
 	i = 0;
 	while (MAP->map[i + 1])
 	{
-		ft_draw_line(setup, MAP->map[i][j], MAP->map[i + 1][j]);
+		ft_draw_line(setup, &MAP->map[i][j], &MAP->map[i + 1][j]);
 		i++;
 	}
 }
@@ -72,9 +72,9 @@ static void		ft_draw_map_line(t_setup *setup, int i)
 	int	j;
 
 	j = 0;
-	while (MAP->map[i][j + 1])
+	while (&MAP->map[i][j + 1])
 	{
-		ft_draw_line(setup, MAP->map[i][j], MAP->map[i][j + 1]);
+		ft_draw_line(setup, &MAP->map[i][j], &MAP->map[i][j + 1]);
 		j++;
 	}
 }
@@ -90,9 +90,9 @@ void			ft_draw_map_point(t_setup *setup)
 	while (MAP->map[++i])
 	{
 		j = -1;
-		while (MAP->map[i][++j])
+		while (&MAP->map[i][++j])
 		{
-			pix = MAP->map[i][j];
+			pix = &MAP->map[i][j];
 			ft_put_pix(setup, pix, ft_give_color(pix->z, MAP));
 		}
 	}
@@ -109,7 +109,7 @@ void			ft_draw_map(t_setup *setup)
 		i++;
 	}
 	i = 0;
-	while (MAP->map[0][i])
+	while (&MAP->map[0][i])
 	{
 		ft_draw_map_column(setup, i);
 		i++;
