@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 17:22:08 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 19:21:01 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int				main(int argc, char **argv)
 
 	if (argc < 2 || argc > 4)
 		return (usage(0));
-	ret = ft_setup(setup, argv, argc, 1);
-	if (!ret || (fd = open(argv[1], O_RDONLY) < 3))
+	setup = ft_setup(setup, argv, argc, 1);
+	if (!setup || (fd = open(argv[1], O_RDONLY) < 3))
 		return (usage(ret));
 	if (ft_read_map(setup, fd))
 		ft_mlx_process(setup);

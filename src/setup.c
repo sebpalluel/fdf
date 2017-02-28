@@ -6,24 +6,11 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 16:03:43 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 19:28:36 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-t_vec3			*new_vec3(double x, double y, double z)
-{
-	t_vec3		*vec3;
-
-	if ((vec3 = (t_vec3*)malloc(sizeof(t_vec3))))
-	{
-		vec3->x = x;
-		vec3->y = y;
-		vec3->z = z;
-	}
-	return (vec3);
-}
 
 t_pix			*ft_new_pix(int x, int y, int z)
 {
@@ -38,7 +25,7 @@ t_pix			*ft_new_pix(int x, int y, int z)
 	return (pix);
 }
 
-static void		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
+static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
 {
 	t_cam		*cam = NULL;
 
@@ -50,23 +37,44 @@ static void		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
 		cam->fov = fov;
 		cam->offset_x = setup->width / 2.0;
 		cam->offset_y = setup->height / 2.0;
+		CAM = cam;
+		return (1);
 	}
-	CAM = cam;
+	return (0);
 }
 
-static int		ft_allocate_setup(t_setup *setup)
+static int		ft_setup_map_and_mlx(t_setup *setup)
 {
-	setup = (t_setup *)ft_memalloc(sizeof(t_setup));
-	setup->width = WIDTH;
-	setup->height = HEIGHT;
-	ft_setup_cam(setup, new_vec3(0, 0, 1500), new_vec3(0, 0, 0), 2000);
-	if (CAM && (MAP = (t_map *)ft_memalloc(sizeof(t_map))) && \
-			(MLX = (t_mlx *)ft_memalloc(sizeof(t_mlx))))
+	t_map		*map = NULL;
+	t_mlx		*mlx = NULL;
+
+	if ((map = (t_map*)ft_memalloc(sizeof(t_map))) && setup)
+	{
+		map->width = 0;
+		map->height = 0;
+		MAP = map;
+	}
+	if ((mlx = (t_mlx*)ft_memalloc(sizeof(t_mlx))) && setup)
+		MLX = mlx;
+	if (MLX && MAP)
 		return (1);
 	return (0);
 }
 
-void			ft_delete_setup(t_setup *setup)
+static t_setup	*ft_allocate_setup()
+{
+	t_setup *setup = NULL;
+
+	setup = (t_setup *)ft_memalloc(sizeof(t_setup));
+	setup->width = WIDTH;
+	setup->height = HEIGHT;
+	if (ft_setup_cam(setup, ft_new_vec3(0, 0, 1500),\
+				ft_new_vec3(0, 0, 0), 2000) && ft_setup_map_and_mlx(setup))
+		return (setup);
+	return (NULL);
+}
+
+t_setup			*ft_delete_setup(t_setup *setup)
 {
 	ft_memdel((void **)&(MAP->lerp_in));
 	ft_memdel((void **)&(MAP->lerp_out));
@@ -77,18 +85,20 @@ void			ft_delete_setup(t_setup *setup)
 	ft_memdel((void **)&(MAP));
 	ft_memdel((void **)&(MLX));
 	ft_memdel((void **)&(setup));
+	return (NULL);
 }
 
-int				ft_setup(t_setup *setup, char **argv, int argc, int allocate)
+t_setup			*ft_setup(t_setup *setup, char **argv, int argc, int allocate)
 {
+	t_setup 	*setup_tmp = NULL;
+
+	setup_tmp = setup;
 	if (allocate)
 	{
-		allocate = ft_allocate_setup(setup);
-		M_WIDTH = 0;
-		M_HEIGHT = 0;
-		allocate = ft_color_input(argv, argc, setup);
+		setup_tmp = ft_allocate_setup();
+		allocate = ft_color_input(argv, argc, setup_tmp);
 	}
-	if (!allocate && setup)
-		ft_delete_setup(setup);
-	return (allocate);
+	if ((!allocate && setup_tmp))
+		return (ft_delete_setup(setup_tmp));
+	return (setup_tmp);
 }

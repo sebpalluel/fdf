@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:50:52 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 17:31:14 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 18:45:07 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 t_vec3		*ft_new_vec3(double x, double y, double z)
 {
-	t_vec3		*ret;
+	t_vec3		*vec3 = NULL;
 
-	ret = (t_vec3*)malloc(sizeof(t_vec3));
-	ret->x = x;
-	ret->y = y;
-	ret->z = z;
-	return (ret);
+	if ((vec3 = (t_vec3*)malloc(sizeof(t_vec3))))
+	{
+		vec3->x = x;
+		vec3->y = y;
+		vec3->z = z;
+	}
+	return (vec3);
 }
 
 double		**ft_matrix_zero(int size)
