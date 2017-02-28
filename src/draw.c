@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 16:03:55 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/02/28 17:09:51 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 {
-	unsigned int	color;
+	int		p;
 
-	color = clr->r * 65536 + clr->g * 256 + clr->b;
-	mlx_pixel_put(MLX->mlx_ptr, MLX->win_ptr, setup->width / 2 + pix->y,
-			setup->height / 2 + pix->x, color);
+	p = pix->x * 4 + pix->y * MAP->width;
+	if (pix->y > 0 && pix->y < setup->height && pix->x > 0 \
+			&& pix->x < setup->width)
+	{
+		IMG->image_addr[p] = clr->b;
+		IMG->image_addr[p + 1] = clr->g;
+		IMG->image_addr[p + 2] = clr->r;
+	}
 }
 
 void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
