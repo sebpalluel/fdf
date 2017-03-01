@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 17:13:02 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/01 14:57:57 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int			ft_free_tmp(char **tab, int fd, int return_val)
 	if (tab)
 		ft_freetab(tab);
 	if (fd)
-	close(fd);
+		close(fd);
 	return (return_val);
 }
 
@@ -77,8 +77,11 @@ int					ft_read_map(t_setup *setup, int fd)
 	M_HEIGHT = -1;
 	tab = (char**)malloc(sizeof(char*) * MAX_SIZE);
 	while ((ret_gnl = get_next_line(fd, &tab[++M_HEIGHT])))
+	{
+		ft_putendl(tab[M_HEIGHT]);
 		if (M_HEIGHT > MAX_SIZE)
 			return (0);
+	}
 	tab[M_HEIGHT] = NULL;
 	MAP->tmp_map = (int**)malloc(sizeof(int*) * M_HEIGHT + 1);
 	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !MAP->tmp_map || \

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 19:21:01 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/01 14:57:20 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ static int		usage(int mode)
 int				main(int argc, char **argv)
 {
 	t_setup 	*setup = NULL;
-	int			ret;
 	int			fd;
 
 	if (argc < 2 || argc > 4)
 		return (usage(0));
 	setup = ft_setup(setup, argv, argc, 1);
-	if (!setup || (fd = open(argv[1], O_RDONLY) < 3))
-		return (usage(ret));
+	fd = open(argv[1], O_RDONLY);
+	if (!setup || (fd < 3))
+		return (usage(0));
 	if (ft_read_map(setup, fd))
 		ft_mlx_process(setup);
 	ft_setup(setup, argv, argc, 0);
