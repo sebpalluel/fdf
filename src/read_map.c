@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/01 16:15:18 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/02 13:17:26 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void		ft_print_array_int(int **map, int width, int height)
 		while (j < width)
 		{
 			ft_putchar(' ');
+			printf("x: %d y: %d\n", j, i);
+			printf("print: %d\n",map[i][j]);
 			ft_putnbr(map[i][j]);
 			j++;
 		}
@@ -115,5 +117,8 @@ int					ft_read_map(t_setup *setup, int fd)
 	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !MAP->tmp_map || \
 			!ft_parse_map(setup, tab))
 		return (ft_free_tmp(tab, fd, 0));
+	MAP->tmp_map[M_HEIGHT] = NULL;
+	printf("int : %d\n",MAP->tmp_map[0][0]);
+	ft_print_array_int(MAP->tmp_map, M_WIDTH, M_HEIGHT);
 	return (ft_free_tmp(tab, fd, 1)); 
 }
