@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 19:28:36 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/02 16:52:58 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
 static int		ft_setup_map_and_mlx(t_setup *setup)
 {
 	t_map		*map = NULL;
-	t_mlx		*mlx = NULL;
 
 	if ((map = (t_map*)ft_memalloc(sizeof(t_map))) && setup)
 	{
@@ -54,8 +53,7 @@ static int		ft_setup_map_and_mlx(t_setup *setup)
 		map->height = 0;
 		MAP = map;
 	}
-	if ((mlx = (t_mlx*)ft_memalloc(sizeof(t_mlx))) && setup)
-		MLX = mlx;
+	MLX = ft_init_window("fdf", setup->width, setup->height);
 	if (MLX && MAP)
 		return (1);
 	return (0);

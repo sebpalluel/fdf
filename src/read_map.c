@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/02 13:17:26 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/02 16:55:09 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void		ft_print_array_int(int **map, int width, int height)
 		while (j < width)
 		{
 			ft_putchar(' ');
-			printf("x: %d y: %d\n", j, i);
-			printf("print: %d\n",map[i][j]);
 			ft_putnbr(map[i][j]);
 			j++;
 		}
@@ -82,19 +80,22 @@ static int			ft_parse_map(t_setup *setup, char **tab)
 	int			i;
 	char		**split_ret;
 
-	i = -1;
-	while (M_HEIGHT - ++i)
+	i = 0;
+	while (i < M_HEIGHT)
 	{
-		M_WIDTH = 0;
 		split_ret = ft_strsplit((char const*)tab[i], ' ');
 		if (!ft_check_if_number(split_ret, &M_WIDTH) || !split_ret || \
-				!(MAP->tmp_map[M_HEIGHT - i] = \
+				!(MAP->tmp_map[i] = \
 					(int *)malloc(sizeof(int) * M_WIDTH + 1)))
 			return (ft_free_tmp(split_ret, 0, 0));
-		MAP->tmp_map[M_HEIGHT - i][M_WIDTH] = 0;
-		j = -1;
-		while (++j < M_WIDTH)
-			MAP->tmp_map[M_HEIGHT - i][M_WIDTH - j - 1] = ft_atoi(split_ret[j]);
+		MAP->tmp_map[i][M_WIDTH] = 0;
+		j = 0;
+		while (j < M_WIDTH)
+		{
+			MAP->tmp_map[i][j] = ft_atoi(split_ret[j]);
+			j++;
+		}
+		i++;
 	}
 	return (ft_free_tmp(split_ret, 0, 1));
 }
@@ -118,7 +119,6 @@ int					ft_read_map(t_setup *setup, int fd)
 			!ft_parse_map(setup, tab))
 		return (ft_free_tmp(tab, fd, 0));
 	MAP->tmp_map[M_HEIGHT] = NULL;
-	printf("int : %d\n",MAP->tmp_map[0][0]);
 	ft_print_array_int(MAP->tmp_map, M_WIDTH, M_HEIGHT);
 	return (ft_free_tmp(tab, fd, 1)); 
 }
