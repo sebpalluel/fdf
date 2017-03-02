@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:50:52 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 18:45:07 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/02 13:45:02 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ double		**ft_matrix_mult(double **m, double **n, int size)
 			ret[xyz[0]][xyz[1]] = temp;
 		}
 	}
-	free(xyz);
 	return (ret);
 }
 
