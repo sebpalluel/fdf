@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 17:22:57 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:39:42 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 	if (pix->y > 0 && pix->y <  (int)setup->height && pix->x > 0 \
 			&& pix->x < (int)setup->width)
 	{
+		//p = (int)clr->b;
 		IMG->image_addr[p] = clr->b;
 		IMG->image_addr[p + 1] = clr->g;
 		IMG->image_addr[p + 2] = clr->r;
+		if (clr->b > 0 || clr->g > 0 || clr->r > 0)
+			printf("x: %d, y: %d, rgb: %d %d %d\n", pix->x, pix->y, clr->r, clr->g, clr->b);
 	}
 }
 
@@ -46,10 +49,11 @@ void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 	while (++i < step)
 	{
 		clr = ft_give_color(pix->z, MAP);
-		ft_put_pix(setup, pix, clr);
+		printf("clr r: %d\n",clr->r);
 		pix->x = a->x + round((double)i * xyzi[0]);
 		pix->y = a->y + round((double)i * xyzi[1]);
 		pix->z = a->z + round((double)i * xyzi[2]);
+		ft_put_pix(setup, pix, clr);
 		free(clr);
 	}
 	free(pix);
@@ -103,17 +107,17 @@ void			ft_draw_map(t_setup *setup)
 	int i;
 
 	i = 0;
-	while (MAP->map[i])
-	{
+//	while (MAP->map[i])
+//	{
 		ft_draw_map_line(setup, i);
-		i++;
-	}
-	i = 0;
-	while (&MAP->map[0][i])
-	{
+//		i++;
+//	}
+//	i = 0;
+//	while (&MAP->map[0][i])
+//	{
 		ft_draw_map_column(setup, i);
-		i++;
-	}
+//		i++;
+//	}
 }
 
 void			ft_imgdel(t_img *img, void *mlx)
@@ -128,7 +132,7 @@ void			ft_imgdel(t_img *img, void *mlx)
 
 t_img				*ft_imgnew(void *mlx, size_t x, size_t y)
 {
-	int			bpp;
+	int			bbp;
 	t_img		*new;
 
 	if (mlx)
@@ -137,10 +141,10 @@ t_img				*ft_imgnew(void *mlx, size_t x, size_t y)
 		{
 			if ((new->image = mlx_new_image(mlx, x, y)))
 			{
-				if ((new->image_addr = mlx_get_data_addr(new->image, &bpp,
+				if ((new->image_addr = mlx_get_data_addr(new->image, &bbp,
 						&new->size_x, (int *)&new->endian)))
 				{
-					new->bpp = bpp / 8;
+					new->bbp = bbp / 8;
 					return (new);
 				}
 			}
