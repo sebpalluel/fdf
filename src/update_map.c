@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/09 13:05:17 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/09 16:59:21 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,26 @@ static int		ft_free_tmp_map(double **matrix, int *mid, t_vec3 *vec3,\
 	return (return_case);
 }
 
+void		ft_print_array_pix(t_pix **map, int width, int height)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < height)
+	{
+		j = 0;
+		while (j < width)
+		{
+			ft_putchar(' ');
+			ft_putnbr(map[i][j].z);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
+}
+
 int				ft_update_map_and_cam(t_setup *setup)
 {
 	int			xy[2];
@@ -95,16 +115,20 @@ int				ft_update_map_and_cam(t_setup *setup)
 	if (!(matrix = ft_matrix_cam(CAM)) || !(mid = ft_allocate_map(setup)))
 		return (ft_free_tmp_map(matrix, mid, vec3, 0));
 	xy[0] = -1;
-	while (MAP->tmp_map[++xy[0]])
+	while (++xy[0] < MAP->height)
 	{
 		xy[1] = -1;
-		while (MAP->tmp_map[xy[0]][++xy[1]])
+		while (++xy[1] < MAP->width)
 		{
-			if (!(vec3 = ft_new_vec3((xy[0] - mid[0]) * STEP, (xy[1] - \
-								mid[1]) * STEP, MAP->tmp_map[xy[0]][xy[1]])))
+			if (!(vec3 = ft_new_vec3((double)((xy[0] - mid[0]) * STEP), \
+							(double)((xy[1] - mid[1]) * STEP), \
+							(double)(MAP->tmp_map[xy[0]][xy[1]]))))
 				return (ft_free_tmp_map(matrix, mid, vec3, 0));
 			MAP->map[xy[0]][xy[1]] = ft_vec3_to_pix(setup, matrix, vec3);
+			printf("z_tmp%d ", MAP->tmp_map[xy[0]][xy[1]]);
+			printf("z%f ", vec3->z);
 		}
 	}
+	//ft_print_array_pix(MAP->map, xy[1], xy[0]);
 	return (ft_free_tmp_map(matrix, mid, vec3, 1));
 }
