@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/08 16:39:42 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:58:54 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 	xyzi[2] = (double)(b->z - a->z) / step;
 	while (++i < step)
 	{
-		clr = ft_give_color(pix->z, MAP);
-		printf("clr r: %d\n",clr->r);
+		clr = ft_give_color(pix->z, setup);
 		pix->x = a->x + round((double)i * xyzi[0]);
 		pix->y = a->y + round((double)i * xyzi[1]);
 		pix->z = a->z + round((double)i * xyzi[2]);
@@ -97,7 +96,7 @@ void			ft_draw_map_point(t_setup *setup)
 		while (&MAP->map[i][++j])
 		{
 			pix = &MAP->map[i][j];
-			ft_put_pix(setup, pix, ft_give_color(pix->z, MAP));
+			ft_put_pix(setup, pix, ft_give_color(pix->z, setup));
 		}
 	}
 }
@@ -107,17 +106,17 @@ void			ft_draw_map(t_setup *setup)
 	int i;
 
 	i = 0;
-//	while (MAP->map[i])
-//	{
+	while (MAP->map[i])
+	{
 		ft_draw_map_line(setup, i);
-//		i++;
-//	}
-//	i = 0;
-//	while (&MAP->map[0][i])
-//	{
+		i++;
+	}
+	i = 0;
+	while (&MAP->map[0][i])
+	{
 		ft_draw_map_column(setup, i);
-//		i++;
-//	}
+		i++;
+	}
 }
 
 void			ft_imgdel(t_img *img, void *mlx)

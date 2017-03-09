@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:50:52 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/02 13:45:02 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/09 12:58:50 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ t_vec3		*ft_new_vec3(double x, double y, double z)
 
 double		**ft_matrix_zero(int size)
 {
-	double	**ret;
+	double	**ret = NULL;
 	int		xy[2];
 
-	ret = (double**)malloc(sizeof(double*) * size);
+	ret = (double**)malloc(sizeof(double*) * size + 1);
 	xy[0] = -1;
 	while (++xy[0] < size)
 	{
@@ -39,12 +39,13 @@ double		**ft_matrix_zero(int size)
 		while (++xy[1] < size)
 			ret[xy[0]][xy[1]] = 0;
 	}
+	ret[++xy[0]] = NULL;
 	return (ret);
 }
 
 double		**ft_matrix_translate(t_vec3 *vector)
 {
-	double	**ret;
+	double	**ret = NULL;
 
 	ret = ft_matrix_zero(4);
 	ret[0][0] = 1;
@@ -59,7 +60,7 @@ double		**ft_matrix_translate(t_vec3 *vector)
 
 double		**ft_matrix_homothety(int factor)
 {
-	double	**ret;
+	double	**ret = NULL;
 
 	ret = ft_matrix_zero(4);
 	ret[0][0] = factor;
@@ -71,7 +72,7 @@ double		**ft_matrix_homothety(int factor)
 
 double		**ft_matrix_mult(double **m, double **n, int size)
 {
-	double	**ret;
+	double	**ret = NULL;
 	double	temp;
 	int		xyz[3];
 
@@ -94,7 +95,7 @@ double		**ft_matrix_mult(double **m, double **n, int size)
 
 double		**ft_matrix_add(double **m, double **n, int size)
 {
-	double	**ret;
+	double	**ret = NULL;
 	int		xy[2];
 
 	ret = ft_matrix_zero(size);
@@ -110,7 +111,7 @@ double		**ft_matrix_add(double **m, double **n, int size)
 
 double		**ft_matrix_rot_x(double deg)
 {
-	double	**ret;
+	double	**ret = NULL;
 	double	c;
 	double	s;
 
@@ -128,7 +129,7 @@ double		**ft_matrix_rot_x(double deg)
 
 double		**ft_matrix_rot_y(double deg)
 {
-	double	**ret;
+	double	**ret = NULL;
 	double	c;
 	double	s;
 
@@ -146,7 +147,7 @@ double		**ft_matrix_rot_y(double deg)
 
 double		**ft_matrix_rot_z(double deg)
 {
-	double	**ret;
+	double	**ret = NULL;
 	double	c;
 	double	s;
 

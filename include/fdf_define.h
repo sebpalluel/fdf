@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 15:29:39 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:53:46 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 # define M_WIDTH	setup->map->width
 # define M_HEIGHT	setup->map->height
 # define M_DEPTH	setup->map->depth
+# define LERP_IN	setup->map->lerp_in
+# define LERP_OUT	setup->map->lerp_out
 # define CAM		setup->cam
 # define MLX		setup->mlx
 # define IMG		setup->img

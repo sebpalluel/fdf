@@ -6,13 +6,14 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:22:36 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/22 18:09:10 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/08 17:11:24 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-static t_color	*ft_new_color(char r, char g, char b)
+static t_color	*ft_new_color(unsigned char r, unsigned char g, \
+		unsigned char b)
 {
 	t_color		*col;
 
@@ -56,30 +57,30 @@ int				ft_color_input(char **argv, int argc, t_setup *setup)
 	return (0);
 }
 
-t_color				*ft_give_color(int z, t_map *map)
+t_color				*ft_give_color(int z, t_setup *setup)
 {
 	double		coef;
 	double		rgb[3];
 
 	if (z == 0)
-		return (ft_new_color(map->lerp_in->r,
-					map->lerp_in->g, map->lerp_in->b));
+		return (ft_new_color(LERP_IN->r,
+					LERP_IN->g, LERP_IN->b));
 	else if (z < 0)
 		z = -z;
-	else if (z == map->depth)
-		return (ft_new_color(map->lerp_out->r, map->lerp_out->g, map->lerp_out->b));
-	coef = (double)z / (double)(map->depth);
-	if (map->lerp_out->r - map->lerp_in->r)
-		rgb[0] = (double)(map->lerp_out->r - map->lerp_in->r) * coef;
+	else if (z == MAP->depth)
+		return (ft_new_color(LERP_OUT->r, LERP_OUT->g, LERP_OUT->b));
+	coef = (double)z / (double)(MAP->depth);
+	if (LERP_OUT->r - LERP_IN->r)
+		rgb[0] = (double)(LERP_OUT->r - LERP_IN->r) * coef;
 	else
-		rgb[0] = map->lerp_out->r;
-	if (map->lerp_out->g - map->lerp_in->g)
-		rgb[1] = (double)(map->lerp_out->g - map->lerp_in->g) * coef;
+		rgb[0] = LERP_OUT->r;
+	if (LERP_OUT->g - LERP_IN->g)
+		rgb[1] = (double)(LERP_OUT->g - LERP_IN->g) * coef;
 	else
-		rgb[1] = map->lerp_out->g;
-	if (map->lerp_out->b - map->lerp_in->b)
-		rgb[2] = (double)(map->lerp_out->b - map->lerp_in->b) * coef;
+		rgb[1] = LERP_OUT->g;
+	if (LERP_OUT->b - LERP_IN->b)
+		rgb[2] = (double)(LERP_OUT->b - LERP_IN->b) * coef;
 	else
-		rgb[2] = map->lerp_out->b;
+		rgb[2] = LERP_OUT->b;
 	return (ft_new_color((char)rgb[0], (char)rgb[1], (char)rgb[2]));
 }

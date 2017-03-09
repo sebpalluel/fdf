@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/02 16:55:33 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:54:06 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_setup	*ft_delete_setup(t_setup *setup);
 t_vec3	*ft_new_vec3(double x, double y, double z);
 t_pix	*ft_new_pix(int x, int y, int z);
 int		ft_update_map_and_cam(t_setup *setup);
-t_color	*ft_give_color(int z, t_map *map);
+t_color	*ft_give_color(int z, t_setup *setup);
 void	ft_draw_map_point(t_setup *setup);
 void	ft_draw_map(t_setup *setup);
 t_img	*ft_imgnew(void *mlx, size_t x, size_t y);

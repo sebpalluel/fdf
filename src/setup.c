@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/02 16:52:58 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/08 17:41:11 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_setup			*ft_delete_setup(t_setup *setup)
 	ft_memdel((void **)&(MAP->lerp_out));
 	ft_memdel((void **)&(CAM->pos));
 	ft_memdel((void **)&(CAM->rot));
-	ft_freetab((char **)MAP->tmp_map);
+	ft_freetab((void **)MAP->tmp_map);
 	ft_memdel((void **)&(CAM));
 	ft_memdel((void **)&(MAP));
 	ft_memdel((void **)&(MLX));
