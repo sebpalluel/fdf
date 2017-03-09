@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/08 17:37:45 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/09 13:05:17 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int			*ft_allocate_map(t_setup *setup)
 
 static double	**ft_matrix_cam(t_cam *cam)
 {
-	double		**matrix_cam;
+	double		**matrix_cam = NULL;
 	t_vec3		*vec3;
 
 	if (!(vec3 = ft_new_vec3(-cam->pos->x, -cam->pos->y, -cam->pos->z)))
@@ -81,7 +81,6 @@ static int		ft_free_tmp_map(double **matrix, int *mid, t_vec3 *vec3,\
 		free(mid);
 	if (vec3)
 		free(vec3);
-	printf("update end\n");
 	return (return_case);
 }
 
@@ -96,7 +95,6 @@ int				ft_update_map_and_cam(t_setup *setup)
 	if (!(matrix = ft_matrix_cam(CAM)) || !(mid = ft_allocate_map(setup)))
 		return (ft_free_tmp_map(matrix, mid, vec3, 0));
 	xy[0] = -1;
-	printf("update map\n");
 	while (MAP->tmp_map[++xy[0]])
 	{
 		xy[1] = -1;

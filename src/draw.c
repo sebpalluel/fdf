@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/08 16:58:54 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/09 13:09:55 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 	int		p;
 
 	p = pix->x * 4 + pix->y * MAP->width;
-	if (pix->y > 0 && pix->y <  (int)setup->height && pix->x > 0 \
+	if (pix->y > 0 && pix->y < (int)setup->height && pix->x > 0 \
 			&& pix->x < (int)setup->width)
 	{
 		//p = (int)clr->b;
@@ -38,7 +38,10 @@ void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 	t_color		*clr;
 
 	i = -1;
+	printf("a->x: %d, a->y: %d, a->z: %d\n", a->x, a->y, a->z);
+	printf("b->x: %d, b->y: %d, b->z: %d\n", b->x, b->y, b->z);
 	pix = ft_new_pix(a->x, a->y, a->z);
+	printf("pix->z: %d\n",pix->z);
 	if (abs(a->x - b->x) <= abs(a->y - b->y))
 		step = 1 + abs(a->y - b->y);
 	else
@@ -46,6 +49,7 @@ void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 	xyzi[0] = (double)(b->x - a->x) / step;
 	xyzi[1] = (double)(b->y - a->y) / step;
 	xyzi[2] = (double)(b->z - a->z) / step;
+		printf("step: %d\n",step);
 	while (++i < step)
 	{
 		clr = ft_give_color(pix->z, setup);
@@ -56,6 +60,7 @@ void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 		free(clr);
 	}
 	free(pix);
+		printf("end draw_line\n");
 }
 
 static void		ft_draw_map_column(t_setup *setup, int j)
@@ -77,6 +82,7 @@ static void		ft_draw_map_line(t_setup *setup, int i)
 	j = 0;
 	while (&MAP->map[i][j + 1])
 	{
+		printf("draw_line x: %d, y: %d\n",j,i);
 		ft_draw_line(setup, &MAP->map[i][j], &MAP->map[i][j + 1]);
 		j++;
 	}
