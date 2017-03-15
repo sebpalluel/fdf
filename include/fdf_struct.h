@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/28 17:12:59 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/07 15:11:54 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct		s_img
 {
 	void			*image;
 	char			*image_addr;
-	int				bpp;
+	int				bbp;
 	int				endian;
 	int				size_x;
 }					t_img;

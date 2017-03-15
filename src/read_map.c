@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/02 16:55:09 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/08 17:41:40 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_print_array(char **array)
 static int			ft_free_tmp(char **tab, int fd, int return_val)
 {
 	if (tab)
-		ft_freetab(tab);
+		ft_freetab((void **)tab);
 	if (fd)
 		close(fd);
 	return (return_val);

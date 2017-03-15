@@ -6,17 +6,17 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/08 16:53:46 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/09 21:20:48 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_DEFINE_H
 # define FDF_DEFINE_H
 
-# define WIDTH		1920
-# define HEIGHT		1080
+# define WIDTH		1700
+# define HEIGHT		800
 
-# define STEP		2
+# define STEP		5
 # define ENDIAN		0
 # define BBP		8
 

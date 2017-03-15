@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/02/28 17:10:59 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/03/07 15:15:32 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -27,7 +27,7 @@ OBJ			=	$(SRC:.c=.o)
 
 CMP			=	gcc
 
-FLAGS		=	-g -Wall -Wextra -Werror
+FLAGS		=	-ggdb -Wall -Wextra -Werror
 
 LIB_DIR		=	-L libs/libft/ -L libs/minilibx
 LIBS		=	-lft -lmlx -framework OpenGL -framework AppKit

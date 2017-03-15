@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/09 16:59:21 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/09 21:27:38 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,14 @@ static t_pix	ft_vec3_to_pix(t_setup *setup, double **matrix,
 	t_pix		*pix;
 	int			oldz;
 
-	oldz = vec3->z;
+	oldz = (int)(vec3->z);
 	if (vec3->z > MAP->depth)
 		MAP->depth = vec3->z;
-	vec3->z = vec3->z * STEP * CAM->scale;
-	ft_matrix_on_point(vec3, matrix);
-	pix = ft_new_pix((CAM->fov / vec3->z) * vec3->x, (CAM->fov / vec3->z) \
-			* vec3->y, oldz);
+	vec3->z = (double)(vec3->z * STEP * CAM->scale);
+	ft_matrix_on_point(vec3, matrix); // bypass temporarly
+//	matrix[4] = NULL; // to erase after
+	pix = ft_new_pix((int)((CAM->fov / vec3->z) * vec3->x), \
+			(int)((CAM->fov / vec3->z) * vec3->y), oldz);
 	return (*pix);
 }
 
@@ -76,7 +77,7 @@ static int		ft_free_tmp_map(double **matrix, int *mid, t_vec3 *vec3,\
 		int return_case)
 {
 	if (matrix)
-	ft_freetab((void **)matrix);
+		ft_freetab((void **)matrix);
 	if (mid)
 		free(mid);
 	if (vec3)
@@ -95,11 +96,11 @@ void		ft_print_array_pix(t_pix **map, int width, int height)
 		j = 0;
 		while (j < width)
 		{
-			ft_putchar(' ');
-			ft_putnbr(map[i][j].z);
+			//ft_putchar(' ');
+			printf("x:%d,y:%d,z:%d ", map[i][j].x, map[i][j].y, map[i][j].z);
 			j++;
 		}
-		ft_putchar('\n');
+		ft_putstr(" newline\n");
 		i++;
 	}
 }
@@ -118,6 +119,7 @@ int				ft_update_map_and_cam(t_setup *setup)
 	while (++xy[0] < MAP->height)
 	{
 		xy[1] = -1;
+		printf("width: %d\n", MAP->width);
 		while (++xy[1] < MAP->width)
 		{
 			if (!(vec3 = ft_new_vec3((double)((xy[0] - mid[0]) * STEP), \
@@ -125,10 +127,11 @@ int				ft_update_map_and_cam(t_setup *setup)
 							(double)(MAP->tmp_map[xy[0]][xy[1]]))))
 				return (ft_free_tmp_map(matrix, mid, vec3, 0));
 			MAP->map[xy[0]][xy[1]] = ft_vec3_to_pix(setup, matrix, vec3);
-			printf("z_tmp%d ", MAP->tmp_map[xy[0]][xy[1]]);
-			printf("z%f ", vec3->z);
+			printf("x:%d,y:%d,z:%d ", MAP->map[xy[0]][xy[1]].x, MAP->map[xy[0]][xy[1]].y, \
+					MAP->map[xy[0]][xy[1]].z);
 		}
+		ft_putstr(" newline\n");
 	}
-	//ft_print_array_pix(MAP->map, xy[1], xy[0]);
+//	ft_print_array_pix(MAP->map, MAP->width, MAP->height);
 	return (ft_free_tmp_map(matrix, mid, vec3, 1));
 }

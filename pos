@@ -1,0 +1,15 @@
+./src/mlx_process.c:31:			ft_itoa(CAM->pos->x));
+./src/mlx_process.c:35:			ft_itoa(CAM->pos->y));
+./src/mlx_process.c:39:			ft_itoa(CAM->pos->z));
+./src/mlx_process.c:43:			ft_itoa((int)(57.3 * CAM->rot->x)));
+./src/mlx_process.c:47:			ft_itoa((int)(57.3 * CAM->rot->y)));
+./src/mlx_process.c:51:			ft_itoa((int)(57.3 * CAM->rot->z)));
+./src/mlx_process.c:80:				CAM->x += 1 / 50.0;
+./src/mlx_process.c:82:				CAM->x -= 1 / 50.0;
+./src/mlx_process.c:84:				CAM->y += 1 / 50.0;
+./src/mlx_process.c:86:				CAM->y -= 1 / 50.0;
+./src/setup.c:79:	ft_memdel((void **)&(CAM->pos));
+./src/setup.c:80:	ft_memdel((void **)&(CAM->rot));
+./src/update_map.c:68:	vec3->z = (double)(vec3->z * STEP * CAM->scale);
+./src/update_map.c:71:	pix = ft_new_pix((int)((CAM->fov / vec3->z) * vec3->x), \
+./src/update_map.c:72:			(int)((CAM->fov / vec3->z) * vec3->y), oldz);

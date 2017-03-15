@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/02 16:54:44 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/09 13:05:33 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		ft_print_cam(t_setup *setup)
 static int				ft_expose_hook(t_setup *setup)
 {
 	if (IMG == NULL)
-		IMG = ft_imgnew(MLX, M_WIDTH, M_HEIGHT);
+		IMG = ft_imgnew(MLX->mlx_ptr, M_WIDTH, M_HEIGHT);
 	mlx_clear_window(MLX->mlx_ptr, MLX->win_ptr);
 	ft_draw_map(setup);
 	//	ft_draw_image(setup);
@@ -64,7 +64,7 @@ static int				ft_expose_hook(t_setup *setup)
 		ft_print_cam(setup);
 		//draw on screen info
 	}
-	mlx_do_sync(MLX);
+	mlx_do_sync(MLX->mlx_ptr);
 	//ft_clean(env); //clean image
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/09 13:09:55 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/15 19:54:23 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 		IMG->image_addr[p] = clr->b;
 		IMG->image_addr[p + 1] = clr->g;
 		IMG->image_addr[p + 2] = clr->r;
-		if (clr->b > 0 || clr->g > 0 || clr->r > 0)
+//		if (clr->b > 0 || clr->g > 0 || clr->r > 0)
 			printf("x: %d, y: %d, rgb: %d %d %d\n", pix->x, pix->y, clr->r, clr->g, clr->b);
 	}
 }
@@ -53,14 +53,14 @@ void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 	while (++i < step)
 	{
 		clr = ft_give_color(pix->z, setup);
-		pix->x = a->x + round((double)i * xyzi[0]);
-		pix->y = a->y + round((double)i * xyzi[1]);
-		pix->z = a->z + round((double)i * xyzi[2]);
+		pix->x = a->x + round((double)(i * xyzi[0]));
+		pix->y = a->y + round((double)(i * xyzi[1]));
+		pix->z = a->z + round((double)(i * xyzi[2]));
 		ft_put_pix(setup, pix, clr);
 		free(clr);
 	}
 	free(pix);
-		printf("end draw_line\n");
+//		printf("end draw_line\n");
 }
 
 static void		ft_draw_map_column(t_setup *setup, int j)
@@ -82,7 +82,7 @@ static void		ft_draw_map_line(t_setup *setup, int i)
 	j = 0;
 	while (&MAP->map[i][j + 1])
 	{
-		printf("draw_line x: %d, y: %d\n",j,i);
+//		printf("draw_line x: %d, y: %d\n",j,i);
 		ft_draw_line(setup, &MAP->map[i][j], &MAP->map[i][j + 1]);
 		j++;
 	}
