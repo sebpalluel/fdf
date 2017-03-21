@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:22:36 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/08 17:11:28 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:31:13 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_color	*ft_new_color(unsigned char r, unsigned char g, \
 		unsigned char b)
 {
-	t_color		*col;
+	t_color		*col = NULL;
 
 	col = (t_color*)malloc(sizeof(t_color));
 	col->r = r;
@@ -26,7 +26,7 @@ static t_color	*ft_new_color(unsigned char r, unsigned char g, \
 
 static int		ft_color_parse(char *arg, t_color *color)
 {
-	char		**arg_color;
+	char		**arg_color = NULL;
 
 	if (ft_strlen(arg) < 5 || ft_strlen(arg) > 11)
 		return (0);

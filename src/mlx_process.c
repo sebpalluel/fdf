@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/09 13:05:33 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/21 17:27:13 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,19 @@ static int				ft_expose_hook(t_setup *setup)
 		IMG = ft_imgnew(MLX->mlx_ptr, M_WIDTH, M_HEIGHT);
 	mlx_clear_window(MLX->mlx_ptr, MLX->win_ptr);
 	ft_draw_map(setup);
-	//	ft_draw_image(setup);
+	//	ft_draw_image(setup); // method without IMG
+	printf("put_image\n");
 	mlx_put_image_to_window(MLX, MLX->win_ptr, IMG, 0, 0);
 	if (setup->ui == 1)
 	{
 		ft_print_cam(setup);
 		//draw on screen info
 	}
+	printf("mlx_do_sync\n");
 	mlx_do_sync(MLX->mlx_ptr);
 	//ft_clean(env); //clean image
 	return (0);
 }
-
-
 
 static int				ft_key_hook(int keycode, t_setup *setup)
 {
@@ -107,5 +107,6 @@ void		ft_mlx_process(t_setup *setup)
 	ft_update_map_and_cam(setup);
 	mlx_key_hook(MLX->win_ptr, ft_key_hook, setup);
 	mlx_expose_hook(MLX->win_ptr, ft_expose_hook, setup);
+	printf("mlx_loop\n");
 	mlx_loop(MLX->mlx_ptr);
 }
