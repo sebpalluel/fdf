@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/21 16:23:45 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/21 17:18:46 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 		IMG->image_addr[p] = clr->b;
 		IMG->image_addr[p + 1] = clr->g;
 		IMG->image_addr[p + 2] = clr->r;
-//		if (clr->b > 0 || clr->g > 0 || clr->r > 0)
-			printf("x: %d, y: %d, rgb: %d %d %d\n", pix->x, pix->y, clr->r, clr->g, clr->b);
+		//		if (clr->b > 0 || clr->g > 0 || clr->r > 0)
+		//printf("x: %d, y: %d, rgb: %d %d %d\n", pix->x, pix->y, clr->r, clr->g, clr->b);
 	}
 }
 
@@ -38,29 +38,33 @@ void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 	t_color		*clr = NULL;
 
 	i = -1;
-	printf("a->x: %d, a->y: %d, a->z: %d\n", a->x, a->y, a->z);
-	printf("b->x: %d, b->y: %d, b->z: %d\n", b->x, b->y, b->z);
-	pix = ft_new_pix(a->x, a->y, a->z);
-	printf("pix->z: %d\n",pix->z);
-	if (abs(a->x - b->x) <= abs(a->y - b->y))
-		step = 1 + abs(a->y - b->y);
-	else
-		step = 1 + abs(a->x - b->x);
-	xyzi[0] = (double)(b->x - a->x) / step;
-	xyzi[1] = (double)(b->y - a->y) / step;
-	xyzi[2] = (double)(b->z - a->z) / step;
-		printf("step: %d\n",step);
-	while (++i < step)
+	//printf("a->x: %d, a->y: %d, a->z: %d\n", a->x, a->y, a->z);
+	//printf("b->x: %d, b->y: %d, b->z: %d\n", b->x, b->y, b->z);
+	if ((pix = ft_new_pix(a->x, a->y, a->z)))
 	{
-		clr = ft_give_color(pix->z, setup);
-		pix->x = a->x + round((double)(i * xyzi[0]));
-		pix->y = a->y + round((double)(i * xyzi[1]));
-		pix->z = a->z + round((double)(i * xyzi[2]));
-		ft_put_pix(setup, pix, clr);
-		free(clr);
+		//printf("pix->z: %d\n",pix->z);
+		if (abs(a->x - b->x) <= abs(a->y - b->y))
+			step = 1 + abs(a->y - b->y);
+		else
+			step = 1 + abs(a->x - b->x);
+		xyzi[0] = (double)(b->x - a->x) / step;
+		xyzi[1] = (double)(b->y - a->y) / step;
+		xyzi[2] = (double)(b->z - a->z) / step;
+		//printf("step: %d\n",step);
+		while (++i < step)
+		{
+			if ((clr = ft_give_color(pix->z, setup)))
+			{
+				pix->x = a->x + round((double)(i * xyzi[0]));
+				pix->y = a->y + round((double)(i * xyzi[1]));
+				pix->z = a->z + round((double)(i * xyzi[2]));
+				ft_put_pix(setup, pix, clr);
+				free(clr);
+			}
+		}
+		free(pix);
 	}
-	free(pix);
-//		printf("end draw_line\n");
+	printf("end draw_line\n");
 }
 
 static void		ft_draw_map_column(t_setup *setup, int j)
@@ -70,7 +74,9 @@ static void		ft_draw_map_column(t_setup *setup, int j)
 	i = 0;
 	while ((i + 1) < M_HEIGHT)
 	{
+		printf("draw_map_column x: %d, y: %d\n",j,i);
 		ft_draw_line(setup, &MAP->map[i][j], &MAP->map[i + 1][j]);
+		printf("end draw_map_column\n");
 		i++;
 	}
 }
@@ -84,6 +90,7 @@ static void		ft_draw_map_line(t_setup *setup, int i)
 	{
 		printf("draw_line x: %d, y: %d\n",j,i);
 		ft_draw_line(setup, &MAP->map[i][j], &MAP->map[i][j + 1]);
+		printf("end draw_map_line\n");
 		j++;
 	}
 }
@@ -123,6 +130,7 @@ void			ft_draw_map(t_setup *setup)
 		ft_draw_map_column(setup, xy[1]);
 		xy[1]++;
 	}
+	printf("end_draw_map\n");
 }
 
 void			ft_imgdel(t_img *img, void *mlx)
@@ -147,7 +155,7 @@ t_img				*ft_imgnew(void *mlx, size_t x, size_t y)
 			if ((new->image = mlx_new_image(mlx, x, y)))
 			{
 				if ((new->image_addr = mlx_get_data_addr(new->image, &bbp,
-						&new->size_x, (int *)&new->endian)))
+								&new->size_x, (int *)&new->endian)))
 				{
 					new->bbp = bbp / 8;
 					return (new);

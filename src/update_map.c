@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/21 14:42:52 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/21 16:11:23 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,18 @@ static int		*ft_allocate_map(t_setup *setup)
 
 	if (!(mid = (int*)malloc(sizeof(int) * 2)))
 		return(NULL);
-	if (!((MAP)->map = (t_pix**)malloc(sizeof(t_pix*) * (MAP)->height + 1)))
+	if (!(MAP->map = (t_pix**)malloc(sizeof(t_pix*) * M_HEIGHT + 1)))
 		return(NULL);
-	(MAP)->map[(MAP)->height] = NULL;
-	mid[0] = MAP->width / 2;
-	mid[1] = MAP->height / 2;
+	mid[0] = M_WIDTH / 2;
+	mid[1] = M_HEIGHT / 2;
 	array = -1;
-	while ((MAP)->tmp_map[++array])
+	while (MAP->tmp_map[++array])
 	{
-		if(!((MAP)->map[array] = (t_pix*)malloc(sizeof(t_pix) * MAP->width + 1)))
+		if(!(MAP->map[array] = (t_pix*)malloc(sizeof(t_pix) * M_WIDTH))) // erase + 1, see if V
 			return(NULL);
 	}
+	printf("MAP witdh %d MAP height %d\n", M_WIDTH, M_HEIGHT);
+	MAP->map[M_HEIGHT] = NULL;
 	return (mid);
 }
 
@@ -88,7 +89,6 @@ static int		ft_free_tmp_map(t_setup *setup, int *mid, t_vec3 *vec3,\
 		free(mid);
 	if (vec3 && !return_case)
 		free(vec3);
-	printf("test_free_tmp_map\n");
 	return (return_case);
 }
 
@@ -103,11 +103,11 @@ int				ft_update_map_and_cam(t_setup *setup)
 		return (ft_free_tmp_map(setup, mid, vec3, 0));
 	MAT->to_cam[3][3] = 1;
 	xy[0] = 0;
-	printf("width: %d\n", MAP->width);
-	while (xy[0] < MAP->height)
+	printf("width: %d\n", M_WIDTH);
+	while (xy[0] < M_HEIGHT)
 	{
 		xy[1] = 0;
-		while (xy[1] < MAP->width)
+		while (xy[1] < M_WIDTH)
 		{
 			if (!(vec3 = ft_new_vec3((double)((xy[0] - mid[0]) * STEP), \
 							(double)((xy[1] - mid[1]) * STEP), \
@@ -125,5 +125,6 @@ int				ft_update_map_and_cam(t_setup *setup)
 		free(vec3);
 		xy[0]++;
 	}
+	printf("test x:%d,y:%d\n",MAP->map[10][18].x, MAP->map[10][18].y);
 	return (ft_free_tmp_map(setup, mid, vec3, 1));
 }

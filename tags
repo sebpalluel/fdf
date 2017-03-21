@@ -37,6 +37,7 @@ LIBFT_STRUCT_H	libs/libft/libft_struct.h	/^# define LIBFT_STRUCT_H$/;"	d
 LIBS	Makefile	/^LIBS		=	-lft -lmlx -framework OpenGL -framework AppKit$/;"	m
 LIB_DIR	Makefile	/^LIB_DIR		=	-L libs\/libft\/ -L libs\/minilibx$/;"	m
 MAP	include/fdf_define.h	/^# define MAP	/;"	d
+MAT	include/fdf_define.h	/^# define MAT	/;"	d
 MAX_EVENT	libs/minilibx/mlx_int.h	/^#define	MAX_EVENT	/;"	d
 MAX_INT	libs/libft/libft.h	/^# define MAX_INT /;"	d
 MAX_PIXEL_NB	libs/minilibx/mlx_int.h	/^#define MAX_PIXEL_NB	/;"	d
@@ -98,7 +99,7 @@ font_fshader	libs/minilibx/mlx_int.h	/^  GLuint	font_fshader;$/;"	m	struct:glsl_
 font_program	libs/minilibx/mlx_int.h	/^  GLuint	font_program;$/;"	m	struct:glsl_info_s
 font_vshader	libs/minilibx/mlx_int.h	/^  GLuint	font_vshader;$/;"	m	struct:glsl_info_s
 fov	include/fdf_struct.h	/^	double			fov;$/;"	m	struct:s_cam
-ft_allocate_map	src/update_map.c	/^static int			*ft_allocate_map(t_setup *setup)$/;"	f	file:
+ft_allocate_map	src/update_map.c	/^static int		*ft_allocate_map(t_setup *setup)$/;"	f	file:
 ft_allocate_setup	src/setup.c	/^static t_setup	*ft_allocate_setup()$/;"	f	file:
 ft_atoi	libs/libft/ft_atoi.c	/^int		ft_atoi(const char *str)$/;"	f
 ft_bzero	libs/libft/ft_bzero.c	/^void		ft_bzero(void *s, size_t n)$/;"	f
@@ -114,8 +115,9 @@ ft_draw_map_column	src/draw.c	/^static void		ft_draw_map_column(t_setup *setup, 
 ft_draw_map_line	src/draw.c	/^static void		ft_draw_map_line(t_setup *setup, int i)$/;"	f	file:
 ft_draw_map_point	src/draw.c	/^void			ft_draw_map_point(t_setup *setup)$/;"	f
 ft_expose_hook	src/mlx_process.c	/^static int				ft_expose_hook(t_setup *setup)$/;"	f	file:
+ft_free_matrix_cam	src/update_map.c	/^void			ft_free_matrix_cam(t_setup *setup)$/;"	f
 ft_free_tmp	src/read_map.c	/^static int			ft_free_tmp(char **tab, int fd, int return_val)$/;"	f	file:
-ft_free_tmp_map	src/update_map.c	/^static int		ft_free_tmp_map(double **matrix, int *mid, t_vec3 *vec3,\\$/;"	f	file:
+ft_free_tmp_map	src/update_map.c	/^static int		ft_free_tmp_map(t_setup *setup, int *mid, t_vec3 *vec3,\\$/;"	f	file:
 ft_freetab	libs/libft/ft_freetab.c	/^void	ft_freetab(void **tab)$/;"	f
 ft_getnbr	libs/libft/ft_getnbr.c	/^int		ft_getnbr(char *str)$/;"	f
 ft_give_color	src/color.c	/^t_color				*ft_give_color(int z, t_setup *setup)$/;"	f
@@ -148,7 +150,7 @@ ft_lstmap	libs/libft/ft_lstmap.c	/^t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t
 ft_lstnew	libs/libft/ft_lstnew.c	/^t_list		*ft_lstnew(void const *content, size_t content_size)$/;"	f
 ft_lsttoarray	libs/libft/ft_lsttoarray.c	/^void	**ft_lsttoarray(t_list *lst)$/;"	f
 ft_matrix_add	src/matrix.c	/^double		**ft_matrix_add(double **m, double **n, int size)$/;"	f
-ft_matrix_cam	src/update_map.c	/^static double	**ft_matrix_cam(t_cam *cam)$/;"	f	file:
+ft_matrix_cam	src/update_map.c	/^static double	**ft_matrix_cam(t_setup *setup)$/;"	f	file:
 ft_matrix_homothety	src/matrix.c	/^double		**ft_matrix_homothety(int factor)$/;"	f
 ft_matrix_mult	src/matrix.c	/^double		**ft_matrix_mult(double **m, double **n, int size)$/;"	f
 ft_matrix_on_point	src/matrix.c	/^void		ft_matrix_on_point(t_vec3 *vec3, double **m)$/;"	f
@@ -175,7 +177,6 @@ ft_newtab	libs/libft/ft_newtab.c	/^void	**ft_newtab(size_t height, size_t width)
 ft_parse_map	src/read_map.c	/^static int			ft_parse_map(t_setup *setup, char **tab)$/;"	f	file:
 ft_print_array	src/read_map.c	/^void	ft_print_array(char **array)$/;"	f
 ft_print_array_int	src/read_map.c	/^void		ft_print_array_int(int **map, int width, int height)$/;"	f
-ft_print_array_pix	src/update_map.c	/^void		ft_print_array_pix(t_pix **map, int width, int height)$/;"	f
 ft_print_cam	src/mlx_process.c	/^void		ft_print_cam(t_setup *setup)$/;"	f
 ft_put_pix	src/draw.c	/^void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)$/;"	f
 ft_putchar	libs/libft/ft_putchar.c	/^void	ft_putchar(char c)$/;"	f
@@ -268,6 +269,7 @@ main	src/fdf.c	/^int				main(int argc, char **argv)$/;"	f
 main_loop_active	libs/minilibx/mlx_int.h	/^  int			main_loop_active;$/;"	m	struct:mlx_ptr_s
 map	include/fdf_struct.h	/^	t_map			*map;$/;"	m	struct:s_setup
 map	include/fdf_struct.h	/^	t_pix			**map;$/;"	m	struct:s_map
+matrix	include/fdf_struct.h	/^	t_matrix_cam	*matrix;$/;"	m	struct:s_cam
 mlx	include/fdf_struct.h	/^	t_mlx			*mlx;$/;"	m	struct:s_setup
 mlx_col_name	libs/minilibx/mlx_rgb.c	/^struct s_col_name mlx_col_name[] =$/;"	v	typeref:struct:s_col_name
 mlx_img_ctx_s	libs/minilibx/mlx_int.h	/^typedef struct	mlx_img_ctx_s$/;"	s
@@ -295,6 +297,8 @@ mlx_win_list_s	libs/minilibx/mlx_int.h	/^typedef struct	mlx_win_list_s$/;"	s
 mlx_win_list_t	libs/minilibx/mlx_int.h	/^} mlx_win_list_t;$/;"	t	typeref:struct:mlx_win_list_s
 mlx_xpm_file_to_image	libs/minilibx/mlx_xpm.c	/^void	*mlx_xpm_file_to_image(mlx_ptr_t *xvar,char *file,int *width,int *height)$/;"	f
 mlx_xpm_to_image	libs/minilibx/mlx_xpm.c	/^void	*mlx_xpm_to_image(mlx_ptr_t *xvar,char **xpm_data,int *width,int *height)$/;"	f
+mult_rot	include/fdf_struct.h	/^	double			**mult_rot;$/;"	m	struct:s_matrix
+mult_zy	include/fdf_struct.h	/^	double			**mult_zy;$/;"	m	struct:s_matrix
 name	libs/minilibx/mlx_xpm.c	/^  char  *name;$/;"	m	struct:s_col_name	file:
 name	libs/minilibx/mlx_xpm.c	/^  int           name;$/;"	m	struct:s_xpm_col	file:
 nb_flush	libs/minilibx/mlx_int.h	/^  int			nb_flush;$/;"	m	struct:mlx_win_list_s
@@ -315,6 +319,9 @@ r	include/fdf_struct.h	/^	unsigned char	r;$/;"	m	struct:s_color
 read_buff	libs/libft/get_next_line.c	/^static int			read_buff(int fd, t_fd *fd_tab)$/;"	f	file:
 ret	libs/libft/main.c	/^	int				ret;$/;"	m	struct:s_fdp	file:
 rot	include/fdf_struct.h	/^	t_vec3			*rot;$/;"	m	struct:s_cam
+rot_x	include/fdf_struct.h	/^	double			**rot_x;$/;"	m	struct:s_matrix
+rot_y	include/fdf_struct.h	/^	double			**rot_y;$/;"	m	struct:s_matrix
+rot_z	include/fdf_struct.h	/^	double			**rot_z;$/;"	m	struct:s_matrix
 s_cam	include/fdf_struct.h	/^typedef struct		s_cam$/;"	s
 s_char	libs/libft/libft_struct.h	/^typedef struct		s_char$/;"	s
 s_col_name	libs/minilibx/mlx_xpm.c	/^struct  s_col_name$/;"	s	file:
@@ -324,6 +331,7 @@ s_fdp	libs/libft/main.c	/^typedef struct		s_fdp$/;"	s	file:
 s_img	include/fdf_struct.h	/^typedef struct		s_img$/;"	s
 s_list	libs/libft/libft_struct.h	/^typedef struct		s_list$/;"	s
 s_map	include/fdf_struct.h	/^typedef struct		s_map$/;"	s
+s_matrix	include/fdf_struct.h	/^typedef struct		s_matrix$/;"	s
 s_mlx	include/fdf_struct.h	/^typedef struct		s_mlx$/;"	s
 s_pix	include/fdf_struct.h	/^typedef struct		s_pix$/;"	s
 s_setup	include/fdf_struct.h	/^typedef struct		s_setup $/;"	s
@@ -340,6 +348,7 @@ t_fdp	libs/libft/main.c	/^}					t_fdp;$/;"	t	typeref:struct:s_fdp	file:
 t_img	include/fdf_struct.h	/^}					t_img;$/;"	t	typeref:struct:s_img
 t_list	libs/libft/libft_struct.h	/^}					t_list;$/;"	t	typeref:struct:s_list
 t_map	include/fdf_struct.h	/^}					t_map;$/;"	t	typeref:struct:s_map
+t_matrix_cam	include/fdf_struct.h	/^}					t_matrix_cam;$/;"	t	typeref:struct:s_matrix
 t_mlx	include/fdf_struct.h	/^}					t_mlx;$/;"	t	typeref:struct:s_mlx
 t_pix	include/fdf_struct.h	/^}					t_pix;$/;"	t	typeref:struct:s_pix
 t_setup	include/fdf_struct.h	/^}					t_setup;$/;"	t	typeref:struct:s_setup
@@ -347,6 +356,8 @@ t_vec3	include/fdf_struct.h	/^}					t_vec3;$/;"	t	typeref:struct:s_vec3
 t_xpm_col	libs/minilibx/mlx_xpm.c	/^} t_xpm_col;$/;"	t	typeref:struct:s_xpm_col	file:
 texture	libs/minilibx/mlx_int.h	/^  GLuint		texture;$/;"	m	struct:mlx_img_ctx_s
 tmp_map	include/fdf_struct.h	/^	int				**tmp_map;$/;"	m	struct:s_map
+to_cam	include/fdf_struct.h	/^	double			**to_cam;$/;"	m	struct:s_matrix
+trans	include/fdf_struct.h	/^	double			**trans;$/;"	m	struct:s_matrix
 ui	include/fdf_struct.h	/^	size_t			ui;$/;"	m	struct:s_setup
 usage	src/fdf.c	/^static int		usage(int mode)$/;"	f	file:
 vbuffer	libs/minilibx/mlx_int.h	/^  GLuint		vbuffer;$/;"	m	struct:mlx_img_ctx_s
