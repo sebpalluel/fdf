@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/21 17:18:46 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/21 17:59:33 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 		}
 		free(pix);
 	}
-	printf("end draw_line\n");
+//	printf("end draw_line\n");
 }
 
 static void		ft_draw_map_column(t_setup *setup, int j)
@@ -74,9 +74,9 @@ static void		ft_draw_map_column(t_setup *setup, int j)
 	i = 0;
 	while ((i + 1) < M_HEIGHT)
 	{
-		printf("draw_map_column x: %d, y: %d\n",j,i);
+	//	printf("draw_map_column x: %d, y: %d\n",j,i);
 		ft_draw_line(setup, &MAP->map[i][j], &MAP->map[i + 1][j]);
-		printf("end draw_map_column\n");
+	//	printf("end draw_map_column\n");
 		i++;
 	}
 }
@@ -88,9 +88,9 @@ static void		ft_draw_map_line(t_setup *setup, int i)
 	j = 0;
 	while ((j + 1) < M_WIDTH)
 	{
-		printf("draw_line x: %d, y: %d\n",j,i);
+	//	printf("draw_line x: %d, y: %d\n",j,i);
 		ft_draw_line(setup, &MAP->map[i][j], &MAP->map[i][j + 1]);
-		printf("end draw_map_line\n");
+	//	printf("end draw_map_line\n");
 		j++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/21 17:27:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/21 18:10:54 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ static int				ft_expose_hook(t_setup *setup)
 	//	ft_draw_image(setup); // method without IMG
 	printf("put_image\n");
 	mlx_put_image_to_window(MLX, MLX->win_ptr, IMG, 0, 0);
-	if (setup->ui == 1)
-	{
-		ft_print_cam(setup);
-		//draw on screen info
-	}
+	//if (setup->ui == 1)
+	//{
+	ft_print_cam(setup);
+	//draw on screen info
+	//	}
 	printf("mlx_do_sync\n");
-	mlx_do_sync(MLX->mlx_ptr);
+	//mlx_do_sync(MLX->mlx_ptr);
 	//ft_clean(env); //clean image
 	return (0);
 }
@@ -97,8 +97,9 @@ static int				ft_key_hook(int keycode, t_setup *setup)
 	else if (keycode == CTRL)
 	{
 		setup->ui = !setup->ui ? 1 : 0;
-		ft_expose_hook(setup);
+		//ft_expose_hook(setup);
 	}
+	printf("mlx_key_hook\n");
 	return (0);
 }
 
