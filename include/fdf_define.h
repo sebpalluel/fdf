@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/09 21:20:48 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/20 17:23:48 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@
 # define CAM		setup->cam
 # define MLX		setup->mlx
 # define IMG		setup->img
+# define MAT		setup->cam->matrix
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/07 15:11:54 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/20 17:23:45 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ typedef struct		s_map
 	t_pix			**map;
 }					t_map;
 
+typedef struct		s_matrix
+{
+	double			**to_cam;
+	double			**mult_rot;
+	double			**mult_zy;
+	double			**rot_x;
+	double			**rot_y;
+	double			**rot_z;
+	double			**trans;
+}					t_matrix_cam;
+
 typedef struct		s_cam
 {
 	t_vec3			*pos;
@@ -53,6 +64,7 @@ typedef struct		s_cam
 	double			fov;
 	double			offset_x;
 	double			offset_y;
+	t_matrix_cam	*matrix;
 }					t_cam;
 
 typedef struct		s_mlx

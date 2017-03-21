@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/09 21:27:11 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/20 19:13:44 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
 		cam->offset_x = (double)(setup->width / 2.0);
 		cam->offset_y = (double)(setup->height / 2.0);
 		CAM = cam;
-		return (1);
 	}
+	if (CAM && (CAM->matrix = (t_matrix_cam*)malloc(sizeof(t_matrix_cam))))
+		return (1);
 	return (0);
 }
 
@@ -79,6 +80,7 @@ t_setup			*ft_delete_setup(t_setup *setup)
 	ft_memdel((void **)&(CAM->pos));
 	ft_memdel((void **)&(CAM->rot));
 	ft_freetab((void **)MAP->tmp_map);
+	//ADD ERASE FUNCTION FOR MAT
 	ft_memdel((void **)&(CAM));
 	ft_memdel((void **)&(MAP));
 	ft_memdel((void **)&(MLX));

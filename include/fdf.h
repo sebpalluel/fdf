@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/08 16:54:06 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/20 19:45:35 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_draw_map_point(t_setup *setup);
 void	ft_draw_map(t_setup *setup);
 t_img	*ft_imgnew(void *mlx, size_t x, size_t y);
 t_mlx	*ft_init_window(char *name, int width, int height);
+void	ft_free_matrix_cam(t_setup *setup);
 
 double	**ft_matrix_zero(int size);
 double	**ft_matrix_translate(t_vec3 *vector);

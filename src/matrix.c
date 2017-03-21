@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:50:52 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/09 16:57:03 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/21 14:28:59 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,18 @@ double		**ft_matrix_zero(int size)
 	double	**ret = NULL;
 	int		xy[2];
 
-	ret = (double**)malloc(sizeof(double*) * size + 1);
+	if (!(ret = (double**)malloc(sizeof(double*) * size + 1)))
+		return (NULL);
 	xy[0] = -1;
 	while (++xy[0] < size)
 	{
 		xy[1] = -1;
-		ret[xy[0]] = (double*)malloc(sizeof(double) * size);
+		if (!(ret[xy[0]] = (double*)malloc(sizeof(double) * size)))
+			return (NULL);
 		while (++xy[1] < size)
 			ret[xy[0]][xy[1]] = 0;
 	}
-	ret[++xy[0]] = NULL;
+	ret[size] = NULL;
 	return (ret);
 }
 
@@ -47,14 +49,16 @@ double		**ft_matrix_translate(t_vec3 *vector)
 {
 	double	**ret = NULL;
 
-	ret = ft_matrix_zero(4);
-	ret[0][0] = 1;
-	ret[1][1] = 1;
-	ret[2][2] = 1;
-	ret[3][3] = 1;
-	ret[0][3] = vector->x;
-	ret[1][3] = vector->y;
-	ret[2][3] = vector->z;
+	if ((ret = ft_matrix_zero(4)))
+	{
+		ret[0][0] = 1;
+		ret[1][1] = 1;
+		ret[2][2] = 1;
+		ret[3][3] = 1;
+		ret[0][3] = vector->x;
+		ret[1][3] = vector->y;
+		ret[2][3] = vector->z;
+	}
 	return (ret);
 }
 
@@ -62,11 +66,13 @@ double		**ft_matrix_homothety(int factor)
 {
 	double	**ret = NULL;
 
-	ret = ft_matrix_zero(4);
-	ret[0][0] = factor;
-	ret[1][1] = factor;
-	ret[2][2] = factor;
-	ret[3][3] = 1;
+	if ((ret = ft_matrix_zero(4)))
+	{
+		ret[0][0] = factor;
+		ret[1][1] = factor;
+		ret[2][2] = factor;
+		ret[3][3] = 1;
+	}
 	return (ret);
 }
 
@@ -76,18 +82,20 @@ double		**ft_matrix_mult(double **m, double **n, int size)
 	double	temp;
 	int		xyz[3];
 
-	ret = ft_matrix_zero(size);
-	xyz[0] = -1;
-	while (++xyz[0] < size)
+	if ((ret = ft_matrix_zero(size)) && m && n)
 	{
-		xyz[1] = -1;
-		while (++xyz[1] < size)
+		xyz[0] = -1;
+		while (++xyz[0] < size)
 		{
-			temp = 0;
-			xyz[2] = -1;
-			while (++xyz[2] < size)
-				temp = temp + m[xyz[0]][xyz[2]] * n[xyz[2]][xyz[1]];
-			ret[xyz[0]][xyz[1]] = temp;
+			xyz[1] = -1;
+			while (++xyz[1] < size)
+			{
+				temp = 0;
+				xyz[2] = -1;
+				while (++xyz[2] < size)
+					temp = temp + m[xyz[0]][xyz[2]] * n[xyz[2]][xyz[1]];
+				ret[xyz[0]][xyz[1]] = temp;
+			}
 		}
 	}
 	return (ret);
@@ -98,13 +106,15 @@ double		**ft_matrix_add(double **m, double **n, int size)
 	double	**ret = NULL;
 	int		xy[2];
 
-	ret = ft_matrix_zero(size);
-	xy[0] = -1;
-	while (++xy[0] < size)
+	if ((ret = ft_matrix_zero(size)) && m && n)
 	{
-		xy[1] = -1;
-		while (++xy[1] < size)
-			ret[xy[0]][xy[1]] = m[xy[0]][xy[1]] + n[xy[0]][xy[1]];
+		xy[0] = -1;
+		while (++xy[0] < size)
+		{
+			xy[1] = -1;
+			while (++xy[1] < size)
+				ret[xy[0]][xy[1]] = m[xy[0]][xy[1]] + n[xy[0]][xy[1]];
+		}
 	}
 	return (ret);
 }
@@ -117,13 +127,15 @@ double		**ft_matrix_rot_x(double deg)
 
 	c = cos(deg);
 	s = sin(deg);
-	ret = ft_matrix_zero(4);
+	if ((ret = ft_matrix_zero(4)))
+	{
 	ret[3][3] = 1;
 	ret[0][0] = 1;
 	ret[1][1] = c;
 	ret[1][2] = -s;
 	ret[2][1] = s;
 	ret[2][2] = c;
+	}
 	return (ret);
 }
 
@@ -135,13 +147,15 @@ double		**ft_matrix_rot_y(double deg)
 
 	c = cos(deg);
 	s = sin(deg);
-	ret = ft_matrix_zero(4);
+	if ((ret = ft_matrix_zero(4)))
+	{
 	ret[3][3] = 1;
 	ret[0][0] = c;
 	ret[0][2] = s;
 	ret[1][1] = 1;
 	ret[2][0] = -s;
 	ret[2][2] = c;
+	}
 	return (ret);
 }
 
@@ -153,18 +167,22 @@ double		**ft_matrix_rot_z(double deg)
 
 	c = cos(deg);
 	s = sin(deg);
-	ret = ft_matrix_zero(4);
+	if ((ret = ft_matrix_zero(4)))
+	{
 	ret[3][3] = 1;
 	ret[2][2] = 1;
 	ret[0][0] = c;
 	ret[0][1] = -s;
 	ret[1][0] = s;
 	ret[1][1] = c;
+	}
 	return (ret);
 }
 
 void		ft_matrix_on_point(t_vec3 *vec3, double **m)
 {
+	if (m)
+	{
 	vec3->x = m[0][0] * vec3->x
 		+ m[0][1] * vec3->y
 		+ m[0][2] * vec3->z + m[0][3];
@@ -174,4 +192,5 @@ void		ft_matrix_on_point(t_vec3 *vec3, double **m)
 	vec3->z = m[2][0] * vec3->x
 		+ m[2][1] * vec3->y
 		+ m[1][2] * vec3->z + m[2][3];
+	}
 }
