@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/03/07 15:15:32 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/03/22 00:48:25 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -20,6 +20,7 @@ SRC 		=	src/fdf.c \
 				src/matrix.c \
 				src/setup.c \
 				src/update_map.c \
+				src/cam.c \
 
 EXT			=	Makefile
 

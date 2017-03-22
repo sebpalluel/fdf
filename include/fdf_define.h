@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/20 17:23:48 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/22 01:23:26 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define STEP		5
 # define ENDIAN		0
-# define BBP		8
+# define BBP		32
 
 # define ESC		53
 # define LEFT		123
@@ -27,9 +27,10 @@
 # define DOWN		125
 # define MINUS		78
 # define PLUS		69
-# define CTRL		8
+# define CTRL		256
 # define STAR		67
 # define SLASH		75
+# define G_KEY		5
 
 # define BLUE		0x0000FF
 # define GREEN		0x00F611

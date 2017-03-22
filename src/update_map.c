@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/21 18:16:29 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/22 01:18:01 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			ft_free_matrix_cam(t_setup *setup)
 static t_pix	ft_vec3_to_pix(t_setup *setup, double **matrix,
 		t_vec3 *vec3)
 {
-	t_pix		*pix;
+	t_pix		*pix = NULL;
 	int			oldz;
 
 	oldz = (int)(vec3->z);
@@ -72,7 +72,6 @@ static t_pix	ft_vec3_to_pix(t_setup *setup, double **matrix,
 		MAP->depth = vec3->z;
 	vec3->z = (double)(vec3->z * STEP * CAM->scale);
 	ft_matrix_on_point(vec3, matrix); // bypass temporarly
-	//	matrix[4] = NULL; // to erase after
 	pix = ft_new_pix((int)((CAM->fov / vec3->z) * vec3->x), \
 			(int)((CAM->fov / vec3->z) * vec3->y), oldz);
 	return (*pix);
@@ -119,5 +118,6 @@ int				ft_update_map_and_cam(t_setup *setup)
 		free(vec3);
 		xy[0]++;
 	}
+	printf("update_map_and_cam\n");
 	return (ft_free_tmp_map(setup, mid, vec3, 1));
 }

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/21 17:59:33 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/22 01:35:00 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,34 @@ void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 {
 	int		p;
 
-	p = pix->x * 4 + pix->y * M_WIDTH;
+	p = pix->x * 4 + pix->y * IMG->size_x;
 	if (pix->y > 0 && pix->y < (int)setup->height && pix->x > 0 \
 			&& pix->x < (int)setup->width)
 	{
-		//p = (int)clr->b;
 		IMG->image_addr[p] = clr->b;
 		IMG->image_addr[p + 1] = clr->g;
 		IMG->image_addr[p + 2] = clr->r;
-		//		if (clr->b > 0 || clr->g > 0 || clr->r > 0)
-		//printf("x: %d, y: %d, rgb: %d %d %d\n", pix->x, pix->y, clr->r, clr->g, clr->b);
+	}
+}
+
+void				ft_clean_img(t_setup *setup)
+{
+	t_pix			p1;
+	unsigned int	p;
+
+	p1.y = 0;
+	while (p1.y < (int)setup->height)
+	{
+		p1.x = 0;
+		while (p1.x < (int)setup->width)
+		{
+			p = p1.x * 4 + p1.y * IMG->size_x;
+			IMG->image_addr[p] = 0;
+			IMG->image_addr[p + 1] = 0;
+			IMG->image_addr[p + 2] = 0;
+			p1.x++;
+		}
+		p1.y++;
 	}
 }
 
@@ -64,7 +82,7 @@ void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 		}
 		free(pix);
 	}
-//	printf("end draw_line\n");
+	//	printf("end draw_line\n");
 }
 
 static void		ft_draw_map_column(t_setup *setup, int j)
@@ -74,9 +92,9 @@ static void		ft_draw_map_column(t_setup *setup, int j)
 	i = 0;
 	while ((i + 1) < M_HEIGHT)
 	{
-	//	printf("draw_map_column x: %d, y: %d\n",j,i);
+		//	printf("draw_map_column x: %d, y: %d\n",j,i);
 		ft_draw_line(setup, &MAP->map[i][j], &MAP->map[i + 1][j]);
-	//	printf("end draw_map_column\n");
+		//	printf("end draw_map_column\n");
 		i++;
 	}
 }
@@ -88,9 +106,9 @@ static void		ft_draw_map_line(t_setup *setup, int i)
 	j = 0;
 	while ((j + 1) < M_WIDTH)
 	{
-	//	printf("draw_line x: %d, y: %d\n",j,i);
+		//	printf("draw_line x: %d, y: %d\n",j,i);
 		ft_draw_line(setup, &MAP->map[i][j], &MAP->map[i][j + 1]);
-	//	printf("end draw_map_line\n");
+		//	printf("end draw_map_line\n");
 		j++;
 	}
 }
@@ -145,7 +163,6 @@ void			ft_imgdel(t_img *img, void *mlx)
 
 t_img				*ft_imgnew(void *mlx, size_t x, size_t y)
 {
-	int			bbp;
 	t_img		*new;
 
 	if (mlx)
@@ -154,12 +171,9 @@ t_img				*ft_imgnew(void *mlx, size_t x, size_t y)
 		{
 			if ((new->image = mlx_new_image(mlx, x, y)))
 			{
-				if ((new->image_addr = mlx_get_data_addr(new->image, &bbp,
-								&new->size_x, (int *)&new->endian)))
-				{
-					new->bbp = bbp / 8;
+				if ((new->image_addr = mlx_get_data_addr(new->image, &(new->bbp),
+								&(new->size_x), &(new->endian))))
 					return (new);
-				}
 			}
 		}
 		ft_imgdel(new, mlx);
