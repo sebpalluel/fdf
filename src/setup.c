@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/21 20:33:27 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:10:53 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ static t_setup	*ft_allocate_setup()
 	setup = (t_setup *)ft_memalloc(sizeof(t_setup));
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
-	if (ft_setup_cam(setup, ft_new_vec3(0., 0., 1000.),\
-				ft_new_vec3(0., 0., 0.), 2600.) && ft_setup_map_and_mlx(setup))
+	if (ft_setup_cam(setup, ft_new_vec3(setup->width / STEP, setup->height / STEP\
+					, 1000.), ft_new_vec3(0., 0., 0.), 2600.) \
+			&& ft_setup_map_and_mlx(setup))
 		return (setup);
 	return (NULL);
 }

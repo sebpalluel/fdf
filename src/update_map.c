@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/22 01:18:01 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/22 16:04:16 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int				ft_update_map_and_cam(t_setup *setup)
 		return (ft_free_tmp_map(setup, mid, vec3, 0));
 	MAT->to_cam[3][3] = 1;
 	xy[0] = 0;
-//	printf("width: %d\n", M_WIDTH);
+	printf("mid[0]: %d mid[1] %d\n", mid[0], mid[1]);
 	while (xy[0] < M_HEIGHT)
 	{
 		xy[1] = 0;
@@ -111,7 +111,7 @@ int				ft_update_map_and_cam(t_setup *setup)
 							(double)(MAP->tmp_map[xy[0]][xy[1]]))))
 				return (ft_free_tmp_map(setup, mid, vec3, 0));
 			MAP->map[xy[0]][xy[1]] = ft_vec3_to_pix(setup, MAT->to_cam, vec3);
-			//printf("l:%d w:%d,x:%d,y:%d,z:%d\n",xy[0], xy[1], MAP->map[xy[0]][xy[1]].x, MAP->map[xy[0]][xy[1]].y, MAP->map[xy[0]][xy[1]].z);
+			printf("l:%d w:%d,x:%d,y:%d,z:%d\n",xy[0], xy[1], MAP->map[xy[0]][xy[1]].x, MAP->map[xy[0]][xy[1]].y, MAP->map[xy[0]][xy[1]].z);
 			xy[1]++;
 		}
 		//printf("newline %d\n",xy[0]);

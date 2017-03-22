@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/22 01:35:55 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/22 14:58:23 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int				ft_key_hook(int keycode, t_setup *setup)
 	if (CAM != 0)
 	{
 		ft_move_cam(setup, keycode);
+		printf("CAM pos x %f pos y %f pos z %f rot x %f rot y %f rot z %f scale %f fov %f", \
+				CAM->pos->x, CAM->pos->y, CAM->pos->z, CAM->rot->x, CAM->rot->y, CAM->rot->z, CAM->scale, CAM->fov);
 		/*		if (keycode == 126)
 				CAM->x += 1 / 50.0;
 				if (keycode == 125)

@@ -27,6 +27,7 @@ FLAGS	libs/libft/Makefile	/^FLAGS	=	-Wall -Wextra -Werror$/;"	m
 FONT_HEIGHT	libs/minilibx/mlx_int.h	/^#define	FONT_HEIGHT	/;"	d
 FONT_WIDTH	libs/minilibx/mlx_int.h	/^#define FONT_WIDTH	/;"	d
 GREEN	include/fdf_define.h	/^# define GREEN	/;"	d
+G_KEY	include/fdf_define.h	/^# define G_KEY	/;"	d
 HEIGHT	include/fdf_define.h	/^# define HEIGHT	/;"	d
 IMG	include/fdf_define.h	/^# define IMG	/;"	d
 LEFT	include/fdf_define.h	/^# define LEFT	/;"	d
@@ -104,6 +105,7 @@ ft_allocate_setup	src/setup.c	/^static t_setup	*ft_allocate_setup()$/;"	f	file:
 ft_atoi	libs/libft/ft_atoi.c	/^int		ft_atoi(const char *str)$/;"	f
 ft_bzero	libs/libft/ft_bzero.c	/^void		ft_bzero(void *s, size_t n)$/;"	f
 ft_check_if_number	src/read_map.c	/^static int			ft_check_if_number(char **tab, int *width)$/;"	f	file:
+ft_clean_img	src/draw.c	/^void				ft_clean_img(t_setup *setup)$/;"	f
 ft_color_input	src/color.c	/^int				ft_color_input(char **argv, int argc, t_setup *setup)$/;"	f
 ft_color_parse	src/color.c	/^static int		ft_color_parse(char *arg, t_color *color)$/;"	f	file:
 ft_delete_setup	src/setup.c	/^t_setup			*ft_delete_setup(t_setup *setup)$/;"	f
@@ -170,14 +172,16 @@ ft_memdup	libs/libft/ft_memdup.c	/^void		*ft_memdup(const void *mem, size_t size
 ft_memmove	libs/libft/ft_memmove.c	/^void	*ft_memmove(void *dest, const void *src, size_t n)$/;"	f
 ft_memset	libs/libft/ft_memset.c	/^void	*ft_memset(void *str, int c, size_t n)$/;"	f
 ft_mlx_process	src/mlx_process.c	/^void		ft_mlx_process(t_setup *setup)$/;"	f
+ft_move_cam	src/cam.c	/^void			ft_move_cam(t_setup *setup, int keycode)$/;"	f
 ft_new_color	src/color.c	/^static t_color	*ft_new_color(unsigned char r, unsigned char g, \\$/;"	f	file:
 ft_new_pix	src/setup.c	/^t_pix			*ft_new_pix(int x, int y, int z)$/;"	f
 ft_new_vec3	src/matrix.c	/^t_vec3		*ft_new_vec3(double x, double y, double z)$/;"	f
 ft_newtab	libs/libft/ft_newtab.c	/^void	**ft_newtab(size_t height, size_t width)$/;"	f
+ft_orient_cam	src/cam.c	/^static void			ft_orient_cam(t_setup *setup, int keycode)$/;"	f	file:
 ft_parse_map	src/read_map.c	/^static int			ft_parse_map(t_setup *setup, char **tab)$/;"	f	file:
 ft_print_array	src/read_map.c	/^void	ft_print_array(char **array)$/;"	f
 ft_print_array_int	src/read_map.c	/^void		ft_print_array_int(int **map, int width, int height)$/;"	f
-ft_print_cam	src/mlx_process.c	/^void		ft_print_cam(t_setup *setup)$/;"	f
+ft_print_cam	src/cam.c	/^void		ft_print_cam(t_setup *setup)$/;"	f
 ft_put_pix	src/draw.c	/^void			ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)$/;"	f
 ft_putchar	libs/libft/ft_putchar.c	/^void	ft_putchar(char c)$/;"	f
 ft_putchar_fd	libs/libft/ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd)$/;"	f
@@ -188,6 +192,7 @@ ft_putnbr_fd	libs/libft/ft_putnbr_fd.c	/^void	ft_putnbr_fd(int n, int fd)$/;"	f
 ft_putstr	libs/libft/ft_putstr.c	/^void	ft_putstr(char const *s)$/;"	f
 ft_putstr_fd	libs/libft/ft_putstr_fd.c	/^void	ft_putstr_fd(char const *s, int fd)$/;"	f
 ft_read_map	src/read_map.c	/^int					ft_read_map(t_setup *setup, int fd)$/;"	f
+ft_scale_cam	src/cam.c	/^void				ft_scale_cam(t_setup *setup)$/;"	f
 ft_setup	src/setup.c	/^t_setup			*ft_setup(t_setup *setup, char **argv, int argc, int allocate)$/;"	f
 ft_setup_cam	src/setup.c	/^static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)$/;"	f	file:
 ft_setup_map_and_mlx	src/setup.c	/^static int		ft_setup_map_and_mlx(t_setup *setup)$/;"	f	file:

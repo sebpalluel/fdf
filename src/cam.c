@@ -6,11 +6,37 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 00:37:02 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/22 01:23:36 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/22 15:33:00 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+void				ft_scale_cam(t_setup *setup)
+{
+	double			x_scale;
+	double			y_scale;
+
+	//	else if (keycode == 32)
+	//	{
+	//		CAM->scale = CAM->scale + (double)STEP / 100;
+	//		if (CAM->scale == 0)
+	//			CAM->scale = (double)STEP / 100;
+	//	}
+	//	else if (keycode == 38)
+	//	{
+	//		CAM->scale = CAM->scale - (double)STEP / 100;
+	//		if (CAM->scale == 0)
+	//			CAM->scale = -(double)STEP / 100;
+	//	}
+	//
+	y_scale = setup->height / (CAM->offset_y * 1.4);
+	x_scale = setup->width / (CAM->offset_x * 1.4);
+	CAM->scale = x_scale;
+	if (y_scale > CAM->scale)
+		CAM->scale = y_scale;
+	CAM->scale = 1 / CAM->scale;
+}
 
 static void			ft_orient_cam(t_setup *setup, int keycode)
 {
@@ -18,52 +44,41 @@ static void			ft_orient_cam(t_setup *setup, int keycode)
 		CAM->pos->y = CAM->pos->y + STEP;
 	else if (keycode == DOWN)
 		CAM->pos->y = CAM->pos->y - STEP;
+	else if (keycode == LEFT)
+		CAM->pos->x = CAM->pos->x - STEP;
+	else if (keycode == RIGHT)
+		CAM->pos->x = CAM->pos->x + STEP;
 	else if (keycode == PLUS)
 		CAM->pos->z = (CAM->pos->z == -STEP) ? STEP :
 			CAM->pos->z + STEP;
 	else if (keycode == MINUS)
 		CAM->pos->z = (CAM->pos->z == STEP) ? -STEP :
 			CAM->pos->z - STEP;
-	else if (keycode == 15)
+	else if (keycode == D_KEY)
 		CAM->rot->x = CAM->rot->x + (double)STEP / 100;
-	else if (keycode == 3)
+	else if (keycode == A_KEY)
 		CAM->rot->x = CAM->rot->x - (double)STEP / 100;
-	else if (keycode == 16)
+	else if (keycode == W_KEY)
 		CAM->rot->y = CAM->rot->y + (double)STEP / 100;
-	else if (keycode == 4)
+	else if (keycode == S_KEY)
 		CAM->rot->y = CAM->rot->y - (double)STEP / 100;
-	else if (keycode == 17)
+	else if (keycode == Q_KEY)
 		CAM->rot->z = CAM->rot->z + (double)STEP / 100;
-	else if (keycode == 5)
+	else if (keycode == E_KEY)
 		CAM->rot->z = CAM->rot->z - (double)STEP / 100;
+	else if (keycode == R_KEY)
+		CAM->fov = CAM->fov + STEP * 10;
+	else if (keycode == F_KEY)
+		CAM->fov = CAM->fov - STEP * 10;
 }
 
 void			ft_move_cam(t_setup *setup, int keycode)
 {
+	ft_scale_cam(setup);
 	ft_orient_cam(setup, keycode);
-//	move_cam_3(CAM, keycode, mlx);
-	if (keycode == 12)
-		CAM->pos->x = CAM->pos->x + STEP;
-	else if (keycode == 0)
-		CAM->pos->x = CAM->pos->x - STEP;
-	else if (keycode == 32)
-	{
-		CAM->scale = CAM->scale + (double)STEP / 100;
-		if (CAM->scale == 0)
-			CAM->scale = (double)STEP / 100;
-	}
-	else if (keycode == 38)
-	{
-		CAM->scale = CAM->scale - (double)STEP / 100;
-		if (CAM->scale == 0)
-			CAM->scale = -(double)STEP / 100;
-	}
-	else if (keycode == 24)
-		CAM->fov = CAM->fov + STEP * 10;
-	else if (keycode == 27)
-		CAM->fov = CAM->fov - STEP * 10;
-//	else if (keycode == 49)
-//		CAM->line = (CAM->line == 0) ? 1 : 0;
+	//	move_cam_3(CAM, keycode, mlx);
+	//	else if (keycode == 49)
+	//		CAM->line = (CAM->line == 0) ? 1 : 0;
 }
 
 void		ft_print_cam(t_setup *setup)
