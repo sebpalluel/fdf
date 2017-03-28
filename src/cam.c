@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 00:37:02 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/27 19:40:59 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/27 20:05:11 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,17 @@ static void			ft_scale_cam(t_setup *setup, int keycode)
 	//if (y_scale > CAM->scale)
 	//	CAM->scale = y_scale;
 	//CAM->scale = 1 / CAM->scale;
-	printf("test keycode %d\n", keycode);
 	if (keycode == EQUAL)
 	{
 		CAM->scale = CAM->scale + (double)STEP / 100;
-		printf("test scale %lf\n",CAM->scale);
-//		if (CAM->scale == 0)
-//			CAM->scale = (double)STEP / 100;
+		if (CAM->scale == 0)
+			CAM->scale = (double)STEP / 100;
 	}
 	else if (keycode == MINUS)
 	{
 		CAM->scale = CAM->scale - (double)STEP / 100;
-//		if (CAM->scale == 0)
-//			CAM->scale = -(double)STEP / 100;
+		if (CAM->scale == 0)
+			CAM->scale = -(double)STEP / 100;
 	}
 }
 

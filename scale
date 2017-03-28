@@ -1,0 +1,57 @@
+./src/cam.c:22:	//		CAM->scale = CAM->scale + (double)STEP / 100;
+./src/cam.c:23:	//		if (CAM->scale == 0)
+./src/cam.c:24:	//			CAM->scale = (double)STEP / 100;
+./src/cam.c:28:	//		CAM->scale = CAM->scale - (double)STEP / 100;
+./src/cam.c:29:	//		if (CAM->scale == 0)
+./src/cam.c:30:	//			CAM->scale = -(double)STEP / 100;
+./src/cam.c:33:	//y_scale = setup->height / (CAM->offset_y * 1.4);
+./src/cam.c:34:	//x_scale = setup->width / (CAM->offset_x * 1.4);
+./src/cam.c:35:	//CAM->scale = x_scale;
+./src/cam.c:36:	//if (y_scale > CAM->scale)
+./src/cam.c:37:	//	CAM->scale = y_scale;
+./src/cam.c:38:	//CAM->scale = 1 / CAM->scale;
+./src/cam.c:41:		CAM->scale = CAM->scale + (double)STEP / 100;
+./src/cam.c:42://		if (CAM->scale == 0)
+./src/cam.c:43://			CAM->scale = (double)STEP / 100;
+./src/cam.c:47:		CAM->scale = CAM->scale - (double)STEP / 100;
+./src/cam.c:48://		if (CAM->scale == 0)
+./src/cam.c:49://			CAM->scale = -(double)STEP / 100;
+./src/cam.c:56:		CAM->pos->y = CAM->pos->y + STEP;
+./src/cam.c:58:		CAM->pos->y = CAM->pos->y - STEP;
+./src/cam.c:60:		CAM->pos->x = CAM->pos->x - STEP;
+./src/cam.c:62:		CAM->pos->x = CAM->pos->x + STEP;
+./src/cam.c:64:		CAM->pos->z = (CAM->pos->z == -STEP) ? STEP :
+./src/cam.c:65:			CAM->pos->z + STEP;
+./src/cam.c:67:		CAM->pos->z = (CAM->pos->z == STEP) ? -STEP :
+./src/cam.c:68:			CAM->pos->z - STEP;
+./src/cam.c:70:		CAM->rot->x = CAM->rot->x + (double)STEP / 100;
+./src/cam.c:72:		CAM->rot->x = CAM->rot->x - (double)STEP / 100;
+./src/cam.c:74:		CAM->rot->y = CAM->rot->y + (double)STEP / 100;
+./src/cam.c:76:		CAM->rot->y = CAM->rot->y - (double)STEP / 100;
+./src/cam.c:78:		CAM->rot->z = CAM->rot->z + (double)STEP / 100;
+./src/cam.c:80:		CAM->rot->z = CAM->rot->z - (double)STEP / 100;
+./src/cam.c:82:		CAM->fov = CAM->fov + STEP * 10;
+./src/cam.c:84:		CAM->fov = CAM->fov - STEP * 10;
+./src/cam.c:93:	//		CAM->line = (CAM->line == 0) ? 1 : 0;
+./src/cam.c:101:			ft_itoa(CAM->pos->x));
+./src/cam.c:105:			ft_itoa(CAM->pos->y));
+./src/cam.c:109:			ft_itoa(CAM->pos->z));
+./src/cam.c:113:			ft_itoa((int)(57.3 * CAM->rot->x)));
+./src/cam.c:117:			ft_itoa((int)(57.3 * CAM->rot->y)));
+./src/cam.c:121:			ft_itoa((int)(57.3 * CAM->rot->z)));
+./src/cam.c:125:			ft_itoa(CAM->fov));
+./src/cam.c:129:			ft_itoa(CAM->scale));
+./src/mlx_process.c:56:				CAM->x += 1 / 50.0;
+./src/mlx_process.c:58:				CAM->x -= 1 / 50.0;
+./src/mlx_process.c:60:				CAM->y += 1 / 50.0;
+./src/mlx_process.c:62:				CAM->y -= 1 / 50.0;
+./src/setup.c:42:	if (CAM && (CAM->matrix = (t_matrix_cam*)malloc(sizeof(t_matrix_cam))))
+./src/setup.c:81:	ft_memdel((void **)&(CAM->pos));
+./src/setup.c:82:	ft_memdel((void **)&(CAM->rot));
+./src/update_map.c:41:	MAT->rot_x = ft_matrix_rot_x(-CAM->rot->x);
+./src/update_map.c:42:	MAT->rot_y = ft_matrix_rot_y(-CAM->rot->y);
+./src/update_map.c:43:	MAT->rot_z = ft_matrix_rot_z(-CAM->rot->z);
+./src/update_map.c:46:	if (!(vec3 = ft_new_vec3(-CAM->pos->x, -CAM->pos->y, -CAM->pos->z)))
+./src/update_map.c:73:	vec3->z = (double)(vec3->z * STEP * CAM->scale);
+./src/update_map.c:75:	pix = ft_new_pix((int)((CAM->fov / vec3->z) * vec3->x), \
+./src/update_map.c:76:			(int)((CAM->fov / vec3->z) * vec3->y), oldz);

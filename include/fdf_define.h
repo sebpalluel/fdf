@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/22 15:29:01 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/28 16:15:04 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 # define RIGHT		124
 # define DOWN		125
 # define UP			126
-# define MINUS		78
-# define PLUS		69
+# define MINUS		27
+# define EQUAL		24
+# define DOT_KEY	47
+# define SLASH_KEY	44
 # define CTRL		256
 # define STAR		67
 # define SLASH		75
@@ -56,6 +58,6 @@
 # define CAM		setup->cam
 # define MLX		setup->mlx
 # define IMG		setup->img
-# define MAT		setup->cam->matrix
+//# define MAT		setup->cam->matrix
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/22 15:10:53 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/28 23:25:01 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,36 @@ t_pix			*ft_new_pix(int x, int y, int z)
 	return (pix);
 }
 
+void			ft_populate_pix(t_pix *to_pix, int x, int y, int z)
+{
+	if (to_pix)
+	{
+		to_pix->x = x;
+		to_pix->y = y;
+		to_pix->z = z;
+	}
+}
+
+static t_cam	*ft_allocate_matrix_cam(t_cam *cam)
+{
+	size_t		mat_inc;
+
+	cam->to_cam = ft_matrix_zero(4);
+	cam->tmp_mat = (double ***)(ft_memalloc(sizeof(double **) * 7));
+	if (!cam->to_cam || !cam->tmp_mat)
+		return (NULL);
+	mat_inc = 0;
+	while (mat_inc < 6)
+	{
+		cam->tmp_mat[mat_inc] = ft_matrix_zero(4);
+		if (!cam->tmp_mat[mat_inc])
+			return (NULL);
+		mat_inc++;
+	}
+	cam->tmp_mat[mat_inc] = NULL;
+	return (cam);
+}
+
 static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
 {
 	t_cam		*cam = NULL;
@@ -37,9 +67,9 @@ static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
 		cam->fov = fov;
 		cam->offset_x = (double)(setup->width / 2.0);
 		cam->offset_y = (double)(setup->height / 2.0);
-		CAM = cam;
+		CAM = ft_allocate_matrix_cam(cam);
 	}
-	if (CAM && (CAM->matrix = (t_matrix_cam*)malloc(sizeof(t_matrix_cam))))
+	if (CAM)
 		return (1);
 	return (0);
 }
@@ -52,6 +82,7 @@ static int		ft_setup_map_and_mlx(t_setup *setup)
 	{
 		map->width = 0;
 		map->height = 0;
+		map->mid = (int *)ft_memalloc(sizeof(int) * 2);
 		MAP = map;
 	}
 	MLX = ft_init_window("fdf", setup->width, setup->height);
@@ -67,8 +98,8 @@ static t_setup	*ft_allocate_setup()
 	setup = (t_setup *)ft_memalloc(sizeof(t_setup));
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
-	if (ft_setup_cam(setup, ft_new_vec3(setup->width / STEP, setup->height / STEP\
-					, 1000.), ft_new_vec3(0., 0., 0.), 2600.) \
+	if (ft_setup_cam(setup, ft_new_vec3(0., 0., 1000.), \
+				ft_new_vec3(0., 0., 0.), 2600.) \
 			&& ft_setup_map_and_mlx(setup))
 		return (setup);
 	return (NULL);
@@ -76,12 +107,19 @@ static t_setup	*ft_allocate_setup()
 
 t_setup			*ft_delete_setup(t_setup *setup)
 {
+	size_t mat_inc;
+
+	mat_inc = 0;
 	ft_memdel((void **)&(MAP->lerp_in));
 	ft_memdel((void **)&(MAP->lerp_out));
 	ft_memdel((void **)&(CAM->pos));
 	ft_memdel((void **)&(CAM->rot));
 	ft_freetab((void **)MAP->tmp_map);
+	ft_memdel((void **)&(MAP->mid));
 	//ADD ERASE FUNCTION FOR MAT
+	ft_freetab((void **)CAM->to_cam);
+	while (CAM->tmp_mat[mat_inc++])
+		ft_freetab((void **)CAM->tmp_mat[mat_inc]);
 	ft_memdel((void **)&(CAM));
 	ft_memdel((void **)&(MAP));
 	ft_memdel((void **)&(MLX));
