@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/28 17:56:05 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/29 16:12:38 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 int		ft_color_input(char **argv, int argc, t_setup *setup);
 void	ft_mlx_process(t_setup *setup);
 int		ft_read_map(t_setup *setup, int fd);
-t_setup	*ft_setup(t_setup *setup, char **argv, int argc, int allocate);
+t_setup	*ft_setup(char **argv, int argc);
 t_setup	*ft_delete_setup(t_setup *setup);
 t_vec3	*ft_new_vec3(double x, double y, double z);
 void	ft_populate_vec3(t_vec3 *to_vec3, double x, double y, double z);

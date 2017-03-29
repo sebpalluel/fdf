@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/28 23:25:01 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/29 16:16:47 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static t_setup	*ft_allocate_setup()
 	setup = (t_setup *)ft_memalloc(sizeof(t_setup));
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
-	if (ft_setup_cam(setup, ft_new_vec3(0., 0., 1000.), \
+	if (ft_setup_cam(setup, ft_new_vec3(WIDTH / STEP, HEIGHT / STEP, 1000.), \
 				ft_new_vec3(0., 0., 0.), 2600.) \
 			&& ft_setup_map_and_mlx(setup))
 		return (setup);
@@ -110,34 +110,30 @@ t_setup			*ft_delete_setup(t_setup *setup)
 	size_t mat_inc;
 
 	mat_inc = 0;
-	ft_memdel((void **)&(MAP->lerp_in));
-	ft_memdel((void **)&(MAP->lerp_out));
-	ft_memdel((void **)&(CAM->pos));
-	ft_memdel((void **)&(CAM->rot));
-	ft_freetab((void **)MAP->tmp_map);
-	ft_memdel((void **)&(MAP->mid));
-	//ADD ERASE FUNCTION FOR MAT
-	ft_freetab((void **)CAM->to_cam);
-	while (CAM->tmp_mat[mat_inc++])
-		ft_freetab((void **)CAM->tmp_mat[mat_inc]);
-	ft_memdel((void **)&(CAM));
-	ft_memdel((void **)&(MAP));
-	ft_memdel((void **)&(MLX));
-	ft_memdel((void **)&(setup));
+		ft_memdel((void **)&(MAP->lerp_in));
+		ft_memdel((void **)&(MAP->lerp_out));
+		ft_memdel((void **)&(CAM->pos));
+		ft_memdel((void **)&(CAM->rot));
+		ft_freetab((void **)MAP->tmp_map);
+		ft_memdel((void **)&(MAP->mid));
+		//ADD ERASE FUNCTION FOR MAT
+		ft_freetab((void **)CAM->to_cam);
+		while (CAM->tmp_mat[mat_inc++])
+			ft_freetab((void **)CAM->tmp_mat[mat_inc]);
+		ft_memdel((void **)&(CAM));
+		ft_memdel((void **)&(MAP));
+		ft_memdel((void **)&(MLX));
+		ft_memdel((void **)&(setup));
 	return (NULL);
 }
 
-t_setup			*ft_setup(t_setup *setup, char **argv, int argc, int allocate)
+t_setup			*ft_setup(char **argv, int argc)
 {
 	t_setup 	*setup_tmp = NULL;
 
-	setup_tmp = setup;
-	if (allocate)
-	{
 		setup_tmp = ft_allocate_setup();
-		allocate = ft_color_input(argv, argc, setup_tmp);
-	}
-	if ((!allocate && setup_tmp))
+		if (!ft_color_input(argv, argc, setup_tmp)\
+				&& setup_tmp)
 		return (ft_delete_setup(setup_tmp));
 	return (setup_tmp);
 }

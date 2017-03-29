@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/28 23:30:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/29 16:07:55 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int				ft_allocate_map(t_setup *setup)
 static void		ft_matrix_cam(t_setup *setup)
 {
 
-	ft_matrix_rot_x(CAM->tmp_mat[0], -CAM->rot->x);
-	ft_matrix_rot_y(CAM->tmp_mat[1], -CAM->rot->y);
-	ft_matrix_rot_z(CAM->tmp_mat[2], -CAM->rot->z);
-	ft_matrix_mult(CAM->tmp_mat[3], CAM->tmp_mat[2], CAM->tmp_mat[1], 4);
-	ft_matrix_mult(CAM->tmp_mat[4], CAM->tmp_mat[3], CAM->tmp_mat[0], 4);
+	ft_matrix_rot_x(CAM->tmp_mat[0], CAM->rot->x);
+	ft_matrix_rot_y(CAM->tmp_mat[1], CAM->rot->y);
+	ft_matrix_rot_z(CAM->tmp_mat[2], CAM->rot->z);
+	ft_matrix_mult(CAM->tmp_mat[3], CAM->tmp_mat[2], CAM->tmp_mat[1], 4); // 3 2 1
+	ft_matrix_mult(CAM->tmp_mat[4], CAM->tmp_mat[3], CAM->tmp_mat[0], 4);// 4 3 0
 	ft_matrix_translate(CAM->tmp_mat[5], CAM->pos);
 	ft_matrix_add(CAM->to_cam, CAM->tmp_mat[4], CAM->tmp_mat[5], 4);
 	CAM->to_cam[3][3] = 1;
@@ -77,9 +77,9 @@ int				ft_update_map_and_cam(t_setup *setup)
 		while (++xy[1] < M_WIDTH)
 		{
 			ft_vec3_to_pix(setup, vec3, xy);
-			printf("l:%d w:%d,x:%d,y:%d,z:%d\n",xy[0], xy[1], MAP->map[xy[0]][xy[1]].x, MAP->map[xy[0]][xy[1]].y, MAP->map[xy[0]][xy[1]].z);
+			//printf("l:%d w:%d,x:%d,y:%d,z:%d\n",xy[0], xy[1], MAP->map[xy[0]][xy[1]].x, MAP->map[xy[0]][xy[1]].y, MAP->map[xy[0]][xy[1]].z);
 		}
-		printf("newline %d\n",xy[0]);
+		//printf("newline %d\n",xy[0]);
 	}
 	free(vec3);
 	printf("update_map_and_cam\n");

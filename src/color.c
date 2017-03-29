@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:22:36 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/21 16:32:31 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/29 16:15:16 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,29 @@ static t_color	*ft_new_color(unsigned char r, unsigned char g, \
 	return (col);
 }
 
-static int		ft_color_parse(char *arg, t_color *color)
+static t_color	*ft_color_parse(char *arg)
 {
 	char		**arg_color = NULL;
 
 	if (ft_strlen(arg) < 5 || ft_strlen(arg) > 11)
-		return (0);
+		return (NULL);
 	arg_color = ft_strsplit(arg, ',');
 	if (!arg_color || !arg_color[0] || !arg_color[1] || !arg_color[2])
-		return (0);
-	color = ft_new_color((unsigned char)ft_atoi(arg_color[0]), \
+		return (NULL);
+	return (ft_new_color((unsigned char)ft_atoi(arg_color[0]), \
 			(unsigned char)ft_atoi(arg_color[1]), \
-			(unsigned char)ft_atoi(arg_color[2]));
-	return (1);
+			(unsigned char)ft_atoi(arg_color[2])));
 }
 
 int				ft_color_input(char **argv, int argc, t_setup *setup)
 {
 	if (argc == 4)
 	{
-		if (!ft_color_parse(argv[3], MAP->lerp_in) || \
-				!ft_color_parse(argv[4], MAP->lerp_out))
-			return (-1);
+		if (!(MAP->lerp_in = ft_color_parse(argv[2])) || \
+				!(MAP->lerp_out = ft_color_parse(argv[3])))
+			return (0);
 	}
-	else
+	if (argc == 2)
 	{
 		MAP->lerp_in = ft_new_color(0, 0, 0);
 		MAP->lerp_out = ft_new_color(255, 255, 255);
