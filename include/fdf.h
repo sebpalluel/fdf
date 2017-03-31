@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/29 16:12:38 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/30 01:39:15 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 int		ft_color_input(char **argv, int argc, t_setup *setup);
 void	ft_mlx_process(t_setup *setup);
 int		ft_read_map(t_setup *setup, int fd);
-t_setup	*ft_setup(char **argv, int argc);
+t_setup	*ft_setup(char **argv, int argc, int *usage);
+int		usage(int mode);
 t_setup	*ft_delete_setup(t_setup *setup);
 t_vec3	*ft_new_vec3(double x, double y, double z);
 void	ft_populate_vec3(t_vec3 *to_vec3, double x, double y, double z);
@@ -38,9 +39,12 @@ void	ft_draw_map_point(t_setup *setup);
 void	ft_draw_map(t_setup *setup);
 void	ft_clean_img(t_setup *setup);
 t_img	*ft_imgnew(void *mlx, size_t x, size_t y);
+void	ft_imgdel(t_img *img, void *mlx);
 t_mlx	*ft_init_window(char *name, int width, int height);
 void	ft_free_matrix_cam(t_setup *setup);
-void	ft_move_cam(t_setup *setup, int keycode);
+void	ft_scale_cam(t_setup *setup, int keycode);
+void	ft_rot_cam(t_setup *setup, int keycode);
+void	ft_orient_cam(t_setup *setup, int keycode);
 void	ft_print_cam(t_setup *setup);
 int		ft_allocate_map(t_setup *setup);
 

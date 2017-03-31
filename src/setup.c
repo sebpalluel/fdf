@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/29 16:16:47 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/30 15:43:27 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,35 +105,74 @@ static t_setup	*ft_allocate_setup()
 	return (NULL);
 }
 
-t_setup			*ft_delete_setup(t_setup *setup)
+static void		ft_delete_map(t_setup *setup)
+{
+	if (MAP)
+	{
+		if (MAP->tmp_map && MAP->tmp_map[M_HEIGHT - 1])
+			ft_freetab((void **)MAP->tmp_map);
+		if	(MAP->map)
+			ft_freetab((void **)MAP->map);
+		if (MAP->lerp_in)
+			ft_memdel((void **)&(MAP->lerp_in));
+		if (MAP->lerp_out)
+			ft_memdel((void **)&(MAP->lerp_out));
+		if (MAP->mid)
+			ft_memdel((void **)&(MAP->mid));
+		ft_memdel((void **)&(MAP));
+	}
+}
+
+static void		ft_delete_cam(t_setup *setup)
 {
 	size_t mat_inc;
 
 	mat_inc = 0;
-		ft_memdel((void **)&(MAP->lerp_in));
-		ft_memdel((void **)&(MAP->lerp_out));
-		ft_memdel((void **)&(CAM->pos));
-		ft_memdel((void **)&(CAM->rot));
-		ft_freetab((void **)MAP->tmp_map);
-		ft_memdel((void **)&(MAP->mid));
-		//ADD ERASE FUNCTION FOR MAT
-		ft_freetab((void **)CAM->to_cam);
-		while (CAM->tmp_mat[mat_inc++])
-			ft_freetab((void **)CAM->tmp_mat[mat_inc]);
+	if (CAM)
+	{
+		if (CAM->tmp_mat)
+			while (CAM->tmp_mat[mat_inc++])
+				ft_freetab((void **)CAM->tmp_mat[mat_inc]);
+		if (CAM->to_cam)
+			ft_freetab((void **)CAM->to_cam);
+		if (CAM->pos)
+			ft_memdel((void **)&(CAM->pos));
+		if (CAM->rot)
+			ft_memdel((void **)&(CAM->rot));
 		ft_memdel((void **)&(CAM));
-		ft_memdel((void **)&(MAP));
+	}
+}
+
+static	void	ft_delete_mlx(t_setup *setup)
+{
+	if (MLX)
+	{
+		if (IMG)
+			ft_imgdel(IMG, MLX->mlx_ptr);
+		if (MLX->mlx_ptr && MLX->win_ptr)
+		{
+			mlx_destroy_window(MLX->mlx_ptr, MLX->win_ptr);
+			ft_memdel((void **)&(MLX->mlx_ptr));
+		}
 		ft_memdel((void **)&(MLX));
-		ft_memdel((void **)&(setup));
+	}
+}
+
+t_setup			*ft_delete_setup(t_setup *setup)
+{
+	ft_delete_map(setup);
+	ft_delete_cam(setup);
+	ft_delete_mlx(setup);
+	ft_memdel((void **)&(setup));
 	return (NULL);
 }
 
-t_setup			*ft_setup(char **argv, int argc)
+t_setup			*ft_setup(char **argv, int argc, int *usage)
 {
 	t_setup 	*setup_tmp = NULL;
 
-		setup_tmp = ft_allocate_setup();
-		if (!ft_color_input(argv, argc, setup_tmp)\
-				&& setup_tmp)
+	setup_tmp = ft_allocate_setup();
+	if ((*usage = ft_color_input(argv, argc, setup_tmp)) == -1)
 		return (ft_delete_setup(setup_tmp));
 	return (setup_tmp);
 }

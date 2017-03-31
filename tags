@@ -114,10 +114,13 @@ ft_allocate_matrix_cam	src/setup.c	/^static t_cam	*ft_allocate_matrix_cam(t_cam 
 ft_allocate_setup	src/setup.c	/^static t_setup	*ft_allocate_setup()$/;"	f	file:
 ft_atoi	libs/libft/ft_atoi.c	/^int		ft_atoi(const char *str)$/;"	f
 ft_bzero	libs/libft/ft_bzero.c	/^void		ft_bzero(void *s, size_t n)$/;"	f
-ft_check_if_number	src/read_map.c	/^static int			ft_check_if_number(char **tab, int *width)$/;"	f	file:
+ft_check_line	src/read_map.c	/^static int			ft_check_line(char **tab, int *width)$/;"	f	file:
 ft_clean_img	src/draw.c	/^void				ft_clean_img(t_setup *setup)$/;"	f
 ft_color_input	src/color.c	/^int				ft_color_input(char **argv, int argc, t_setup *setup)$/;"	f
-ft_color_parse	src/color.c	/^static int		ft_color_parse(char *arg, t_color *color)$/;"	f	file:
+ft_color_parse	src/color.c	/^static t_color	*ft_color_parse(char *arg)$/;"	f	file:
+ft_delete_cam	src/setup.c	/^static void		ft_delete_cam(t_setup *setup)$/;"	f	file:
+ft_delete_map	src/setup.c	/^static void		ft_delete_map(t_setup *setup)$/;"	f	file:
+ft_delete_mlx	src/setup.c	/^static	void	ft_delete_mlx(t_setup *setup)$/;"	f	file:
 ft_delete_setup	src/setup.c	/^t_setup			*ft_delete_setup(t_setup *setup)$/;"	f
 ft_draw_image	src/draw_image.c	/^void	ft_draw_image(t_setup *setup)$/;"	f
 ft_draw_line	src/draw.c	/^void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)$/;"	f
@@ -132,6 +135,7 @@ ft_freetab	libs/libft/ft_freetab.c	/^void	ft_freetab(void **tab)$/;"	f
 ft_ftoa	libs/libft/ft_ftoa.c	/^char		*ft_ftoa(float f)$/;"	f
 ft_getnbr	libs/libft/ft_getnbr.c	/^int		ft_getnbr(char *str)$/;"	f
 ft_give_color	src/color.c	/^t_color				*ft_give_color(int z, t_setup *setup)$/;"	f
+ft_hexa_to_color	src/color.c	/^t_color			*ft_hexa_to_color(int hexValue)$/;"	f
 ft_imgdel	src/draw.c	/^void			ft_imgdel(t_img *img, void *mlx)$/;"	f
 ft_imgnew	src/draw.c	/^t_img				*ft_imgnew(void *mlx, size_t x, size_t y)$/;"	f
 ft_init_window	src/mlx_process.c	/^t_mlx		*ft_init_window(char *name, int width, int height)$/;"	f
@@ -181,12 +185,11 @@ ft_memdup	libs/libft/ft_memdup.c	/^void		*ft_memdup(const void *mem, size_t size
 ft_memmove	libs/libft/ft_memmove.c	/^void	*ft_memmove(void *dest, const void *src, size_t n)$/;"	f
 ft_memset	libs/libft/ft_memset.c	/^void	*ft_memset(void *str, int c, size_t n)$/;"	f
 ft_mlx_process	src/mlx_process.c	/^void		ft_mlx_process(t_setup *setup)$/;"	f
-ft_move_cam	src/cam.c	/^void			ft_move_cam(t_setup *setup, int keycode)$/;"	f
 ft_new_color	src/color.c	/^static t_color	*ft_new_color(unsigned char r, unsigned char g, \\$/;"	f	file:
 ft_new_pix	src/setup.c	/^t_pix			*ft_new_pix(int x, int y, int z)$/;"	f
 ft_new_vec3	src/matrix.c	/^t_vec3		*ft_new_vec3(double x, double y, double z)$/;"	f
 ft_newtab	libs/libft/ft_newtab.c	/^void	**ft_newtab(size_t height, size_t width)$/;"	f
-ft_orient_cam	src/cam.c	/^static void			ft_orient_cam(t_setup *setup, int keycode)$/;"	f	file:
+ft_orient_cam	src/cam.c	/^ void		ft_orient_cam(t_setup *setup, int keycode)$/;"	f
 ft_parse_map	src/read_map.c	/^static int			ft_parse_map(t_setup *setup, char **tab)$/;"	f	file:
 ft_populate_pix	src/setup.c	/^void			ft_populate_pix(t_pix *to_pix, int x, int y, int z)$/;"	f
 ft_populate_vec3	src/matrix.c	/^void		ft_populate_vec3(t_vec3 *to_vec3, double x, double y, double z)$/;"	f
@@ -203,8 +206,9 @@ ft_putnbr_fd	libs/libft/ft_putnbr_fd.c	/^void	ft_putnbr_fd(int n, int fd)$/;"	f
 ft_putstr	libs/libft/ft_putstr.c	/^void	ft_putstr(char const *s)$/;"	f
 ft_putstr_fd	libs/libft/ft_putstr_fd.c	/^void	ft_putstr_fd(char const *s, int fd)$/;"	f
 ft_read_map	src/read_map.c	/^int					ft_read_map(t_setup *setup, int fd)$/;"	f
-ft_scale_cam	src/cam.c	/^static void			ft_scale_cam(t_setup *setup, int keycode)$/;"	f	file:
-ft_setup	src/setup.c	/^t_setup			*ft_setup(t_setup *setup, char **argv, int argc, int allocate)$/;"	f
+ft_rot_cam	src/cam.c	/^void		ft_rot_cam(t_setup *setup, int keycode)$/;"	f
+ft_scale_cam	src/cam.c	/^void		ft_scale_cam(t_setup *setup, int keycode)$/;"	f
+ft_setup	src/setup.c	/^t_setup			*ft_setup(char **argv, int argc, int *usage)$/;"	f
 ft_setup_cam	src/setup.c	/^static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)$/;"	f	file:
 ft_setup_map_and_mlx	src/setup.c	/^static int		ft_setup_map_and_mlx(t_setup *setup)$/;"	f	file:
 ft_sqrt	libs/libft/ft_sqrt.c	/^int		ft_sqrt(int nb)$/;"	f
@@ -368,7 +372,7 @@ tmp_map	include/fdf_struct.h	/^	int				**tmp_map;$/;"	m	struct:s_map
 tmp_mat	include/fdf_struct.h	/^	double			***tmp_mat;$/;"	m	struct:s_cam
 to_cam	include/fdf_struct.h	/^	double			**to_cam;$/;"	m	struct:s_cam
 ui	include/fdf_struct.h	/^	size_t			ui;$/;"	m	struct:s_setup
-usage	src/fdf.c	/^static int		usage(int mode)$/;"	f	file:
+usage	src/fdf.c	/^int				usage(int mode)$/;"	f
 vbuffer	libs/minilibx/mlx_int.h	/^  GLuint		vbuffer;$/;"	m	struct:mlx_img_ctx_s
 vertexes	libs/minilibx/mlx_int.h	/^  GLfloat		vertexes[8];$/;"	m	struct:mlx_img_list_s
 width	include/fdf_struct.h	/^	int				width;$/;"	m	struct:s_map
