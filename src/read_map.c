@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/30 01:26:18 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/01 18:29:08 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,16 @@ void	ft_print_array(char **array)
 
 static int			ft_free_tmp(char **tab, int fd, int return_val)
 {
-	if (tab)
+	if (tab && tab[0])
 		ft_freetab((void **)tab);
 	if (fd)
 		close(fd);
 	return (return_val);
 }
 
-static int			ft_check_line(char **tab, int *width)
+static int			ft_evaluate_length(t_setup *setup, char **tab)
 {
 	int				len;
-	int				i;
-	int				j;
 	static int		width_state = 0;
 
 	len = -1;
@@ -66,46 +64,158 @@ static int			ft_check_line(char **tab, int *width)
 		width_state = len;
 	if (width_state != len)
 		return (0);
-	*width = len;
-	i = -1;
-	while (tab[++i])
+	M_WIDTH = len;
+	return (1);
+}
+
+static int			ft_checkhexa(char *str)
+{
+	size_t 			i;
+	size_t			hexa_count;
+	size_t			prefix;
+
+	i = 0;
+	hexa_count = 0;
+	prefix = 0;
+	while (str[i])
 	{
-		j = -1;
-		while (tab[i][++j])
-			if (!ft_isdigit(tab[i][j]) &&\
-					tab[i][j] != '-' && tab[i][j] != ' ')
+		if (i == 0 && str[0] == '0' && str[1] == 'x')
+		{
+			prefix = 1;
+			i += 2;
+		}
+		if (prefix && ft_ishexa(str[i]) && hexa_count < 7)
+			hexa_count++;
+		else
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int			ft_checkdigit(char *str)
+{
+	size_t			i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int			ft_check_tab_depth(char **tab)
+{
+	size_t			depth;
+
+	depth = 0;
+	if (tab && *tab)
+	{
+		while (tab[depth])
+			depth++;
+	}
+	return (depth);
+}
+
+static int			ft_return_del_tab(void **tab, int return_val)
+{
+	ft_freetab(tab);
+	return (return_val);
+}
+
+static int			ft_split_elem(t_setup *setup, char *str, int line, int col)
+{
+	char			**split_elem = NULL;
+
+	if (str)
+	{
+		if (!MAP->hexa)
+		{
+			if (!ft_checkdigit(str))
 				return (0);
+			MAP->tmp_map[line][col] = ft_atoi(str);
+		}
+		else
+		{
+			if (!(split_elem = ft_strsplit((char const *)str, ',')) && \
+					ft_check_tab_depth(split_elem) != 2)
+				return (ft_return_del_tab((void **)split_elem, 0)); // map error
+			if (!ft_checkdigit(split_elem[0]) || !ft_checkhexa(split_elem[1]))
+				return (ft_return_del_tab((void **)split_elem, 0)); // map error
+			MAP->tmp_map[line][col] = ft_atoi(split_elem[0]);
+			//here function to populate lerp_in lerp_out with hexa relative to MAP->depth
+			ft_freetab((void **)split_elem);
+		}
+		return (1);
+	}
+	return (0);
+}
+
+static int			ft_have_hexa(t_setup *setup, char *str)
+{
+	size_t 			i;
+
+	i = 0;
+	MAP->hexa = 0;
+	while (str[i])
+	{
+		if ((!ft_isdigit(str[i]) && !ft_ishexa(str[i]) && str[i] != 'x' \
+					&& str[i] != ',') || (MAP->hexa && str[i] == ','))
+			return (0);
+		if (str[i] == ',')
+			MAP->hexa = 1;
+		i++;
+	}
+	return (1);
+}
+
+static int			ft_parse_line(t_setup *setup, char **tab, int line)
+{
+	size_t			elem;
+
+	if (!ft_evaluate_length(setup, tab))
+		return (0); // map error
+	if(!(MAP->tmp_map[line] = (int *)malloc(sizeof(int) * M_WIDTH + 1)))
+		return (-1);
+	MAP->tmp_map[line][M_WIDTH] = 0;
+	elem = 0; 
+	while (tab[elem])
+	{
+		if (!ft_have_hexa(setup, tab[elem]))
+			return (0); // map error
+		if (!ft_split_elem(setup, tab[elem], line, elem))
+			return (0); // map error
+		elem++;
 	}	
 	return (1);
 }
 
 static int			ft_parse_map(t_setup *setup, char **tab)
 {
-	int			j;
-	int			i;
+	//	int			j;
+	int			line;
 	static int	error_line = 1;
-	char		**split_ret;
+	char		**split_ret = NULL;
 
-	i = 0;
-	while (i < M_HEIGHT)
+	line = 0;
+	while (line < M_HEIGHT)
 	{
-		split_ret = ft_strsplit((char const*)tab[i], ' ');
-		if (!ft_check_line(split_ret, &M_WIDTH))
-			error_line = 0;
-		if (!split_ret || !(MAP->tmp_map[i] =\
-					(int *)malloc(sizeof(int) * M_WIDTH + 1)))
+		if (!(split_ret = ft_strsplit((char const*)tab[line], ' ')))
 			return (ft_free_tmp(split_ret, 0, 0));
-		MAP->tmp_map[i][M_WIDTH] = 0;
-		j = 0;
-		while (split_ret[j])
-		{
-			MAP->tmp_map[i][j] = ft_atoi(split_ret[j]);
-			j++;
-		}
-		i++;
+		if ((error_line = ft_parse_line(setup, split_ret, line)) <= 0)
+			return (ft_free_tmp(split_ret, 0, error_line));
+		//		j = 0;
+		//		while (ft_split_elem(setup, split_ret, line, j))
+		//			j++;
+		ft_freetab((void **)split_ret);
+		line++;
 	}
 	MAP->tmp_map[M_HEIGHT] = NULL;
-	return (ft_free_tmp(split_ret, 0, error_line));
+	printf("error_line end parse %d\n", error_line);
+	return (ft_free_tmp(NULL, 0, error_line));
 }
 
 int					ft_read_map(t_setup *setup, int fd)

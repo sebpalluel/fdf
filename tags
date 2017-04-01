@@ -114,7 +114,7 @@ ft_allocate_matrix_cam	src/setup.c	/^static t_cam	*ft_allocate_matrix_cam(t_cam 
 ft_allocate_setup	src/setup.c	/^static t_setup	*ft_allocate_setup()$/;"	f	file:
 ft_atoi	libs/libft/ft_atoi.c	/^int		ft_atoi(const char *str)$/;"	f
 ft_bzero	libs/libft/ft_bzero.c	/^void		ft_bzero(void *s, size_t n)$/;"	f
-ft_check_line	src/read_map.c	/^static int			ft_check_line(char **tab, int *width)$/;"	f	file:
+ft_check_hexa_or_digit	src/read_map.c	/^static int			ft_check_hexa_or_digit(t_setup *setup, char *str, \\$/;"	f	file:
 ft_clean_img	src/draw.c	/^void				ft_clean_img(t_setup *setup)$/;"	f
 ft_color_input	src/color.c	/^int				ft_color_input(char **argv, int argc, t_setup *setup)$/;"	f
 ft_color_parse	src/color.c	/^static t_color	*ft_color_parse(char *arg)$/;"	f	file:
@@ -129,6 +129,7 @@ ft_draw_map	src/draw.c	/^void			ft_draw_map(t_setup *setup)$/;"	f
 ft_draw_map_column	src/draw.c	/^static void		ft_draw_map_column(t_setup *setup, int j)$/;"	f	file:
 ft_draw_map_line	src/draw.c	/^static void		ft_draw_map_line(t_setup *setup, int i)$/;"	f	file:
 ft_draw_map_point	src/draw.c	/^void			ft_draw_map_point(t_setup *setup)$/;"	f
+ft_evaluate_length	src/read_map.c	/^static int			ft_evaluate_length(t_setup *setup, char **tab)$/;"	f	file:
 ft_expose_hook	src/mlx_process.c	/^static int				ft_expose_hook(t_setup *setup)$/;"	f	file:
 ft_free_tmp	src/read_map.c	/^static int			ft_free_tmp(char **tab, int fd, int return_val)$/;"	f	file:
 ft_freetab	libs/libft/ft_freetab.c	/^void	ft_freetab(void **tab)$/;"	f
@@ -147,6 +148,7 @@ ft_isalnum	libs/libft/ft_isalnum.c	/^int		ft_isalnum(int c)$/;"	f
 ft_isalpha	libs/libft/ft_isalpha.c	/^int	ft_isalpha(int c)$/;"	f
 ft_isascii	libs/libft/ft_isascii.c	/^int	ft_isascii(int c)$/;"	f
 ft_isdigit	libs/libft/ft_isdigit.c	/^int	ft_isdigit(int c)$/;"	f
+ft_ishexa	libs/libft/ft_ishexa.c	/^int			ft_ishexa(int c)$/;"	f
 ft_isnegative	libs/libft/ft_itoa.c	/^static void		ft_isnegative(int *n, int *negative)$/;"	f	file:
 ft_isprint	libs/libft/ft_isprint.c	/^int	ft_isprint(int c)$/;"	f
 ft_isspace	libs/libft/ft_isspace.c	/^int		ft_isspace(int c)$/;"	f
@@ -190,6 +192,7 @@ ft_new_pix	src/setup.c	/^t_pix			*ft_new_pix(int x, int y, int z)$/;"	f
 ft_new_vec3	src/matrix.c	/^t_vec3		*ft_new_vec3(double x, double y, double z)$/;"	f
 ft_newtab	libs/libft/ft_newtab.c	/^void	**ft_newtab(size_t height, size_t width)$/;"	f
 ft_orient_cam	src/cam.c	/^ void		ft_orient_cam(t_setup *setup, int keycode)$/;"	f
+ft_parse_line	src/read_map.c	/^static int			ft_parse_line(t_setup *setup, char **tab, int line)$/;"	f	file:
 ft_parse_map	src/read_map.c	/^static int			ft_parse_map(t_setup *setup, char **tab)$/;"	f	file:
 ft_populate_pix	src/setup.c	/^void			ft_populate_pix(t_pix *to_pix, int x, int y, int z)$/;"	f
 ft_populate_vec3	src/matrix.c	/^void		ft_populate_vec3(t_vec3 *to_vec3, double x, double y, double z)$/;"	f
@@ -211,6 +214,7 @@ ft_scale_cam	src/cam.c	/^void		ft_scale_cam(t_setup *setup, int keycode)$/;"	f
 ft_setup	src/setup.c	/^t_setup			*ft_setup(char **argv, int argc, int *usage)$/;"	f
 ft_setup_cam	src/setup.c	/^static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)$/;"	f	file:
 ft_setup_map_and_mlx	src/setup.c	/^static int		ft_setup_map_and_mlx(t_setup *setup)$/;"	f	file:
+ft_split_elem	src/read_map.c	/^static int			ft_split_elem(t_setup *setup, char *str, int line, int row)$/;"	f	file:
 ft_sqrt	libs/libft/ft_sqrt.c	/^int		ft_sqrt(int nb)$/;"	f
 ft_strcat	libs/libft/ft_strcat.c	/^char	*ft_strcat(char *src, const char *dest)$/;"	f
 ft_strchr	libs/libft/ft_strchr.c	/^char	*ft_strchr(const char *src, int c)$/;"	f
@@ -255,6 +259,7 @@ height	include/fdf_struct.h	/^	int				height;$/;"	m	struct:s_map
 height	include/fdf_struct.h	/^	unsigned int	height;$/;"	m	struct:s_setup
 height	libs/minilibx/font.c	/^  unsigned int 	 height;$/;"	m	struct:__anon1	file:
 height	libs/minilibx/mlx_int.h	/^  int			height;$/;"	m	struct:mlx_img_list_s
+hexa	include/fdf_struct.h	/^	size_t			hexa;$/;"	m	struct:s_map
 image	include/fdf_struct.h	/^	void			*image;$/;"	m	struct:s_img
 image_addr	include/fdf_struct.h	/^	char			*image_addr;$/;"	m	struct:s_img
 image_fshader	libs/minilibx/mlx_int.h	/^  GLuint	image_fshader;$/;"	m	struct:glsl_info_s

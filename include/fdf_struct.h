@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/28 16:15:36 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/03/31 16:13:34 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,13 @@ typedef struct		s_map
 	int				width;
 	int				height;
 	int				depth;
+	size_t			hexa;
 	int				*mid;
 	t_color			*lerp_in;
 	t_color			*lerp_out;
 	int				**tmp_map;
 	t_pix			**map;
 }					t_map;
-
-//typedef struct		s_matrix
-//{
-//	double			**to_cam;
-//	double			**mult_rot;
-//	double			**mult_zy;
-//	double			**rot_x;
-//	double			**rot_y;
-//	double			**rot_z;
-//	double			**trans;
-//}					t_matrix_cam;
 
 typedef struct		s_cam
 {
