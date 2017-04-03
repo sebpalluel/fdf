@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/30 01:39:15 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/03 18:40:20 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <stdio.h> // warning, erase when finish
 
 int		ft_color_input(char **argv, int argc, t_setup *setup);
+t_color	*ft_new_color(unsigned char r, unsigned char g, \
+		unsigned char b);
 void	ft_mlx_process(t_setup *setup);
 int		ft_read_map(t_setup *setup, int fd);
 t_setup	*ft_setup(char **argv, int argc, int *usage);
@@ -34,7 +36,9 @@ void	ft_populate_vec3(t_vec3 *to_vec3, double x, double y, double z);
 t_pix	*ft_new_pix(int x, int y, int z);
 void	ft_populate_pix(t_pix *to_pix, int x, int y, int z);
 int		ft_update_map_and_cam(t_setup *setup);
-t_color	*ft_give_color(int z, t_setup *setup);
+void	ft_give_color(t_setup *setup, t_color *clr, int z);
+t_color	*ft_hexcolor(int hexValue);
+void	ft_hexa_to_color(t_color *col, int hexValue);
 void	ft_draw_map_point(t_setup *setup);
 void	ft_draw_map(t_setup *setup);
 void	ft_clean_img(t_setup *setup);

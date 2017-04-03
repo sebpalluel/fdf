@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/30 01:38:42 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/03 19:29:14 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,14 @@ static int				ft_expose_hook(t_setup *setup)
 {
 	if (!IMG)
 		IMG = ft_imgnew(MLX->mlx_ptr, setup->width, setup->height);
-	printf("bbp %d, endian %d, size_x %d\n", IMG->bbp, IMG->endian, IMG->size_x);
-	//mlx_clear_window(MLX->mlx_ptr, MLX->win_ptr);
-	ft_clean_img(setup); //clean image
-	ft_draw_map(setup);
-	printf("put_image\n");
+	ft_clean_img(setup);
+	if (setup->line)
+		ft_draw_map(setup);
+	else
+		ft_draw_map_point(setup);
 	mlx_put_image_to_window(MLX->mlx_ptr, MLX->win_ptr, IMG->image, 0, 0);
 	if (setup->ui == 1)
 		ft_print_cam(setup);
-	printf("mlx_do_sync\n");
 	mlx_do_sync(MLX->mlx_ptr);
 	return (0);
 }
@@ -54,9 +53,11 @@ static int				ft_key_hook(int keycode, t_setup *setup)
 	ft_orient_cam(setup, keycode);
 	if (keycode == G_KEY)
 		setup->ui = !setup->ui ? 1 : 0;
+	if (keycode == L_KEY)
+		setup->line = !setup->line ? 1 : 0;
 	ft_update_map_and_cam(setup);
 	ft_expose_hook(setup);
-	printf("mlx_key_hook %d\n", keycode);
+	//printf("mlx_key_hook %d\n", keycode);
 	return (0);
 }
 
@@ -66,6 +67,5 @@ void		ft_mlx_process(t_setup *setup)
 	mlx_key_hook(MLX->win_ptr, ft_key_hook, setup);
 	mlx_expose_hook(MLX->win_ptr, ft_expose_hook, setup);
 	mlx_do_sync(MLX->mlx_ptr);
-	printf("mlx_loop\n");
 	mlx_loop(MLX->mlx_ptr);
 }

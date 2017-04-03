@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 00:37:02 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/29 18:55:59 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/03 19:27:03 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,23 @@ void		ft_rot_cam(t_setup *setup, int keycode)
  void		ft_orient_cam(t_setup *setup, int keycode)
 {
 	if (keycode == UP)
-		CAM->pos->y = CAM->pos->y + STEP;
+		CAM->pos->y = CAM->pos->y + AMP;
 	else if (keycode == DOWN)
-		CAM->pos->y = CAM->pos->y - STEP;
+		CAM->pos->y = CAM->pos->y - AMP;
 	else if (keycode == LEFT)
-		CAM->pos->x = CAM->pos->x - STEP;
+		CAM->pos->x = CAM->pos->x - AMP;
 	else if (keycode == RIGHT)
-		CAM->pos->x = CAM->pos->x + STEP;
+		CAM->pos->x = CAM->pos->x + AMP;
 	else if (keycode == DOT_KEY)
-		CAM->pos->z = (CAM->pos->z == -STEP) ? STEP :
-			CAM->pos->z + STEP;
+		CAM->pos->z = (CAM->pos->z == -AMP) ? AMP :
+			CAM->pos->z + AMP;
 	else if (keycode == SLASH_KEY)
-		CAM->pos->z = (CAM->pos->z == STEP) ? -STEP :
-			CAM->pos->z - STEP;
+		CAM->pos->z = (CAM->pos->z == AMP) ? -AMP :
+			CAM->pos->z - AMP;
 	else if (keycode == R_KEY)
-		CAM->fov = CAM->fov + STEP * 10;
+		CAM->fov = CAM->fov + AMP * 10;
 	else if (keycode == F_KEY)
-		CAM->fov = CAM->fov - STEP * 10;
+		CAM->fov = CAM->fov - AMP * 10;
 }
 
 void		ft_print_cam(t_setup *setup)
@@ -100,4 +100,8 @@ void		ft_print_cam(t_setup *setup)
 			" key MINUS/EQUAL   cam scale:");
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 140, 16777215,
 			ft_ftoa(CAM->scale));
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 160, 16777215,
+			" key L             line mode:");
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 160, 16777215,
+			ft_itoa(setup->line));
 }

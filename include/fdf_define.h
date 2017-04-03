@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/30 01:53:15 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/03 19:24:07 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # define WIDTH		1920
 # define HEIGHT		1200
 
-# define STEP		10
+# define STEP		5
+# define AMP		50
 # define ENDIAN		0
 # define BBP		32
 
@@ -41,6 +42,7 @@
 # define E_KEY		14
 # define R_KEY		15
 # define F_KEY		3
+# define L_KEY		37
 
 # define BLUE		0x0000FF
 # define GREEN		0x00F611
@@ -55,6 +57,7 @@
 # define M_DEPTH	setup->map->depth
 # define LERP_IN	setup->map->lerp_in
 # define LERP_OUT	setup->map->lerp_out
+# define CLR		setup->map->curr_clr
 # define CAM		setup->cam
 # define MLX		setup->mlx
 # define IMG		setup->img

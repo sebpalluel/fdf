@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/29 16:07:55 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/03 15:15:12 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ int				ft_allocate_map(t_setup *setup)
 	MAP->mid[1] = M_HEIGHT / 2;
 	array = -1;
 	while (MAP->tmp_map[++array])
-	{
 		if(!(MAP->map[array] = (t_pix*)malloc(sizeof(t_pix) * M_WIDTH))) // erase + 1, see if V
 			return(0);
-	}
-	printf("MAP witdh %d MAP height %d\n", M_WIDTH, M_HEIGHT);
+	//printf("MAP witdh %d MAP height %d\n", M_WIDTH, M_HEIGHT);
 	MAP->map[M_HEIGHT] = NULL;
 	return (1);
 }
@@ -67,7 +65,7 @@ int				ft_update_map_and_cam(t_setup *setup)
 
 	MAP->depth = 0;
 	ft_matrix_cam(setup);
-	printf("MAP->mid[0]: %d MAP->mid[1] %d\n", MAP->mid[0], MAP->mid[1]);
+	//printf("MAP->mid[0]: %d MAP->mid[1] %d\n", MAP->mid[0], MAP->mid[1]);
 	if (!(vec3 = (t_vec3 *)(ft_memalloc(sizeof(t_vec3)))))
 		return (0);
 	xy[0] = -1;
@@ -75,13 +73,8 @@ int				ft_update_map_and_cam(t_setup *setup)
 	{
 		xy[1] = -1;
 		while (++xy[1] < M_WIDTH)
-		{
 			ft_vec3_to_pix(setup, vec3, xy);
-			//printf("l:%d w:%d,x:%d,y:%d,z:%d\n",xy[0], xy[1], MAP->map[xy[0]][xy[1]].x, MAP->map[xy[0]][xy[1]].y, MAP->map[xy[0]][xy[1]].z);
-		}
-		//printf("newline %d\n",xy[0]);
 	}
 	free(vec3);
-	printf("update_map_and_cam\n");
 	return (1);
 }

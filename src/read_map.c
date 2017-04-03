@@ -6,42 +6,42 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/01 18:29:08 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/03 16:21:21 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void		ft_print_array_int(int **map, int width, int height)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < height)
-	{
-		j = 0;
-		while (j < width)
-		{
-			ft_putchar(' ');
-			ft_putnbr(map[i][j]);
-			j++;
-		}
-		ft_putchar('\n');
-		i++;
-	}
-}
-void	ft_print_array(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-	{
-		ft_putendl(array[i]);
-		i++;
-	}
-}
+//void		ft_print_array_int(int **map, int width, int height)
+//{
+//	int		i;
+//	int		j;
+//
+//	i = 0;
+//	while (i < height)
+//	{
+//		j = 0;
+//		while (j < width)
+//		{
+//			ft_putchar(' ');
+//			ft_putnbr(map[i][j]);
+//			j++;
+//		}
+//		ft_putchar('\n');
+//		i++;
+//	}
+//}
+//void	ft_print_array(char **array)
+//{
+//	int	i;
+//
+//	i = 0;
+//	while (array[i])
+//	{
+//		ft_putendl(array[i]);
+//		i++;
+//	}
+//}
 
 static int			ft_free_tmp(char **tab, int fd, int return_val)
 {
@@ -126,6 +126,34 @@ static int			ft_return_del_tab(void **tab, int return_val)
 	return (return_val);
 }
 
+static void			ft_lerp_hexa(t_setup *setup, char **str, int line, int col)
+{
+	static int		max = 0;
+	static int		min = MAX_INT;
+	char			*hex;
+
+	hex = str[1] + 2;
+	MAP->tmp_map[line][col] = ft_atoi(str[0]);
+	if (MAP->tmp_map[line][col] > max)
+	{
+		ft_hexa_to_color(MAP->lerp_in, (int)ft_strtol(hex, 16));
+		max = MAP->tmp_map[line][col];
+		printf("lerp_in %uc %uc %uc\n", MAP->lerp_in->r, MAP->lerp_in->g, MAP->lerp_in->b);
+	}
+	if (MAP->tmp_map[line][col] < min)
+	{
+		ft_hexa_to_color(MAP->lerp_out, (int)ft_strtol(hex, 16));
+		min = MAP->tmp_map[line][col];
+		printf("lerp_out %uc %uc %uc\n", MAP->lerp_out->r, MAP->lerp_out->g, MAP->lerp_out->b);
+	}
+	if (max == min)
+	{
+		MAP->lerp_in->r = 255;
+		MAP->lerp_in->g = 255;
+		MAP->lerp_in->b = 255;
+	}
+}
+
 static int			ft_split_elem(t_setup *setup, char *str, int line, int col)
 {
 	char			**split_elem = NULL;
@@ -145,8 +173,7 @@ static int			ft_split_elem(t_setup *setup, char *str, int line, int col)
 				return (ft_return_del_tab((void **)split_elem, 0)); // map error
 			if (!ft_checkdigit(split_elem[0]) || !ft_checkhexa(split_elem[1]))
 				return (ft_return_del_tab((void **)split_elem, 0)); // map error
-			MAP->tmp_map[line][col] = ft_atoi(split_elem[0]);
-			//here function to populate lerp_in lerp_out with hexa relative to MAP->depth
+			ft_lerp_hexa(setup, split_elem, line, col);
 			ft_freetab((void **)split_elem);
 		}
 		return (1);
@@ -195,7 +222,6 @@ static int			ft_parse_line(t_setup *setup, char **tab, int line)
 
 static int			ft_parse_map(t_setup *setup, char **tab)
 {
-	//	int			j;
 	int			line;
 	static int	error_line = 1;
 	char		**split_ret = NULL;
@@ -207,14 +233,10 @@ static int			ft_parse_map(t_setup *setup, char **tab)
 			return (ft_free_tmp(split_ret, 0, 0));
 		if ((error_line = ft_parse_line(setup, split_ret, line)) <= 0)
 			return (ft_free_tmp(split_ret, 0, error_line));
-		//		j = 0;
-		//		while (ft_split_elem(setup, split_ret, line, j))
-		//			j++;
 		ft_freetab((void **)split_ret);
 		line++;
 	}
 	MAP->tmp_map[M_HEIGHT] = NULL;
-	printf("error_line end parse %d\n", error_line);
 	return (ft_free_tmp(NULL, 0, error_line));
 }
 
@@ -236,6 +258,6 @@ int					ft_read_map(t_setup *setup, int fd)
 	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !MAP->tmp_map || \
 			!ft_parse_map(setup, tab))
 		return (ft_free_tmp(tab, fd, -2));
-	ft_print_array_int(MAP->tmp_map, M_WIDTH, M_HEIGHT); // was for debug, to remove after
+	//ft_print_array_int(MAP->tmp_map, M_WIDTH, M_HEIGHT); // was for debug, to remove after
 	return (ft_free_tmp(tab, fd, 1)); 
 }

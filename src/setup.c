@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/03/30 15:43:27 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/03 19:06:47 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ static int		ft_setup_map_and_mlx(t_setup *setup)
 	{
 		map->width = 0;
 		map->height = 0;
+		map->pix = (t_pix *)ft_memalloc(sizeof(t_pix));
 		map->mid = (int *)ft_memalloc(sizeof(int) * 2);
+		if (!map->mid || !map->pix)
+			return (0);
 		MAP = map;
 	}
 	MLX = ft_init_window("fdf", setup->width, setup->height);
@@ -95,7 +98,8 @@ static t_setup	*ft_allocate_setup()
 {
 	t_setup *setup = NULL;
 
-	setup = (t_setup *)ft_memalloc(sizeof(t_setup));
+	if (!(setup = (t_setup *)ft_memalloc(sizeof(t_setup))))
+		return (NULL);
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
 	if (ft_setup_cam(setup, ft_new_vec3(WIDTH / STEP, HEIGHT / STEP, 1000.), \
@@ -111,15 +115,19 @@ static void		ft_delete_map(t_setup *setup)
 	{
 		if (MAP->tmp_map && MAP->tmp_map[M_HEIGHT - 1])
 			ft_freetab((void **)MAP->tmp_map);
+		if	(MAP->pix)
+			free (MAP->pix);
 		if	(MAP->map)
 			ft_freetab((void **)MAP->map);
-		if (MAP->lerp_in)
-			ft_memdel((void **)&(MAP->lerp_in));
-		if (MAP->lerp_out)
-			ft_memdel((void **)&(MAP->lerp_out));
+		if (LERP_IN)
+			free(LERP_IN);
+		if (LERP_OUT)
+			free(LERP_OUT);
+		if (CLR)
+			free(CLR);
 		if (MAP->mid)
-			ft_memdel((void **)&(MAP->mid));
-		ft_memdel((void **)&(MAP));
+			free(MAP->mid);
+		free(MAP);
 	}
 }
 
@@ -136,10 +144,10 @@ static void		ft_delete_cam(t_setup *setup)
 		if (CAM->to_cam)
 			ft_freetab((void **)CAM->to_cam);
 		if (CAM->pos)
-			ft_memdel((void **)&(CAM->pos));
+			free(CAM->pos);
 		if (CAM->rot)
-			ft_memdel((void **)&(CAM->rot));
-		ft_memdel((void **)&(CAM));
+			free(CAM->rot);
+		free(CAM);
 	}
 }
 
@@ -152,9 +160,9 @@ static	void	ft_delete_mlx(t_setup *setup)
 		if (MLX->mlx_ptr && MLX->win_ptr)
 		{
 			mlx_destroy_window(MLX->mlx_ptr, MLX->win_ptr);
-			ft_memdel((void **)&(MLX->mlx_ptr));
+			free(MLX->mlx_ptr);
 		}
-		ft_memdel((void **)&(MLX));
+		free(MLX);
 	}
 }
 
