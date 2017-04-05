@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/05 18:31:35 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/05 18:46:25 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,48 @@ static int			ft_parse_line(t_setup *setup, char **tab, int line)
 	return (1);
 }
 
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void FlipRow(int *row, int columns)
+{
+    // A row is a simple one dimensional array
+    // just swap item 0 with item n-1, 1 with n-2, ...
+    for (int index = 0; index < columns / 2; index++)
+    {
+        swap(row+index, row+columns-1-index);
+    }
+}
+
+void HFlipArray(int **array, int columns, int rows)
+{
+    for (int row = 0; row < rows; row++)
+    {
+        FlipRow(array[row], columns);
+    }
+}
+
+void FlipColumn(int **array, int column, int rows)
+{
+    // Flip column 'column' of an array that has n rows.
+    for (int row = 0; row < rows/2; row++)
+    {
+        swap(array[row]+column, array[rows-1-row]+column);
+    }
+}
+
+void VFlipArray(int **array, int columns, int rows)
+{
+    for (int column = 0; column < columns; column++)
+    {
+        FlipColumn(array, column, rows);
+    }
+}
+
 static int			ft_parse_map(t_setup *setup, char **tab)
 {
 	int			line;
@@ -237,6 +279,8 @@ static int			ft_parse_map(t_setup *setup, char **tab)
 		line++;
 	}
 	MAP->tmp_map[M_HEIGHT] = NULL;
+	VFlipArray(MAP->tmp_map, M_WIDTH, M_HEIGHT);
+	HFlipArray(MAP->tmp_map, M_WIDTH, M_HEIGHT);
 	ft_print_array_int(MAP->tmp_map, M_WIDTH, M_HEIGHT);
 	return (ft_free_tmp(NULL, 0, error_line));
 }
