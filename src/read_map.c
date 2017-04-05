@@ -6,31 +6,31 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/03 16:21:21 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/05 18:31:35 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-//void		ft_print_array_int(int **map, int width, int height)
-//{
-//	int		i;
-//	int		j;
-//
-//	i = 0;
-//	while (i < height)
-//	{
-//		j = 0;
-//		while (j < width)
-//		{
-//			ft_putchar(' ');
-//			ft_putnbr(map[i][j]);
-//			j++;
-//		}
-//		ft_putchar('\n');
-//		i++;
-//	}
-//}
+void		ft_print_array_int(int **map, int width, int height)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < height)
+	{
+		j = 0;
+		while (j < width)
+		{
+			ft_putchar(' ');
+			ft_putnbr(map[i][j]);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
+}
 //void	ft_print_array(char **array)
 //{
 //	int	i;
@@ -237,6 +237,7 @@ static int			ft_parse_map(t_setup *setup, char **tab)
 		line++;
 	}
 	MAP->tmp_map[M_HEIGHT] = NULL;
+	ft_print_array_int(MAP->tmp_map, M_WIDTH, M_HEIGHT);
 	return (ft_free_tmp(NULL, 0, error_line));
 }
 
@@ -249,7 +250,7 @@ int					ft_read_map(t_setup *setup, int fd)
 	tab = (char**)malloc(sizeof(char*) * MAX_SIZE);
 	while ((ret_gnl = get_next_line(fd, &tab[++M_HEIGHT])))
 	{
-		ft_putendl(tab[M_HEIGHT]);
+		//ft_putendl(tab[M_HEIGHT]);
 		if (M_HEIGHT > MAX_SIZE)
 			return (-2);
 	}
