@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/06 15:58:52 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/06 16:48:37 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,8 +294,8 @@ static int			ft_parse_map(t_setup *setup, char **tab)
 		line++;
 	}
 	MAP->tmp_map[M_HEIGHT] = NULL;
-	HFlipArray(MAP->tmp_map, M_WIDTH, M_HEIGHT);
-	VFlipArray(MAP->tmp_map, M_WIDTH, M_HEIGHT);
+	//HFlipArray(MAP->tmp_map, M_WIDTH, M_HEIGHT);
+	//VFlipArray(MAP->tmp_map, M_WIDTH, M_HEIGHT);
 //	ft_print_array_int(MAP->tmp_map, M_WIDTH, M_HEIGHT);
 	return (ft_free_tmp(NULL, 0, error_line));
 }

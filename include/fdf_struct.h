@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/06 16:39:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/06 16:41:13 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct		s_map
 	int				height;
 	int				depth;
 	size_t			hexa;
-	int				*mid;
+	float			*mid;
 	t_color			*lerp_in;
 	t_color			*lerp_out;
 	t_color			*curr_clr;

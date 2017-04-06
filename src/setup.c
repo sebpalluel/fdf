@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/05 21:07:09 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/06 16:42:14 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int		ft_setup_map_and_mlx(t_setup *setup)
 		map->width = 0;
 		map->height = 0;
 		map->pix = (t_pix *)ft_memalloc(sizeof(t_pix));
-		map->mid = (int *)ft_memalloc(sizeof(int) * 2);
+		map->mid = (float *)ft_memalloc(sizeof(float) * 2);
 		if (!map->mid || !map->pix)
 			return (0);
 		MAP = map;
