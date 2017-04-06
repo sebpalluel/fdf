@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/06 15:57:07 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/06 18:45:20 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void				ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 	unsigned int	index;
 	int				mid_w;
 	int				mid_h;
-	
+
 	mid_w = setup->width / 2;
 	mid_h = setup->height / 2;
 	index = (((mid_h + pix->y) * IMG->size_x) + ((mid_w + pix->x) * (IMG->bbp >> 3)));
@@ -84,6 +84,8 @@ void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 	xyzi[0] = (double)(b->x - a->x) / step;
 	xyzi[1] = (double)(b->y - a->y) / step;
 	xyzi[2] = (double)(b->z - a->z) / step;
+	if (step > MAX_STEP)
+		step = MAX_STEP;
 	while ((int)xyzi[3] < step)
 	{
 		ft_line_to_pix(setup, a, xyzi);
@@ -150,7 +152,7 @@ void			ft_draw_map_point(t_setup *setup)
 			ft_put_pix(setup, &MAP->map[i][j], CLR);
 		}
 	}
-//	ft_print_array_pix(MAP->map, M_WIDTH, M_HEIGHT);
+	//	ft_print_array_pix(MAP->map, M_WIDTH, M_HEIGHT);
 }
 
 void			ft_draw_map(t_setup *setup)
