@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/03 19:14:55 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/06 15:57:07 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 void				ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 {
 	unsigned int	index;
-
-	index = (pix->y * IMG->size_x) + (pix->x * (IMG->bbp >> 3));
-	if (pix->x > 0 && pix->x < (int)setup->width && pix->y > 0 \
-			&& pix->y < (int)setup->height)
+	int				mid_w;
+	int				mid_h;
+	
+	mid_w = setup->width / 2;
+	mid_h = setup->height / 2;
+	index = (((mid_h + pix->y) * IMG->size_x) + ((mid_w + pix->x) * (IMG->bbp >> 3)));
+	if ((pix->x < mid_w && pix->x > -mid_w) && (pix->y < mid_h && pix->y > -mid_h))
 	{
 		IMG->image_addr[index] = clr->b;
 		IMG->image_addr[index + 1] = clr->g;
@@ -29,22 +32,22 @@ void				ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 
 void				ft_clean_img(t_setup *setup)
 {
-	t_pix			p1;
+	t_pix			pix;
 	unsigned int	index;
 
-	p1.y = 0;
-	while (p1.y < (int)setup->height)
+	pix.y = 0;
+	while (pix.y < (int)setup->height)
 	{
-		p1.x = 0;
-		while (p1.x < (int)setup->width)
+		pix.x = 0;
+		while (pix.x < (int)setup->width)
 		{
-			index = (p1.y * IMG->size_x) + (p1.x * (IMG->bbp >> 3));
+			index = (pix.y * IMG->size_x) + (pix.x * (IMG->bbp >> 3));
 			IMG->image_addr[index] = 0;
 			IMG->image_addr[index + 1] = 0;
 			IMG->image_addr[index + 2] = 0;
-			p1.x++;
+			pix.x++;
 		}
-		p1.y++;
+		pix.y++;
 	}
 }
 
@@ -112,6 +115,26 @@ static void		ft_draw_map_line(t_setup *setup, int i)
 	}
 }
 
+//void		ft_print_array_pix(t_pix **map, int width, int height)
+//{
+//	int		i;
+//	int		j;
+//
+//	i = 0;
+//	printf("width %d, height %d\n", width, height);
+//	while (i < height)
+//	{
+//		j = 0;
+//		while (j < width)
+//		{
+//			printf("%d,%d,%d ",map[i][j].x, map[i][j].y, map[i][j].z);
+//			j++;
+//		}
+//		i++;
+//		printf("\nline %d: ", i);
+//	}
+//}
+
 void			ft_draw_map_point(t_setup *setup)
 {
 	int		i;
@@ -127,6 +150,7 @@ void			ft_draw_map_point(t_setup *setup)
 			ft_put_pix(setup, &MAP->map[i][j], CLR);
 		}
 	}
+//	ft_print_array_pix(MAP->map, M_WIDTH, M_HEIGHT);
 }
 
 void			ft_draw_map(t_setup *setup)

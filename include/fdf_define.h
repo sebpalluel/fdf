@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/03 19:24:07 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/06 16:37:26 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define FDF_DEFINE_H
 
 # define WIDTH		1920
-# define HEIGHT		1200
+# define HEIGHT		1080
 
-# define STEP		5
-# define AMP		50
+# define STEP		10
+# define AMP		20
 # define ENDIAN		0
 # define BBP		32
 

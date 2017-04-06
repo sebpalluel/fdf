@@ -34,9 +34,12 @@ FLAGS	libs/libft/Makefile	/^FLAGS	=	-Wall -Wextra -Werror$/;"	m
 FONT_HEIGHT	libs/minilibx/mlx_int.h	/^#define	FONT_HEIGHT	/;"	d
 FONT_WIDTH	libs/minilibx/mlx_int.h	/^#define FONT_WIDTH	/;"	d
 F_KEY	include/fdf_define.h	/^# define F_KEY	/;"	d
+FlipColumn	src/read_map.c	/^void FlipColumn(int **array, int column, int rows)$/;"	f
+FlipRow	src/read_map.c	/^void FlipRow(int *row, int columns)$/;"	f
 GREEN	include/fdf_define.h	/^# define GREEN	/;"	d
 G_KEY	include/fdf_define.h	/^# define G_KEY	/;"	d
 HEIGHT	include/fdf_define.h	/^# define HEIGHT	/;"	d
+HFlipArray	src/read_map.c	/^void HFlipArray(int **array, int columns, int rows)$/;"	f
 IMG	include/fdf_define.h	/^# define IMG	/;"	d
 LEFT	include/fdf_define.h	/^# define LEFT	/;"	d
 LERP_IN	include/fdf_define.h	/^# define LERP_IN	/;"	d
@@ -82,6 +85,7 @@ STEP	include/fdf_define.h	/^# define STEP	/;"	d
 S_KEY	include/fdf_define.h	/^# define S_KEY	/;"	d
 UNIQ_BPP	libs/minilibx/mlx_int.h	/^#define UNIQ_BPP	/;"	d
 UP	include/fdf_define.h	/^# define UP	/;"	d
+VFlipArray	src/read_map.c	/^void VFlipArray(int **array, int columns, int rows)$/;"	f
 WHITE	include/fdf_define.h	/^# define WHITE	/;"	d
 WIDTH	include/fdf_define.h	/^# define WIDTH	/;"	d
 W_KEY	include/fdf_define.h	/^# define W_KEY	/;"	d
@@ -377,6 +381,7 @@ s_xpm_col	libs/minilibx/mlx_xpm.c	/^typedef struct  s_xpm_col$/;"	s	file:
 scale	include/fdf_struct.h	/^	double			scale;$/;"	m	struct:s_cam
 size_x	include/fdf_struct.h	/^	int				size_x;$/;"	m	struct:s_img
 still_reading	libs/libft/main.c	/^int		still_reading(t_fdp *fds, int length)$/;"	f
+swap	src/read_map.c	/^void swap(int *a, int *b)$/;"	f
 t_cam	include/fdf_struct.h	/^}					t_cam;$/;"	t	typeref:struct:s_cam
 t_char	libs/libft/libft_struct.h	/^}					t_char;$/;"	t	typeref:struct:s_char
 t_color	include/fdf_struct.h	/^}					t_color;$/;"	t	typeref:struct:s_color

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/03 19:06:47 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/05 21:07:09 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static t_setup	*ft_allocate_setup()
 		return (NULL);
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
-	if (ft_setup_cam(setup, ft_new_vec3(WIDTH / STEP, HEIGHT / STEP, 1000.), \
+	if (ft_setup_cam(setup, ft_new_vec3(0., 0., 1000.), \
 				ft_new_vec3(0., 0., 0.), 2600.) \
 			&& ft_setup_map_and_mlx(setup))
 		return (setup);

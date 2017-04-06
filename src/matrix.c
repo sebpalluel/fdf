@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:50:52 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/03 20:25:27 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/06 15:20:36 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,4 +188,5 @@ void		ft_matrix_on_point(double **m, t_vec3 *vec3)
 			+ m[2][1] * vec3->y
 			+ m[1][2] * vec3->z + m[2][3];
 	}
+//	printf("point %f %f %f\n", vec3->x, vec3->y, vec3->z);
 }

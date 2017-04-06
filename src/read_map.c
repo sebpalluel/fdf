@@ -6,31 +6,31 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/05 18:46:25 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/06 15:58:52 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void		ft_print_array_int(int **map, int width, int height)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < height)
-	{
-		j = 0;
-		while (j < width)
-		{
-			ft_putchar(' ');
-			ft_putnbr(map[i][j]);
-			j++;
-		}
-		ft_putchar('\n');
-		i++;
-	}
-}
+//void		ft_print_array_int(int **map, int width, int height)
+//{
+//	int		i;
+//	int		j;
+//
+//	i = 0;
+//	while (i < height)
+//	{
+//		j = 0;
+//		while (j < width)
+//		{
+//			ft_putchar(' ');
+//			ft_putnbr(map[i][j]);
+//			j++;
+//		}
+//		ft_putchar('\n');
+//		i++;
+//	}
+//}
 //void	ft_print_array(char **array)
 //{
 //	int	i;
@@ -222,43 +222,58 @@ static int			ft_parse_line(t_setup *setup, char **tab, int line)
 
 void swap(int *a, int *b)
 {
-    int temp = *a;
+    int temp;
+
+	temp = *a;
     *a = *b;
     *b = temp;
 }
 
 void FlipRow(int *row, int columns)
 {
-    // A row is a simple one dimensional array
-    // just swap item 0 with item n-1, 1 with n-2, ...
-    for (int index = 0; index < columns / 2; index++)
+	int	index;
+
+	index = 0;
+     while (index < columns / 2)
     {
         swap(row+index, row+columns-1-index);
+		index++;
     }
 }
 
 void HFlipArray(int **array, int columns, int rows)
 {
-    for (int row = 0; row < rows; row++)
+	int	row;
+
+	row = 0;
+    while (row < rows)
     {
         FlipRow(array[row], columns);
+		row++;
     }
 }
 
 void FlipColumn(int **array, int column, int rows)
 {
-    // Flip column 'column' of an array that has n rows.
-    for (int row = 0; row < rows/2; row++)
+	int	row;
+
+	row = 0;
+    while (row < rows/2)
     {
         swap(array[row]+column, array[rows-1-row]+column);
+		row++;
     }
 }
 
 void VFlipArray(int **array, int columns, int rows)
 {
-    for (int column = 0; column < columns; column++)
+	int	column;
+
+	column = 0;
+    while (column < columns)
     {
         FlipColumn(array, column, rows);
+		column++;
     }
 }
 
@@ -279,9 +294,9 @@ static int			ft_parse_map(t_setup *setup, char **tab)
 		line++;
 	}
 	MAP->tmp_map[M_HEIGHT] = NULL;
-	VFlipArray(MAP->tmp_map, M_WIDTH, M_HEIGHT);
 	HFlipArray(MAP->tmp_map, M_WIDTH, M_HEIGHT);
-	ft_print_array_int(MAP->tmp_map, M_WIDTH, M_HEIGHT);
+	VFlipArray(MAP->tmp_map, M_WIDTH, M_HEIGHT);
+//	ft_print_array_int(MAP->tmp_map, M_WIDTH, M_HEIGHT);
 	return (ft_free_tmp(NULL, 0, error_line));
 }
 
@@ -293,16 +308,12 @@ int					ft_read_map(t_setup *setup, int fd)
 	M_HEIGHT = -1;
 	tab = (char**)malloc(sizeof(char*) * MAX_SIZE);
 	while ((ret_gnl = get_next_line(fd, &tab[++M_HEIGHT])))
-	{
-		//ft_putendl(tab[M_HEIGHT]);
 		if (M_HEIGHT > MAX_SIZE)
 			return (-2);
-	}
 	tab[M_HEIGHT] = NULL;
 	MAP->tmp_map = (int**)malloc(sizeof(int*) * M_HEIGHT + 1);
 	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !MAP->tmp_map || \
 			!ft_parse_map(setup, tab))
 		return (ft_free_tmp(tab, fd, -2));
-	//ft_print_array_int(MAP->tmp_map, M_WIDTH, M_HEIGHT); // was for debug, to remove after
 	return (ft_free_tmp(tab, fd, 1)); 
 }
