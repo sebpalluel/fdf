@@ -6,42 +6,44 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/24 18:22:27 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/07 15:18:08 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-static int		usage(int mode)
+int				usage(int mode)
 {
-	if (mode == 0)
+	if (mode == 1)
+		ft_putendl("program exited normally");
+	else if (mode == 0)
 	{
 		ft_putendl("usage: ./fdf map_name.fdf");
-		ft_putendl("alternate usage: can add color arg1 lerp_in, arg2 lerp_out");
-		ft_putendl("example: ./fdf map.fdf \"0,0,0\" \"255,255,255\"");
+		ft_putendl("usage: can add color arg1 lerp_in, arg5 lerp_out");
+		ft_putendl("example: ./fdf map.fdf 0,0,0 255,255,255");
 	}
-	if (mode == -1)
+	else if (mode == -1)
 	{
 		ft_putendl("error in alternate usage");
 		ft_putendl("example: ./fdf map.fdf \"0,0,0\" \"255,255,255\"");
 	}
-	return (-1);
+	else if (mode == -2)
+		ft_putendl("map error");
+	return (mode);
 }
 
 int				main(int argc, char **argv)
 {
 	t_setup 	*setup = NULL;
-	int			***tmp_map = NULL;
-	int			ret;
 	int			fd;
+	static int	usage_ret = 0;
 
 	if (argc < 2 || argc > 4)
-		return (usage(0));
-	ret = ft_setup(setup, argv, argc, 1);
-	if (!ret || (fd = open(argv[1], O_RDONLY) < 3))
-		return (usage(ret));
-	if ((tmp_map = ft_read_map(setup, fd)))
-		ft_mlx_process(setup, tmp_map);
-	ft_setup(setup, argv, argc, 0);
-	return (0);
+		return (usage(usage_ret));
+	setup = ft_setup(argv, argc, &usage_ret);
+	fd = open(argv[1], O_RDONLY);
+	if (!setup || (fd < 3) || (usage_ret = ft_read_map(setup, fd)) != 1)
+		return (usage(usage_ret));
+	if (ft_allocate_map(setup))
+		ft_mlx_process(setup);
 }

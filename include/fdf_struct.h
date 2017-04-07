@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/02/24 17:28:27 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/07 15:17:02 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ typedef struct		s_map
 	int				width;
 	int				height;
 	int				depth;
+	size_t			hexa;
+	float			*mid;
 	t_color			*lerp_in;
 	t_color			*lerp_out;
-	int				***tmp_map;
-	t_pix			***map;
+	t_color			*curr_clr;
+	t_pix			*pix;
+	int				**tmp_map;
+	t_pix			**map;
 }					t_map;
 
 typedef struct		s_cam
@@ -53,6 +57,8 @@ typedef struct		s_cam
 	double			fov;
 	double			offset_x;
 	double			offset_y;
+	double			***tmp_mat;
+	double			**to_cam;
 }					t_cam;
 
 typedef struct		s_mlx
@@ -63,13 +69,25 @@ typedef struct		s_mlx
 	char			*image_addr;
 }					t_mlx;
 
+typedef struct		s_img
+{
+	void			*image;
+	char			*image_addr;
+	int				bbp;
+	int				endian;
+	int				size_x;
+}					t_img;
+
 typedef struct		s_setup 
 {
 	unsigned int	width;
 	unsigned int	height;
+	size_t			ui;
+	size_t			line;
 	t_mlx			*mlx;
 	t_map			*map;
 	t_cam			*cam;
+	t_img			*img;
 }					t_setup;
 
 #endif
