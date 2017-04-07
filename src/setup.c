@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/06 18:53:26 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:35:06 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,43 +35,40 @@ void			ft_populate_pix(t_pix *to_pix, int x, int y, int z)
 	}
 }	
 
-static t_cam	*ft_allocate_matrix_cam(t_cam *cam)
+static int		ft_allocate_matrix_cam(t_setup *setup)
 {
 	size_t		mat_inc;
 
-	cam->to_cam = ft_matrix_zero(4);
-	cam->tmp_mat = (double ***)(ft_memalloc(sizeof(double **) * 7));
-	if (!cam->to_cam || !cam->tmp_mat)
-		return (NULL);
+	CAM->to_cam = ft_matrix_zero(4);
+	CAM->tmp_mat = (double ***)(ft_memalloc(sizeof(double **) * 7));
+	if (!CAM->to_cam || !CAM->tmp_mat)
+		return (0);
 	mat_inc = 0;
 	while (mat_inc < 6)
 	{
-		cam->tmp_mat[mat_inc] = ft_matrix_zero(4);
-		if (!cam->tmp_mat[mat_inc])
-			return (NULL);
+		CAM->tmp_mat[mat_inc] = ft_matrix_zero(4);
+		if (!CAM->tmp_mat[mat_inc])
+			return (0);
 		mat_inc++;
 	}
-	cam->tmp_mat[mat_inc] = NULL;
-	return (cam);
+	CAM->tmp_mat[mat_inc] = NULL;
+	return (1);
 }
 
 static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
 {
-	t_cam		*cam = NULL;
-
-	if ((cam = (t_cam*)ft_memalloc(sizeof(t_cam))) && setup && pos && rot)
+	if ((CAM = (t_cam*)ft_memalloc(sizeof(t_cam))) && setup && pos && rot)
 	{
-		cam->pos = pos;
-		cam->rot = rot;
-		cam->scale = 1.;
-		cam->fov = fov;
-		cam->offset_x = (double)(setup->width / 2.0);
-		cam->offset_y = (double)(setup->height / 2.0);
-		CAM = ft_allocate_matrix_cam(cam);
+		CAM->pos = pos;
+		CAM->rot = rot;
+		CAM->scale = 1.;
+		CAM->fov = fov;
+		CAM->offset_x = (double)(setup->width / 2.0);
+		CAM->offset_y = (double)(setup->height / 2.0);
+		return (ft_allocate_matrix_cam(setup));
 	}
-	if (CAM)
-		return (1);
-	return (0);
+	else
+		return (0);
 }
 
 static int		ft_setup_map_and_mlx(t_setup *setup)
