@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/07 15:20:14 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/07 18:06:26 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <math.h>
 # include <errno.h>
 # include "../libs/minilibx/mlx.h"
-# include "../libs/libft/libft.h"
+# include "../libs/libft/includes/libft.h"
 # include "../include/fdf_struct.h"
 # include "../include/fdf_define.h"
 # include <stdio.h> // warning, erase when finish
