@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/04/07 15:22:17 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/04/07 16:18:27 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -15,6 +15,7 @@ NAME = fdf
 SRC 		=	src/fdf.c \
 				src/color.c \
 				src/draw.c \
+				src/cam.c \
 				src/mlx_process.c \
 				src/read_map.c \
 				src/matrix.c \

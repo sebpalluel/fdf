@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/07 15:26:01 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/07 16:19:18 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,6 @@ static int				ft_expose_hook(t_setup *setup)
 		ft_print_cam(setup);
 	mlx_do_sync(MLX->mlx_ptr);
 	return (0);
-}
-
-void		ft_print_cam(t_setup *setup)
-{
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 0, 16777215,
-			" Position de la camera en x:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 289, 0, 16777215,
-			ft_itoa(CAM->pos->x));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 20, 16777215,
-			"                      --  y:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 289, 20, 16777215,
-			ft_itoa(CAM->pos->y));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 40, 16777215,
-			"                      --  z:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 289, 40, 16777215,
-			ft_itoa(CAM->pos->z));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 60, 16777215,
-			"    Angle de la camera en x:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 289, 60, 16777215,
-			ft_itoa((int)(57.3 * CAM->rot->x)));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 80, 16777215,
-			"                      --  y:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 289, 80, 16777215,
-			ft_itoa((int)(57.3 * CAM->rot->y)));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 100, 16777215,
-			"                      --  z:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 289, 100, 16777215,
-			ft_itoa((int)(57.3 * CAM->rot->z)));
 }
 
 static int				ft_key_hook(int keycode, t_setup *setup)
