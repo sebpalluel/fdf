@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 00:37:02 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/07 16:16:07 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:55:17 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,8 @@ void		ft_rot_cam(t_setup *setup, int keycode)
 		CAM->fov = CAM->fov - AMP * 10;
 }
 
-void		ft_print_cam(t_setup *setup)
-{
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 0, 16777215,
-			" key LEFT/RIGHT    cam pos x:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 0, 16777215,
-			ft_ftoa(CAM->pos->x));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 20, 16777215,
-			" key UP/DOWN       cam pos y:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 20, 16777215,
-			ft_ftoa(CAM->pos->y));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 40, 16777215,
-			" key DOT/SLASH     cam pos z:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 40, 16777215,
-			ft_ftoa(CAM->pos->z));
+static void	ft_print_cam_2(t_setup *setup)
+{	
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 60, 16777215,
 			" key A/D           cam ang x:");
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 60, 16777215,
@@ -104,4 +92,21 @@ void		ft_print_cam(t_setup *setup)
 			" key L             line mode:");
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 160, 16777215,
 			ft_itoa(setup->line));
+}
+
+void		ft_print_cam(t_setup *setup)
+{
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 0, 16777215,
+			" key LEFT/RIGHT    cam pos x:");
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 0, 16777215,
+			ft_ftoa(CAM->pos->x));
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 20, 16777215,
+			" key UP/DOWN       cam pos y:");
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 20, 16777215,
+			ft_ftoa(CAM->pos->y));
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 40, 16777215,
+			" key DOT/SLASH     cam pos z:");
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 40, 16777215,
+			ft_ftoa(CAM->pos->z));
+	ft_print_cam_2(setup);
 }

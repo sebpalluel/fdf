@@ -6,47 +6,24 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/07 15:19:57 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/11 17:54:54 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-t_pix			*ft_new_pix(int x, int y, int z)
-{
-	t_pix		*pix = NULL;
-
-	if ((pix = (t_pix*)malloc(sizeof(t_pix))))
-	{
-		pix->x = x;
-		pix->y = y;
-		pix->z = z;
-	}
-	return (pix);
-}
-
-void			ft_populate_pix(t_pix *to_pix, int x, int y, int z)
-{
-	if (to_pix)
-	{
-		to_pix->x = x;
-		to_pix->y = y;
-		to_pix->z = z;
-	}
-}	
-
 static int		ft_allocate_matrix_cam(t_setup *setup)
 {
 	size_t		mat_inc;
 
-	CAM->to_cam = ft_matrix_zero(4);
+	CAM->to_cam = ft_matrixzero(4);
 	CAM->tmp_mat = (double ***)(ft_memalloc(sizeof(double **) * 7));
 	if (!CAM->to_cam || !CAM->tmp_mat)
 		return (0);
 	mat_inc = 0;
 	while (mat_inc < 6)
 	{
-		CAM->tmp_mat[mat_inc] = ft_matrix_zero(4);
+		CAM->tmp_mat[mat_inc] = ft_matrixzero(4);
 		if (!CAM->tmp_mat[mat_inc])
 			return (0);
 		mat_inc++;
@@ -55,7 +32,8 @@ static int		ft_allocate_matrix_cam(t_setup *setup)
 	return (1);
 }
 
-static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, double fov)
+static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, \
+		double fov)
 {
 	if ((CAM = (t_cam*)ft_memalloc(sizeof(t_cam))) && setup && pos && rot)
 	{
@@ -85,7 +63,7 @@ static int		ft_setup_map_and_mlx(t_setup *setup)
 			return (0);
 		MAP = map;
 	}
-	MLX = ft_init_window("fdf", setup->width, setup->height);
+	MLX = ft_initwindow("fdf", (size_t)setup->width, (size_t)setup->height);
 	if (MLX && MAP)
 		return (1);
 	return (0);
@@ -93,82 +71,16 @@ static int		ft_setup_map_and_mlx(t_setup *setup)
 
 static t_setup	*ft_allocate_setup()
 {
-	t_setup *setup = NULL;
+	t_setup		*setup = NULL;
 
 	if (!(setup = (t_setup *)ft_memalloc(sizeof(t_setup))))
 		return (NULL);
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
-	if (ft_setup_cam(setup, ft_new_vec3(0., 0., 1000.), \
-				ft_new_vec3(0., 0., 0.), 2600.) \
+	if (ft_setup_cam(setup, ft_vec3new(0., 0., 1000.), \
+				ft_vec3new(0., 0., 0.), 2600.) \
 			&& ft_setup_map_and_mlx(setup))
 		return (setup);
-	return (NULL);
-}
-
-static void		ft_delete_map(t_setup *setup)
-{
-	if (MAP)
-	{
-		if (MAP->tmp_map && MAP->tmp_map[M_HEIGHT - 1])
-			ft_freetab((void **)MAP->tmp_map);
-		if	(MAP->pix)
-			free (MAP->pix);
-		if	(MAP->map)
-			ft_freetab((void **)MAP->map);
-		if (LERP_IN)
-			free(LERP_IN);
-		if (LERP_OUT)
-			free(LERP_OUT);
-		if (CLR)
-			free(CLR);
-		if (MAP->mid)
-			free(MAP->mid);
-		free(MAP);
-	}
-}
-
-static void		ft_delete_cam(t_setup *setup)
-{
-	size_t mat_inc;
-
-	mat_inc = 0;
-	if (CAM)
-	{
-		if (CAM->tmp_mat)
-			while (CAM->tmp_mat[mat_inc++])
-				ft_freetab((void **)CAM->tmp_mat[mat_inc]);
-		if (CAM->to_cam)
-			ft_freetab((void **)CAM->to_cam);
-		if (CAM->pos)
-			free(CAM->pos);
-		if (CAM->rot)
-			free(CAM->rot);
-		free(CAM);
-	}
-}
-
-static	void	ft_delete_mlx(t_setup *setup)
-{
-	if (MLX)
-	{
-		if (IMG)
-			ft_imgdel(IMG, MLX->mlx_ptr);
-		if (MLX->mlx_ptr && MLX->win_ptr)
-		{
-			mlx_destroy_window(MLX->mlx_ptr, MLX->win_ptr);
-			free(MLX->mlx_ptr);
-		}
-		free(MLX);
-	}
-}
-
-t_setup			*ft_delete_setup(t_setup *setup)
-{
-	ft_delete_map(setup);
-	ft_delete_cam(setup);
-	ft_delete_mlx(setup);
-	ft_memdel((void **)&(setup));
 	return (NULL);
 }
 

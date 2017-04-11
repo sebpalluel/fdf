@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/04/07 16:18:27 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/04/11 17:48:35 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -15,11 +15,13 @@ NAME = fdf
 SRC 		=	src/fdf.c \
 				src/color.c \
 				src/draw.c \
+				src/draw_line.c \
 				src/cam.c \
 				src/mlx_process.c \
 				src/read_map.c \
-				src/matrix.c \
+				src/parsing.c \
 				src/setup.c \
+				src/setup_delete.c \
 				src/update_map.c \
 
 EXT			=	Makefile
@@ -30,7 +32,7 @@ CMP			=	gcc
 
 FLAGS		=	-ggdb -Wall -Wextra -Werror
 
-LIB_DIR		=	-L libs/libft/ -L libs/minilibx
+LIB_DIR		=	-L libs/libft/ -L libs/libft/minilibx
 LIBS		=	-lft -lmlx -framework OpenGL -framework AppKit
 
 all : lib $(NAME)
@@ -44,7 +46,7 @@ lib :
 	@make -C libs/libft/ --no-print-directory
 	@echo "libft compiled"
 	@echo "compiling mlx..."
-	@make -C libs/minilibx/ --no-print-directory
+	@make -C libs/libft/minilibx/ --no-print-directory
 	@echo "mlx compiled"
 
 clean :
@@ -52,7 +54,7 @@ clean :
 	@echo "cleaning libft..."
 	@make -C libs/libft/ clean --no-print-directory
 	@echo "cleaning mlx..."
-	@make -C libs/minilibx/ clean --no-print-directory
+	@make -C libs/libft/minilibx/ clean --no-print-directory
 	@echo "clean done"
 
 fclean : clean

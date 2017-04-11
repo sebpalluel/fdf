@@ -6,29 +6,17 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/07 16:19:18 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/11 15:41:21 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-t_mlx		*ft_init_window(char *name, int width, int height)
-{
-	t_mlx		*mlx;
-
-	if (!(mlx = (t_mlx*)malloc(sizeof(t_mlx))))
-		return (NULL);
-	mlx->mlx_ptr = mlx_init();
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, width, height, name);
-	return (mlx);
-}
-
-
-static int				ft_expose_hook(t_setup *setup)
+static int	ft_expose_hook(t_setup *setup)
 {
 	if (!IMG)
 		IMG = ft_imgnew(MLX->mlx_ptr, setup->width, setup->height);
-	ft_clean_img(setup);
+	ft_imgclean(IMG, setup->width, setup->height);
 	if (setup->line)
 		ft_draw_map(setup);
 	else
@@ -40,7 +28,7 @@ static int				ft_expose_hook(t_setup *setup)
 	return (0);
 }
 
-static int				ft_key_hook(int keycode, t_setup *setup)
+static int	ft_key_hook(int keycode, t_setup *setup)
 {
 	if (keycode == ESC)
 	{
