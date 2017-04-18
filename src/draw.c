@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/22 15:58:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/11 15:49:11 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/04/18 19:53:11 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,11 @@ void				ft_put_pix(t_setup *setup, t_pix *pix, t_color *clr)
 
 	mid_w = setup->width / 2;
 	mid_h = setup->height / 2;
-	index = (((mid_h + pix->y) * IMG->size_x) + ((mid_w + pix->x) * (IMG->bbp >> 3)));
-	if ((pix->x < mid_w && pix->x > -mid_w) && (pix->y < mid_h && pix->y > -mid_h))
-	{
-		IMG->image_addr[index] = clr->b;
-		IMG->image_addr[index + 1] = clr->g;
-		IMG->image_addr[index + 2] = clr->r;
-		IMG->image_addr[index + 3] = 0;
-	}	
+	index = (((mid_h + pix->y) * IMG->size_x) + ((mid_w + pix->x) * \
+				(IMG->bbp >> 3)));
+	if ((pix->x < mid_w && pix->x > -mid_w) && \
+			(pix->y < mid_h && pix->y > -mid_h))
+		ft_memcpy(IMG->image_addr + index, clr, sizeof(int));
 }
 
 void				ft_draw_map_point(t_setup *setup)
