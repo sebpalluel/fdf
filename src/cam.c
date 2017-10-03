@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 00:37:02 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/11 17:55:17 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/03 14:48:23 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,9 @@
 void		ft_scale_cam(t_setup *setup, int keycode)
 {
 	if (keycode == EQUAL)
-	{
-		CAM->scale = CAM->scale + (double)STEP / 100;
-		if (CAM->scale == 0)
-			CAM->scale = (double)STEP / 100;
-	}
+		CAM->scale += (double)STEP / 100;
 	else if (keycode == MINUS)
-	{
-		CAM->scale = CAM->scale - (double)STEP / 100;
-		if (CAM->scale == 0)
-			CAM->scale = -(double)STEP / 100;
-	}
+		CAM->scale -= (double)STEP / 100;
 }
 
 void		ft_rot_cam(t_setup *setup, int keycode)
@@ -47,23 +39,23 @@ void		ft_rot_cam(t_setup *setup, int keycode)
  void		ft_orient_cam(t_setup *setup, int keycode)
 {
 	if (keycode == UP)
-		CAM->pos->y = CAM->pos->y + AMP;
+		CAM->pos->y = CAM->pos->y + AMP * 10;
 	else if (keycode == DOWN)
-		CAM->pos->y = CAM->pos->y - AMP;
+		CAM->pos->y = CAM->pos->y - AMP * 10;
 	else if (keycode == LEFT)
-		CAM->pos->x = CAM->pos->x - AMP;
+		CAM->pos->x = CAM->pos->x - AMP * 10;
 	else if (keycode == RIGHT)
-		CAM->pos->x = CAM->pos->x + AMP;
+		CAM->pos->x = CAM->pos->x + AMP * 10;
 	else if (keycode == DOT_KEY)
 		CAM->pos->z = (CAM->pos->z == -AMP) ? AMP :
-			CAM->pos->z + AMP;
+			CAM->pos->z + AMP * 10;
 	else if (keycode == SLASH_KEY)
 		CAM->pos->z = (CAM->pos->z == AMP) ? -AMP :
-			CAM->pos->z - AMP;
+			CAM->pos->z - AMP * 10;
 	else if (keycode == R_KEY)
-		CAM->fov = CAM->fov + AMP * 10;
+		CAM->fov = CAM->fov + AMP * 2;
 	else if (keycode == F_KEY)
-		CAM->fov = CAM->fov - AMP * 10;
+		CAM->fov = CAM->fov - AMP * 2;
 }
 
 static void	ft_print_cam_2(t_setup *setup)

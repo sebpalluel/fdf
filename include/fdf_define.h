@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/06/28 17:58:35 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/03 13:02:16 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define WIDTH		1920
 # define HEIGHT		1080
 
-# define MAX_STEP	250
+# define MAX_STEP	400
 # define STEP		10
 # define AMP		20
 # define ENDIAN		0
