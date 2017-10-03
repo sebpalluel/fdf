@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/11 15:41:21 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/01 18:24:20 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_key_hook(int keycode, t_setup *setup)
 	{
 		ft_delete_setup(setup);
 		usage(1);
-		//while (42);
+		while (42);
 		exit (0);
 	}
 	ft_scale_cam(setup, keycode);
@@ -46,7 +46,6 @@ static int	ft_key_hook(int keycode, t_setup *setup)
 		setup->line = !setup->line ? 1 : 0;
 	ft_update_map_and_cam(setup);
 	ft_expose_hook(setup);
-	//printf("mlx_key_hook %d\n", keycode);
 	return (0);
 }
 
