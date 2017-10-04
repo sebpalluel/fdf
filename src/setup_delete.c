@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 15:59:23 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/01 19:40:00 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/04 14:08:25 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,11 @@ static void		ft_delete_cam(t_setup *setup)
 	}
 }
 
-static void		ft_delete_mlx(t_setup *setup)
-{	
-	if (IMG)
-		ft_imgdel(IMG, MLX->mlx_ptr);
-	if (MLX)
-		ft_mlxdelete(MLX);
-}
-
 t_setup			*ft_delete_setup(t_setup *setup)
 {
 	ft_delete_map(setup);
 	ft_delete_cam(setup);
-	ft_delete_mlx(setup);
+	ft_mlxdelete(MLX, IMG);
 	free((void *)setup);
 	return (NULL);
 }

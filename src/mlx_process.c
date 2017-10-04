@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/01 18:24:20 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/04 14:09:04 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_key_hook(int keycode, t_setup *setup)
 		ft_delete_setup(setup);
 		usage(1);
 		while (42);
-		exit (0);
+		exit(0);
 	}
 	ft_scale_cam(setup, keycode);
 	ft_rot_cam(setup, keycode);

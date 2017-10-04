@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 15:49:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/11 17:54:12 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/03 12:59:02 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int			ft_split_elem(t_setup *setup, char *str, int line, int col)
 	{
 		if (!MAP->hexa)
 		{
-			if (!ft_checkdigit(str))
+			if (ft_checkint(str) != OK)
 				return (0);
 			MAP->tmp_map[line][col] = ft_atoi(str);
 		}
@@ -71,7 +71,8 @@ static int			ft_split_elem(t_setup *setup, char *str, int line, int col)
 			if (!(split_elem = ft_strsplit((char const *)str, ',')) && \
 					ft_tabdepth((void **)split_elem) != 2)
 				return (ft_free_tmp(split_elem, 0, 0));
-			if (!ft_checkdigit(split_elem[0]) || !ft_checkhexa(split_elem[1]))
+			if (ft_checkint(split_elem[0]) != OK || \
+					ft_checkhexa(split_elem[1]) != OK)
 				return (ft_free_tmp(split_elem, 0, 0));
 			ft_lerp_hexa(setup, split_elem, line, col);
 			ft_tabfree((void **)split_elem);
@@ -84,16 +85,21 @@ static int			ft_split_elem(t_setup *setup, char *str, int line, int col)
 static int			ft_have_hexa(t_setup *setup, char *str)
 {
 	size_t 			i;
+	size_t			get_min;
 
 	i = 0;
 	MAP->hexa = 0;
-	while (str[i])
+	get_min = 0;
+	while (str[i] != '\0')
 	{
-		if ((!ft_isdigit(str[i]) && !ft_ishexa(str[i]) && str[i] != 'x' \
-					&& str[i] != ',') || (MAP->hexa && str[i] == ','))
+		if ((ft_isint(str[i]) != OK && ft_ishexa(str[i]) != OK &&\
+					str[i] != 'x' && str[i] != ',') ||\
+				((MAP->hexa && str[i] == ',') || (get_min && str[i] == '-')))
 			return (0);
 		if (str[i] == ',')
 			MAP->hexa = 1;
+		if (str[i] == '-')
+			get_min = 1;
 		i++;
 	}
 	return (1);
@@ -109,7 +115,7 @@ int					ft_parse_line(t_setup *setup, char **tab, int line)
 		return (-1);
 	MAP->tmp_map[line][M_WIDTH] = 0;
 	elem = 0; 
-	while (tab[elem])
+	while (tab[elem] != '\0')
 	{
 		if (!ft_have_hexa(setup, tab[elem]))
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/01 18:43:46 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/04 14:09:16 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, \
 	{
 		CAM->pos = pos;
 		CAM->rot = rot;
-		CAM->scale = 1.;
+		CAM->scale = -1.;
 		CAM->fov = fov;
 		CAM->offset_x = (double)(setup->width / 2.0);
 		CAM->offset_y = (double)(setup->height / 2.0);
@@ -79,7 +79,7 @@ static t_setup	*ft_allocate_setup()
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
 	if (ft_setup_cam(setup, ft_vec3new(0., 0., 1000.), \
-				ft_vec3new(0., 0., 0.), 2600.) \
+				ft_vec3new(0., 0., 0.), 200.) \
 			&& ft_setup_map_and_mlx(setup))
 		return (setup);
 	return (NULL);
