@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/04 15:41:42 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/04 15:57:13 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,26 @@
 # define WHITE			0xFFFFFF
 
 # define MAX_SIZE		100000
-# define M_MIN_SIZE		3
-# define M_MAX_SIZE		100000
+# define MG_MIN_SIZE	3
+# define MG_MAX_SIZE	10000
+# define MG_MIN_INT		-100
+# define MG_MAX_INT		100
 
 # define SETUP			setup[0]
 # define S_WIDTH		setup[0].width
 # define S_HEIGHT		setup[0].height
 # define MAP			setup[0].map
+# define M_WIDTH		setup[0].map->width
 # define M_HEIGHT		setup[0].map->height
 # define M_DEPTH		setup[0].map->depth
 # define LERP_IN		setup[0].map->lerp_in
 # define LERP_OUT		setup[0].map->lerp_out
 # define CLR			setup[0].map->curr_clr
 # define MAPG			setup[0].map_gen
-# define MG_WIDTH		setup[0].map->mapsize[0]
-# define MG_HEIGHT		setup[0].map->mapsize[1]
-# define MG_DEPTH		setup[0].map->depth
+# define MG_WIDTH		setup[0].map_gen->mapsize[0]
+# define MG_HEIGHT		setup[0].map_gen->mapsize[1]
+# define MG_DEPTH_MIN	setup[0].map_gen->maxminint[0]
+# define MG_DEPTH_MAX	setup[0].map_gen->maxminint[1]
 # define MG_PATH		setup[0].map_gen->path
 # define CAM			setup[0].cam
 # define MLX			setup[0].mlx

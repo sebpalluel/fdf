@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/04 15:44:09 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/04 15:50:17 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_map_gen
 	size_t			name_t;
 	size_t			name_i;
 	int				mapsize[2];
+	int				maxminint[2];
 	float			mid[2];
 	int				**map;
 	char			**map_str;
