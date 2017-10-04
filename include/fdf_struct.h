@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/04 14:19:33 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/04 15:21:43 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct		s_map_gen
 	int				mapsize[2];
 	float			mid[2];
 	int				**map;
+	char			**map_str;
 }					t_map_gen;
 
 typedef struct		s_cam
@@ -58,6 +59,7 @@ typedef struct		s_setup
 	unsigned int	width;
 	unsigned int	height;
 	size_t			ui;
+	int				key;
 	size_t			line;
 	size_t			mode;
 	t_mlx			*mlx;
@@ -65,6 +67,7 @@ typedef struct		s_setup
 	t_map_gen		*map_gen;
 	t_cam			*cam;
 	t_img			*img;
+	t_fd			*fd;
 }					t_setup;
 
 #endif
