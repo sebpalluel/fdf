@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/11 17:52:15 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/01 18:36:25 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include "../libs/libft/includes/libft.h"
 # include "../include/fdf_struct.h"
 # include "../include/fdf_define.h"
-# include <stdio.h> // warning, erase when finish
 
+
+#include <stdio.h>
 int		ft_color_input(char **argv, int argc, t_setup *setup);
 void	ft_mlx_process(t_setup *setup);
 int		ft_read_map(t_setup *setup, int fd);
