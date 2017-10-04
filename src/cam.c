@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 00:37:02 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/04 14:08:36 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/04 15:12:16 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		ft_rot_cam(t_setup *setup, int keycode)
 		CAM->rot->z = CAM->rot->z - (double)STEP / 100;
 }
 
- void		ft_orient_cam(t_setup *setup, int keycode)
+void		ft_orient_cam(t_setup *setup, int keycode)
 {
 	if (keycode == UP)
 		CAM->pos->y = CAM->pos->y + AMP * 10;
@@ -59,46 +59,50 @@ void		ft_rot_cam(t_setup *setup, int keycode)
 }
 
 static void	ft_print_cam_2(t_setup *setup)
-{	
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 60, 16777215,
-			" key A/D           cam ang x:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 60, 16777215,
-			ft_ftoa((int)(57.3 * CAM->rot->x)));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 80, 16777215,
-			" key S/W           cam ang y:");
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 80, 16777215,
-			ft_ftoa((int)(57.3 * CAM->rot->y)));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 100, 16777215,
-			" key Q/E           cam ang z:");
+{
+	char	*tmp;
+
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 100, 16777215, CANGZ_S);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 100, 16777215,
-			ft_ftoa((int)(57.3 * CAM->rot->z)));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 120, 16777215,
-			" key F/R           cam fov:");
+			tmp = ft_ftoa((int)(57.3 * CAM->rot->z)));
+	free(tmp);
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 120, 16777215, CFOV_S);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 120, 16777215,
-			ft_ftoa(CAM->fov));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 140, 16777215,
-			" key MINUS/EQUAL   cam scale:");
+			tmp = ft_ftoa(CAM->fov));
+	free(tmp);
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 140, 16777215, CSCALE_S);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 140, 16777215,
-			ft_ftoa(CAM->scale));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 160, 16777215,
-			" key L             line mode:");
+			tmp = ft_ftoa(CAM->scale));
+	free(tmp);
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 160, 16777215, CLMODE_S);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 160, 16777215,
-			ft_itoa(setup->line));
+			tmp = ft_itoa(setup->line));
+	free(tmp);
 }
 
 void		ft_print_cam(t_setup *setup)
 {
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 0, 16777215,
-			" key LEFT/RIGHT    cam pos x:");
+	char	*tmp;
+
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 0, 16777215, CPOSX_S);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 0, 16777215,
-			ft_ftoa(CAM->pos->x));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 20, 16777215,
-			" key UP/DOWN       cam pos y:");
+			tmp = ft_ftoa(CAM->pos->x));
+	free(tmp);
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 20, 16777215, CPOSY_S);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 20, 16777215,
-			ft_ftoa(CAM->pos->y));
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 40, 16777215,
-			" key DOT/SLASH     cam pos z:");
+			tmp = ft_ftoa(CAM->pos->y));
+	free(tmp);
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 40, 16777215, CPOSZ_S);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 40, 16777215,
-			ft_ftoa(CAM->pos->z));
+			tmp = ft_ftoa(CAM->pos->z));
+	free(tmp);
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 60, 16777215, CANGX_S);
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 60, 16777215,
+			tmp = ft_ftoa((int)(57.3 * CAM->rot->x)));
+	free(tmp);
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, 0, 80, 16777215, CANGY_S);
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, setup->width/5, 80, 16777215,
+			tmp = ft_ftoa((int)(57.3 * CAM->rot->y)));
+	free(tmp);
 	ft_print_cam_2(setup);
 }
