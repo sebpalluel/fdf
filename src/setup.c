@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/03 14:53:28 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/04 14:09:16 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int		ft_allocate_matrix_cam(t_setup *setup)
 	size_t		mat_inc;
 
 	CAM->to_cam = ft_matrixzero(4);
+	printf("%p %s: %d malloc\n", CAM->to_cam, __FUNCTION__, __LINE__);
 	CAM->tmp_mat = (double ***)(ft_memalloc(sizeof(double **) * 7));
 	if (!CAM->to_cam || !CAM->tmp_mat)
 		return (0);

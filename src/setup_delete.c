@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 15:59:23 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/03 15:47:43 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/04 14:08:25 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void		ft_delete_cam(t_setup *setup)
 		}
 		if (CAM->to_cam)
 			ft_tabfree((void **)CAM->to_cam);
+		//printf("%p %s: %d dealloc\n", CAM->to_cam, __FUNCTION__, __LINE__);
 		if (CAM->pos)
 			free(CAM->pos);
 		if (CAM->rot)
