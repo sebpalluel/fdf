@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 13:25:41 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 16:05:56 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 16:49:38 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int				ft_setup_menu(t_setup *setup)
 	}
 	if (MAPG->depth_t[1] && ft_generate_map(setup) == ERROR)
 		return (ERROR);
+	printf("setup_menu\n");
 	return (OK);
 }
 
@@ -49,5 +50,4 @@ void			ft_start(t_setup *setup)
 			0x00FFFFFF, START_STR);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, xy[0], xy[1] + 30, \
 			0x00FFFFFF, ENTER_STR);
-	
 }

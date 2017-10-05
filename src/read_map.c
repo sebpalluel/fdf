@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 15:54:59 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 16:28:14 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int				ft_read_map(t_setup *setup)
 			return (ERROR);
 	tab[M_HEIGHT] = NULL;
 	MAP->tmp_map = (int**)malloc(sizeof(int*) * M_HEIGHT + 1);
+	printf("read_map\n");
 	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !MAP->tmp_map || \
 			!ft_parse_map(setup, tab))
 		return (ft_free_tmp(tab, FD->fd, ERROR));

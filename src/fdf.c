@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 14:58:11 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 16:46:56 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int				usage(int mode)
 		ft_putendl("usage: ./fdf map_name.fdf");
 		ft_putendl("usage: can add color arg1 lerp_in, arg5 lerp_out");
 		ft_putendl("example: ./fdf map.fdf 0,0,0 255,255,255");
-		ft_putendl("to generate a map type :");
-		ft_putendl("./fdf gen_map");
+		ft_putendl("to generate a map, type:");
+		ft_putendl("./fdf map_gen");
 		ft_putendl("you can add colors too");
 	}
 	else if (mode == -1)

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 15:58:08 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 16:29:05 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int				ft_allocate_map(t_setup *setup)
 	int			array;
 
 	if (!(MAP->map = (t_pix**)malloc(sizeof(t_pix*) * M_HEIGHT + 1)))
-		return(0);
+		return(ERROR);
 	MAP->mid[1] = (M_WIDTH * M_HEIGHT) / M_WIDTH;
 	MAP->mid[0] = M_HEIGHT / 2.;
 	array = -1;
 	while (MAP->tmp_map[++array])
 		if(!(MAP->map[array] = (t_pix*)malloc(sizeof(t_pix) * M_WIDTH)))
-			return(0);
+			return(ERROR);
 	MAP->map[M_HEIGHT] = NULL;
-	return (1);
+	return (OK);
 }
 
 static void		ft_matrix_cam(t_setup *setup)

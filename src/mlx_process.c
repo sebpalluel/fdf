@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 16:00:57 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 16:58:49 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,23 @@ static int	ft_draw_update(t_setup *setup)
 
 static int	ft_open_or_gen(t_setup *setup)
 {
-	if (SETUP.key == ENTER)
+	if (ft_strcmp(SETUP.argv[1], "map_gen") == OK)
 	{
-		if (ft_strcmp(SETUP.argv[1], "gen_map") == OK)
-			setup->mode = STATE_GEN;
-		else
+		setup->mode = STATE_GEN;
+		MAPG = (t_map_gen *)ft_memalloc(sizeof(t_map_gen));
+		if (!MAPG)
+			return (ERROR);
+	}
+	else
+	{
+		setup->mode = STATE_OPEN;
+		if ((FD->fd = open(SETUP.argv[1], O_RDONLY) < 0))
 		{
-			setup->mode = STATE_OPEN;
-			FD->fd = open(SETUP.argv[1], O_RDONLY);
+			usage(0);
+			return (ERROR);
 		}
 	}
-	if (FD->fd < 0)
-		return (ERROR);
-	else
-		return (OK);
+	return (OK);
 }
 
 static int	ft_key_hook(int keycode, t_setup *setup)
@@ -68,7 +71,10 @@ static int	ft_key_hook(int keycode, t_setup *setup)
 	if (SETUP.mode == STATE_DRAW)
 		ret = ft_draw_update(setup);
 	if (SETUP.key == ENTER && SETUP.mode == STATE_START)
+	{
 		ret = ft_open_or_gen(setup);
+		printf("ret %lu\n", ret);
+	}
 	if (SETUP.mode == STATE_GEN)
 		ret = ft_setup_menu(setup);
 	if (SETUP.mode == STATE_SAVE)
