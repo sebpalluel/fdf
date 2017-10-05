@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 15:46:10 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 17:54:59 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 19:33:23 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ static void		ft_random_map(t_setup *setup)
 	}
 }
 
+static void		ft_populate_line(t_setup *setup, int width[2], int height, \
+		char *tmp)
+{
+	MAPG->map_str[height][width[1]] = \
+	ft_itoa(MAPG->map[height][width[0]]);
+	width[1]++;
+	if (width[0] < (MG_WIDTH - 1))
+	{
+		tmp = ft_strnew(1);
+		*tmp = ' ';
+		MAPG->map_str[height][width[1]] = tmp;
+		width[1]++;
+	}
+}
+
 static void		ft_convertmap_to_str(t_setup *setup)
 {
 	int			width[2];
@@ -44,15 +59,7 @@ static void		ft_convertmap_to_str(t_setup *setup)
 		width[0] = -1;
 		width[1] = 0;
 		while (++width[0] < MG_WIDTH)
-		{
-			MAPG->map_str[height][width[1]] = \
-			ft_itoa(MAPG->map[height][width[0]]);
-			width[1]++;
-			tmp = ft_strnew(1);
-			*tmp = ' ';
-			MAPG->map_str[height][width[1]] = tmp;
-			width[1]++;
-		}
+			ft_populate_line(setup, width, height, tmp);
 		tmp = ft_strnew(1);
 		*tmp = '\n';
 		MAPG->map_str[height][width[1]] = tmp;
@@ -62,14 +69,12 @@ static void		ft_convertmap_to_str(t_setup *setup)
 size_t			ft_generate_map(t_setup *setup)
 {
 	srand(time(NULL));
-	if (!(MAPG->map_str = ft_tab3newstr(MG_WIDTH * 2 + 1, MG_HEIGHT)))
+	if (!(MAPG->map_str = ft_tab3newstr(MG_WIDTH * 2, MG_HEIGHT)))
 		return (ERROR);
 	if (!(MAPG->map = ft_tabnewint(MG_WIDTH, MG_HEIGHT)))
 		return (ERROR);
 	ft_random_map(setup);
 	ft_convertmap_to_str(setup);
-	printf("print array int :\n");
-	ft_printintarray(MAPG->map, MG_WIDTH, MG_HEIGHT);
 	SETUP.mode = STATE_SAVE;
 	mlx_put_image_to_window(MLX->mlx_ptr, MLX->win_ptr, IMG->image, 0, 0);
 	return (OK);

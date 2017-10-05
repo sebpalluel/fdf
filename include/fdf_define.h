@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 15:51:50 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 19:40:31 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # define MAX_SIZE		100000
 # define MG_MIN_SIZE	3
-# define MG_MAX_SIZE	10000
+# define MG_MAX_SIZE	2000
 # define MG_MIN_INT		-100
 # define MG_MAX_INT		100
 
@@ -72,8 +72,8 @@
 # define START_STR		"fdf by psebasti"
 # define ENTER_STR		"Press ENTER to start"
 # define MAPG_STR		"MAP GENERATOR MODE"
-# define WIDTHG_STR		"TYPE WIDTH OF MAP [ >= 3 && <= 200] AND PRESS ENTER"
-# define HEIGHTG_STR	"TYPE HEIGHT OF MAP [ >= 3 && <= 200] AND PRESS ENTER"
+# define WIDTHG_STR		"TYPE WIDTH OF MAP [ >= 3 && <= 2000] AND PRESS ENTER"
+# define HEIGHTG_STR	"TYPE HEIGHT OF MAP [ >= 3 && <= 2000] AND PRESS ENTER"
 # define MINDEPTHG_STR	"TYPE MIN DEPTH [ >= -100 && <= 100] AND PRESS ENTER"
 # define MAXDEPTHG_STR	"TYPE MAX DEPTH [ >= -100 && <= 100] AND PRESS ENTER"
 # define SAVE_STR		"WOULD YOU LIKE TO SAVE IT ?"

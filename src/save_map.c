@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 12:40:19 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 16:04:20 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 19:21:54 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,26 @@
 
 static size_t	ft_write_to_file(t_setup *setup)
 {
-	int			err;
 	size_t		line;
+	size_t		elem;
+	size_t		numchar;
 
-	err = 0;
 	line = 0;
 	if (ft_open(FD, O_WRONLY, O_APPEND) != OK)
 		return (ERROR);
-	while (line < (size_t)M_HEIGHT)
+	while (line < (size_t)MG_HEIGHT)
 	{
-			err = write(FD->fd, MAPG->map_str[line], M_WIDTH * 2 + 1);
-			if (err < 0)
+		elem = 0;
+		while (elem < (size_t)(MG_WIDTH * 2))
+		{
+			numchar = ft_strlen(MAPG->map_str[line][elem]);
+			if (write(FD->fd, MAPG->map_str[line][elem], numchar) < 0)
 				return (ERROR);
-			line++;
+			elem++;
+		}
+		line++;
 	}
-		return (OK);
+	return (OK);
 }
 
 static size_t	ft_save_file(t_setup *setup)
