@@ -6,55 +6,55 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 00:37:02 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 12:21:27 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 14:34:22 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void		ft_scale_cam(t_setup *setup, int keycode)
+void		ft_scale_cam(t_setup *setup)
 {
-	if (keycode == EQUAL)
+	if (SETUP.key == EQUAL)
 		CAM->scale += (double)STEP / 100;
-	else if (keycode == MINUS)
+	else if (SETUP.key == MINUS)
 		CAM->scale -= (double)STEP / 100;
 }
 
-void		ft_rot_cam(t_setup *setup, int keycode)
+void		ft_rot_cam(t_setup *setup)
 {
-	if (keycode == D_KEY)
+	if (SETUP.key == D_KEY)
 		CAM->rot->x = CAM->rot->x + (double)STEP / 100;
-	else if (keycode == A_KEY)
+	else if (SETUP.key == A_KEY)
 		CAM->rot->x = CAM->rot->x - (double)STEP / 100;
-	else if (keycode == W_KEY)
+	else if (SETUP.key == W_KEY)
 		CAM->rot->y = CAM->rot->y + (double)STEP / 100;
-	else if (keycode == S_KEY)
+	else if (SETUP.key == S_KEY)
 		CAM->rot->y = CAM->rot->y - (double)STEP / 100;
-	else if (keycode == Q_KEY)
+	else if (SETUP.key == Q_KEY)
 		CAM->rot->z = CAM->rot->z + (double)STEP / 100;
-	else if (keycode == E_KEY)
+	else if (SETUP.key == E_KEY)
 		CAM->rot->z = CAM->rot->z - (double)STEP / 100;
 }
 
-void		ft_orient_cam(t_setup *setup, int keycode)
+void		ft_orient_cam(t_setup *setup)
 {
-	if (keycode == UP)
+	if (SETUP.key == UP)
 		CAM->pos->y = CAM->pos->y + AMP * 10;
-	else if (keycode == DOWN)
+	else if (SETUP.key == DOWN)
 		CAM->pos->y = CAM->pos->y - AMP * 10;
-	else if (keycode == LEFT)
+	else if (SETUP.key == LEFT)
 		CAM->pos->x = CAM->pos->x - AMP * 10;
-	else if (keycode == RIGHT)
+	else if (SETUP.key == RIGHT)
 		CAM->pos->x = CAM->pos->x + AMP * 10;
-	else if (keycode == DOT_KEY)
+	else if (SETUP.key == DOT_KEY)
 		CAM->pos->z = (CAM->pos->z == -AMP) ? AMP :
 			CAM->pos->z + AMP * 10;
-	else if (keycode == SLASH_KEY)
+	else if (SETUP.key == SLASH_KEY)
 		CAM->pos->z = (CAM->pos->z == AMP) ? -AMP :
 			CAM->pos->z - AMP * 10;
-	else if (keycode == R_KEY)
+	else if (SETUP.key == R_KEY)
 		CAM->fov = CAM->fov + AMP * 2;
-	else if (keycode == F_KEY)
+	else if (SETUP.key == F_KEY)
 		CAM->fov = CAM->fov - AMP * 2;
 }
 

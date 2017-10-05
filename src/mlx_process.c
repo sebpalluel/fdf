@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/04 14:14:46 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 16:00:57 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,92 @@
 
 static int	ft_expose_hook(t_setup *setup)
 {
-	if (!IMG)
-		IMG = ft_imgnew(MLX->mlx_ptr, setup->width, setup->height);
 	ft_imgclean(IMG, setup->width, setup->height);
-	if (setup->line)
-		ft_draw_map(setup);
-	else
-		ft_draw_map_point(setup);
-	mlx_put_image_to_window(MLX->mlx_ptr, MLX->win_ptr, IMG->image, 0, 0);
-	if (setup->ui == 1)
-		ft_print_cam(setup);
+	if (SETUP.mode == STATE_DRAW)
+	{
+		if (setup->line)
+			ft_draw_map(setup);
+		else
+			ft_draw_map_point(setup);
+		mlx_put_image_to_window(MLX->mlx_ptr, MLX->win_ptr, IMG->image, 0, 0);
+		if (setup->ui == 1)
+			ft_print_cam(setup);
+	}
 	mlx_do_sync(MLX->mlx_ptr);
 	return (0);
 }
 
+static int	ft_draw_update(t_setup *setup)
+{
+	ft_scale_cam(setup);
+	ft_rot_cam(setup);
+	ft_orient_cam(setup);
+	if (SETUP.key == G_KEY)
+		setup->ui = !setup->ui ? 1 : 0;
+	if (SETUP.key == L_KEY)
+		setup->line = !setup->line ? 1 : 0;
+	return (ft_update_map_and_cam(setup));
+}
+
+static int	ft_open_or_gen(t_setup *setup)
+{
+	if (SETUP.key == ENTER)
+	{
+		if (ft_strcmp(SETUP.argv[1], "gen_map") == OK)
+			setup->mode = STATE_GEN;
+		else
+		{
+			setup->mode = STATE_OPEN;
+			FD->fd = open(SETUP.argv[1], O_RDONLY);
+		}
+	}
+	if (FD->fd < 0)
+		return (ERROR);
+	else
+		return (OK);
+}
+
 static int	ft_key_hook(int keycode, t_setup *setup)
 {
-	if (keycode == ESC)
+	size_t	ret;
+
+	SETUP.key = keycode;
+	ret = OK;
+	if (SETUP.mode == STATE_DRAW)
+		ret = ft_draw_update(setup);
+	if (SETUP.key == ENTER && SETUP.mode == STATE_START)
+		ret = ft_open_or_gen(setup);
+	if (SETUP.mode == STATE_GEN)
+		ret = ft_setup_menu(setup);
+	if (SETUP.mode == STATE_SAVE)
+	{
+		if ((ret = ft_save_map(setup)) == OK)
+			SETUP.mode = STATE_OPEN;
+	}
+	if (SETUP.mode == STATE_OPEN)
+	{
+		if (ft_read_map(setup) == OK && ft_allocate_map(setup) == OK\
+				&& ft_update_map_and_cam(setup) == OK)
+			SETUP.mode = STATE_DRAW;
+		else
+			ret = ERROR;
+	}
+	if (SETUP.key == ESC || ret == ERROR)
 	{
 		ft_delete_setup(setup);
 		usage(1);
 		while (42);
 		exit(0);
 	}
-	ft_scale_cam(setup, keycode);
-	ft_rot_cam(setup, keycode);
-	ft_orient_cam(setup, keycode);
-	if (keycode == G_KEY)
-		setup->ui = !setup->ui ? 1 : 0;
-	if (keycode == L_KEY)
-		setup->line = !setup->line ? 1 : 0;
-	ft_update_map_and_cam(setup);
 	ft_expose_hook(setup);
 	return (0);
 }
 
 void		ft_mlx_process(t_setup *setup)
 {
-	ft_update_map_and_cam(setup);
+	if (SETUP.mode == STATE_START)
+		ft_start(setup);
+	//ft_update_map_and_cam(setup);
 	mlx_key_hook(MLX->win_ptr, ft_key_hook, setup);
 	mlx_expose_hook(MLX->win_ptr, ft_expose_hook, setup);
 	mlx_do_sync(MLX->mlx_ptr);

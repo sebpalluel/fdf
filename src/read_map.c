@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/08/30 17:45:14 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 15:54:59 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,27 @@ static int			ft_parse_map(t_setup *setup, char **tab)
 	return (ft_free_tmp(NULL, 0, error_line));
 }
 
-int				ft_read_map(t_setup *setup, int fd)
+int				ft_read_map(t_setup *setup)
 {
 	int			ret_gnl;
 	char		**tab = NULL;
 
+	if (MAPG)
+	{
+		M_WIDTH = MG_WIDTH;
+		M_HEIGHT = MG_HEIGHT;
+		MAP->tmp_map = MAPG->map;
+		return (OK);
+	}
 	M_HEIGHT = -1;
 	tab = (char**)malloc(sizeof(char*) * MAX_SIZE);
-	while ((ret_gnl = get_next_line(fd, &tab[++M_HEIGHT])))
+	while ((ret_gnl = get_next_line(FD->fd, &tab[++M_HEIGHT])))
 		if (M_HEIGHT > MAX_SIZE)
-			return (-2);
+			return (ERROR);
 	tab[M_HEIGHT] = NULL;
 	MAP->tmp_map = (int**)malloc(sizeof(int*) * M_HEIGHT + 1);
 	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !MAP->tmp_map || \
 			!ft_parse_map(setup, tab))
-		return (ft_free_tmp(tab, fd, -2));
-	return (ft_free_tmp(tab, fd, 1)); 
+		return (ft_free_tmp(tab, FD->fd, ERROR));
+	return (ft_free_tmp(tab, FD->fd, OK)); 
 }

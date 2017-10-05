@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:22:36 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/03 18:24:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 14:45:02 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ static t_color	*ft_color_parse(char *arg)
 				(unsigned char)ft_atoi(arg_color[2])));
 }
 
-int				ft_color_input(char **argv, int argc, t_setup *setup)
+int				ft_color_input(t_setup *setup)
 {
-	if (argc == 4)
+	if (SETUP.argc == 4)
 	{
-		if (!(LERP_IN = ft_color_parse(argv[2])) || \
-				!(LERP_OUT = ft_color_parse(argv[3])))
+		if (!(LERP_IN = ft_color_parse(SETUP.argv[2])) || \
+				!(LERP_OUT = ft_color_parse(SETUP.argv[3])))
 			return (-1);
 	}
-	if (argc == 2)
+	if (SETUP.argc == 2)
 	{
 		LERP_IN = ft_colornew(0, 0, 0);
 		LERP_OUT = ft_colornew(255, 255, 255);

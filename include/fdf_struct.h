@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 13:05:56 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 14:43:20 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct		s_setup
 	int				key;
 	size_t			line;
 	size_t			mode;
+	int				argc;
+	char			**argv;
 	t_mlx			*mlx;
 	t_map			*map;
 	t_map_gen		*map_gen;

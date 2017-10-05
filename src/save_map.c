@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 12:40:19 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 12:46:08 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 16:04:20 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static size_t	ft_write_to_file(t_setup *setup)
 				return (ERROR);
 			line++;
 	}
-		SETUP.mode = STATE_RUN;
 		return (OK);
 }
 

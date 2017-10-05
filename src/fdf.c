@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 13:49:29 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 14:58:11 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,16 @@ int				usage(int mode)
 int				main(int argc, char **argv)
 {
 	t_setup 	*setup;
-	int			fd;
 	static int	usage_ret = 0;
 
 	if (argc < 2 || argc > 4)
 		return (usage(usage_ret));
-	setup = ft_setup(argv, argc, &usage_ret);
-	setup->mode = STATE_START;
-	if (ft_strcmp(argv[1], "gen_map") == OK)
-		setup->mode = STATE_GEN;
-	else
-		fd = open(argv[1], O_RDONLY);
-	if (!setup || (fd < 3) || (usage_ret = ft_read_map(setup, fd)) != 1)
+	setup = ft_setup(argc, argv, &usage_ret);
+	if (!setup)
 		return (usage(usage_ret));
-	if (ft_allocate_map(setup))
-		ft_mlx_process(setup);
+	SETUP.mode = STATE_START;
+	ft_mlx_process(setup);
+	//(usage_ret = ft_read_map(setup) != 1)
+	//if (ft_allocate_map(setup))
+	return (0);
 }
