@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 13:10:42 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 13:41:56 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 17:34:23 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int				ft_configure_depth(t_setup *setup)
 		return (ERROR);
 	dim_col[w_flag] = (MAPG->depth_t[w_flag] == 1) ? 65280 : 16711680;
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 50, \
-			S_HEIGHT / 6, dim_col[0], "DEPTH MIN  : ");
+			S_HEIGHT / 3.1, dim_col[0], "DEPTH MIN  : ");
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 10, \
-			S_HEIGHT / 6, dim_col[0], MAPG->depth_str[0]);
+			S_HEIGHT / 3.1, dim_col[0], MAPG->depth_str[0]);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 50, \
-			S_HEIGHT / 4, dim_col[1], "DEPTH MAX : ");
+			S_HEIGHT / 2.5, dim_col[1], "DEPTH MAX : ");
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 10, \
-			S_HEIGHT / 4, dim_col[1], MAPG->depth_str[1]);
+			S_HEIGHT / 2.5, dim_col[1], MAPG->depth_str[1]);
 	return (OK);
 }

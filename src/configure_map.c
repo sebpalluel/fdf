@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 15:34:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 13:18:29 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 17:31:34 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int				ft_configure_dim(t_setup *setup)
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 10, \
 			S_HEIGHT / 6, dim_col[0], MAPG->dim[0]);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 50, \
-			S_HEIGHT / 4, dim_col[1], "HEIGHT : ");
+			S_HEIGHT / 4.2, dim_col[1], "HEIGHT : ");
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 10, \
-			S_HEIGHT / 4, dim_col[1], MAPG->dim[1]);
+			S_HEIGHT / 4.2, dim_col[1], MAPG->dim[1]);
 	return (OK);
 }
 
