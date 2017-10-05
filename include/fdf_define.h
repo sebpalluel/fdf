@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 12:43:51 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 13:17:41 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@
 # define MAPG			setup[0].map_gen
 # define MG_WIDTH		setup[0].map_gen->mapsize[0]
 # define MG_HEIGHT		setup[0].map_gen->mapsize[1]
-# define MG_DEPTH_MIN	setup[0].map_gen->maxminint[0]
-# define MG_DEPTH_MAX	setup[0].map_gen->maxminint[1]
 # define MG_PATH		setup[0].map_gen->path
 # define CAM			setup[0].cam
 # define MLX			setup[0].mlx

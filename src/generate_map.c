@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 15:46:10 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 12:38:17 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 13:18:34 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void		ft_random_map(t_setup *setup)
 	{
 		width = -1;
 		while (++width < MG_WIDTH)
-			MAPG->map[height][width] = ft_random(0, MG_DEPTH_MIN, MG_DEPTH_MAX);
+			MAPG->map[height][width] = ft_random(0, MAPG->depth[0], \
+					MAPG->depth[1]);
 	}
 }
 
@@ -43,10 +44,13 @@ static void		ft_convertmap_to_str(t_setup *setup)
 			ft_itoa(MAPG->map[height][width[0]]);
 			width[1]++;
 			tmp = ft_strnew(1);
-			MAPG->map_str[height][width[1]] = ft_strnew(' ');
+			*tmp = ' ';
+			MAPG->map_str[height][width[1]] = tmp;
 			width[1]++;
 		}
-		MAPG->map_str[height][width[1]] = '\n';
+		tmp = ft_strnew(1);
+		*tmp = '\n';
+		MAPG->map_str[height][width[1]] = tmp;
 	}
 }
 

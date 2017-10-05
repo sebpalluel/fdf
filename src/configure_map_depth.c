@@ -1,67 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   configure_map.c                                    :+:      :+:    :+:   */
+/*   configure_map_depth.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/04 15:34:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 13:18:29 by psebasti         ###   ########.fr       */
+/*   Created: 2017/10/05 13:10:42 by psebasti          #+#    #+#             */
+/*   Updated: 2017/10/05 13:14:45 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int				ft_map_dim(t_setup *setup, size_t *c, char *str, size_t *flag)
+static int		ft_depth_input(t_setup *setup, size_t w_flag)
 {
-	if (setup->key != ENTER && *c < MAX_INT_DECIMAL)
+	if (!MAPG->depth_t[w_flag])
 	{
-		if (ft_mlx_keytonumchar(setup->key) != '\0')
-		{
-			str[*c] = ft_mlx_keytonumchar(setup->key);
-			str[++c[0]] = '\0';
-		}
-	}
-	if (setup->key == ENTER && *str >= 1)
-		*flag = 1;
-	return (OK);
-}
-
-static int		ft_dim_input(t_setup *setup, size_t w_flag)
-{
-	if (!MAPG->dim_t[w_flag])
-	{
-		if (ft_map_dim(setup, &MAPG->dim_i[w_flag], MAPG->dim[w_flag], \
-					&MAPG->dim_t[w_flag]) == ERROR)
+		if (ft_map_dim(setup, &MAPG->depth_i[w_flag], MAPG->depth_str[w_flag], \
+					&MAPG->depth_t[w_flag]) == ERROR)
 			return (ERROR);
-		if (MAPG->dim_t[w_flag])
+		if (MAPG->depth_t[w_flag])
 		{
-			MAPG->mapsize[w_flag] = ft_atoi(MAPG->dim[w_flag]);
-			if (MAPG->mapsize[w_flag] < MG_MIN_SIZE || MAPG->mapsize[w_flag] >\
-					MG_MAX_SIZE)
+			MAPG->depth[w_flag] = ft_atoi(MAPG->depth_str[w_flag]);
+			if (MAPG->depth[w_flag] < MG_MIN_INT || MAPG->depth[w_flag] >\
+					MG_MAX_INT)
 				return (ERROR);
 		}
 	}
 	return (OK);
 }
 
-int				ft_configure_dim(t_setup *setup)
+int				ft_configure_depth(t_setup *setup)
 {
 	size_t		w_flag;
 	static int	dim_col[2];
 
 	w_flag = MAPG->dim_t[0];
-	if (ft_dim_input(setup, w_flag) == ERROR)
+	if (ft_depth_input(setup, w_flag) == ERROR)
 		return (ERROR);
-	dim_col[w_flag] = (MAPG->dim_t[w_flag] == 1) ? 65280 : 16711680;
+	dim_col[w_flag] = (MAPG->depth_t[w_flag] == 1) ? 65280 : 16711680;
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 50, \
-			S_HEIGHT / 6, dim_col[0], "WIDTH  : ");
+			S_HEIGHT / 6, dim_col[0], "DEPTH MIN  : ");
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 10, \
-			S_HEIGHT / 6, dim_col[0], MAPG->dim[0]);
+			S_HEIGHT / 6, dim_col[0], MAPG->depth_str[0]);
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 50, \
-			S_HEIGHT / 4, dim_col[1], "HEIGHT : ");
+			S_HEIGHT / 4, dim_col[1], "DEPTH MAX : ");
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 10, \
-			S_HEIGHT / 4, dim_col[1], MAPG->dim[1]);
+			S_HEIGHT / 4, dim_col[1], MAPG->depth_str[1]);
 	return (OK);
 }
 
