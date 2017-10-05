@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/11 15:41:42 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 13:49:29 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int				usage(int mode)
 		ft_putendl("usage: ./fdf map_name.fdf");
 		ft_putendl("usage: can add color arg1 lerp_in, arg5 lerp_out");
 		ft_putendl("example: ./fdf map.fdf 0,0,0 255,255,255");
+		ft_putendl("to generate a map type :");
+		ft_putendl("./fdf gen_map");
+		ft_putendl("you can add colors too");
 	}
 	else if (mode == -1)
 	{
@@ -34,14 +37,18 @@ int				usage(int mode)
 
 int				main(int argc, char **argv)
 {
-	t_setup 	*setup = NULL;
+	t_setup 	*setup;
 	int			fd;
 	static int	usage_ret = 0;
 
 	if (argc < 2 || argc > 4)
 		return (usage(usage_ret));
 	setup = ft_setup(argv, argc, &usage_ret);
-	fd = open(argv[1], O_RDONLY);
+	setup->mode = STATE_START;
+	if (ft_strcmp(argv[1], "gen_map") == OK)
+		setup->mode = STATE_GEN;
+	else
+		fd = open(argv[1], O_RDONLY);
 	if (!setup || (fd < 3) || (usage_ret = ft_read_map(setup, fd)) != 1)
 		return (usage(usage_ret));
 	if (ft_allocate_map(setup))

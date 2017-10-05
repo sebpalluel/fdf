@@ -6,7 +6,7 @@
 #*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/01/09 14:05:27 by psebasti          #+#    #+#             *#
-#*   Updated: 2017/10/05 12:46:39 by psebasti         ###   ########.fr       *#
+#*   Updated: 2017/10/05 13:27:12 by psebasti         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -24,6 +24,8 @@ SRC 		=	src/fdf.c \
 				src/setup_delete.c \
 				src/update_map.c \
 				src/configure_map.c \
+				src/configure_map_dim.c \
+				src/setup_gen.c \
 				src/save_map.c \
 
 EXT			=	Makefile

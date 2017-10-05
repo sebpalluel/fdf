@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 13:17:41 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 13:40:55 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,13 @@
 # define CSCALE_S		" key MINUS/EQUAL   cam scale:"
 # define CLMODE_S		" key L             line mode:"
 
+# define START_STR		"fdf by psebasti"
+# define ENTER_STR		"Press ENTER to start"
 # define MAPG_STR		"MAP GENERATOR MODE"
 # define WIDTHG_STR		"TYPE WIDTH OF MAP [ >= 3 && <= 200] AND PRESS ENTER"
 # define HEIGHTG_STR	"TYPE HEIGHT OF MAP [ >= 3 && <= 200] AND PRESS ENTER"
+# define MINDEPTHG_STR	"TYPE MIN DEPTH [ >= -100 && <= 100] AND PRESS ENTER"
+# define MAXDEPTHG_STR	"TYPE MAX DEPTH [ >= -100 && <= 100] AND PRESS ENTER"
 # define SAVE_STR		"WOULD YOU LIKE TO SAVE IT ?"
 # define YESORNO_STR	"y / n"
 # define NAME_STR		"TYPE A NAME FOR THIS FILE AND PRESS ENTER"

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 13:09:37 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 13:29:21 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ int		ft_save_map(t_setup *setup);
 size_t	ft_name_input(t_setup *setup);
 int		ft_configure_dim(t_setup *setup);
 size_t	ft_generate_map(t_setup *setup);
+int		ft_setup_menu(t_setup *setup);
+void	ft_start(t_setup *setup);
+int		ft_configure_depth(t_setup *setup);
 int		ft_map_dim(t_setup *setup, size_t *c, char *str, size_t *flag);
 
 #endif
