@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 16:28:14 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 18:14:20 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int			ft_parse_map(t_setup *setup, char **tab)
 int				ft_read_map(t_setup *setup)
 {
 	int			ret_gnl;
-	char		**tab = NULL;
+	char		**tab;
 
 	if (MAPG)
 	{
@@ -54,13 +54,16 @@ int				ft_read_map(t_setup *setup)
 		return (OK);
 	}
 	M_HEIGHT = -1;
+	printf("read_map before fd %d\n", FD->fd);
 	tab = (char**)malloc(sizeof(char*) * MAX_SIZE);
 	while ((ret_gnl = get_next_line(FD->fd, &tab[++M_HEIGHT])))
 		if (M_HEIGHT > MAX_SIZE)
 			return (ERROR);
+	printf("read_map\n");
+	if (M_HEIGHT == 0)
+		return (ERROR);
 	tab[M_HEIGHT] = NULL;
 	MAP->tmp_map = (int**)malloc(sizeof(int*) * M_HEIGHT + 1);
-	printf("read_map\n");
 	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !MAP->tmp_map || \
 			!ft_parse_map(setup, tab))
 		return (ft_free_tmp(tab, FD->fd, ERROR));

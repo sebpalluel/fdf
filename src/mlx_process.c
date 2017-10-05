@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 17:48:31 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 18:17:02 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	ft_open_or_gen(t_setup *setup)
 	else
 	{
 		setup->mode = STATE_OPEN;
-		if ((FD->fd = open(SETUP.argv[1], O_RDONLY) < 0))
+		if ((FD->fd = open(SETUP.argv[1], O_RDONLY)) <= 0)
 		{
 			usage(0);
 			return (ERROR);
@@ -74,7 +74,6 @@ static int	ft_key_hook(int keycode, t_setup *setup)
 	{
 		ret = ft_open_or_gen(setup);
 		mlx_put_image_to_window(MLX->mlx_ptr, MLX->win_ptr, IMG->image, 0, 0);
-		printf("ret %lu\n", ret);
 	}
 	if (SETUP.mode == STATE_GEN)
 		ret = ft_setup_menu(setup);
