@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/04 15:57:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 12:43:51 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@
 # define MLX			setup[0].mlx
 # define IMG			setup[0].img
 # define FD				setup[0].fd
-//# define MAT			setup->cam->matrix
 
 # define STATE_RUN		0
 # define STATE_START	1
@@ -71,5 +70,12 @@
 # define CFOV_S			" key F/R           cam fov:"
 # define CSCALE_S		" key MINUS/EQUAL   cam scale:"
 # define CLMODE_S		" key L             line mode:"
+
+# define MAPG_STR		"MAP GENERATOR MODE"
+# define WIDTHG_STR		"TYPE WIDTH OF MAP [ >= 3 && <= 200] AND PRESS ENTER"
+# define HEIGHTG_STR	"TYPE HEIGHT OF MAP [ >= 3 && <= 200] AND PRESS ENTER"
+# define SAVE_STR		"WOULD YOU LIKE TO SAVE IT ?"
+# define YESORNO_STR	"y / n"
+# define NAME_STR		"TYPE A NAME FOR THIS FILE AND PRESS ENTER"
 
 #endif

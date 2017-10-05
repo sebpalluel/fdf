@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/01 18:36:25 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 12:45:18 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,9 @@ void	ft_rot_cam(t_setup *setup, int keycode);
 void	ft_orient_cam(t_setup *setup, int keycode);
 void	ft_print_cam(t_setup *setup);
 int		ft_allocate_map(t_setup *setup);
+int		ft_save_map(t_setup *setup);
+size_t	ft_name_input(t_setup *setup);
+int		ft_configure_dim(t_setup *setup);
+size_t	ft_generate_map(t_setup *setup);
 
 #endif

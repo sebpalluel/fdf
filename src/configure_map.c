@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 15:34:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/04 15:44:19 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 12:53:02 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ static int		ft_map_dim(t_setup *setup, size_t *c, char *str, size_t *flag)
 		}
 	}
 	if (setup->key == ENTER && *str >= 1)
-	{
-		if (ft_atoi(str) < M_MIN_SIZE || ft_atoi(str) > M_MAX_SIZE)
-			return (ERROR);
 		*flag = 1;
-	}
 	return (OK);
 }
 
@@ -41,8 +37,8 @@ static int		ft_dim_input(t_setup *setup, size_t w_flag)
 		if (MAPG->dim_t[w_flag])
 		{
 			MAPG->mapsize[w_flag] = ft_atoi(MAPG->dim[w_flag]);
-			if (MAPG->mapsize[w_flag] < M_MIN_SIZE || MAPG->mapsize[w_flag] >\
-					M_MAX_SIZE)
+			if (MAPG->mapsize[w_flag] < MG_MIN_SIZE || MAPG->mapsize[w_flag] >\
+					MG_MAX_SIZE)
 				return (ERROR);
 		}
 	}

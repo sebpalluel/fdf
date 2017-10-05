@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 15:46:10 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/04 19:59:08 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/05 12:38:17 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static void		ft_convertmap_to_str(t_setup *setup)
 		width[1] = 0;
 		while (++width[0] < MG_WIDTH)
 		{
-			tmp = ft_itoa(MAPG->map[height][width[0]]);
-			MAPG->map_str[height][width[1]] = *tmp;
-			free(tmp);
+			MAPG->map_str[height][width[1]] = \
+			ft_itoa(MAPG->map[height][width[0]]);
 			width[1]++;
-			MAPG->map_str[height][width[1]] = ' ';
+			tmp = ft_strnew(1);
+			MAPG->map_str[height][width[1]] = ft_strnew(' ');
 			width[1]++;
 		}
 		MAPG->map_str[height][width[1]] = '\n';
@@ -53,7 +53,7 @@ static void		ft_convertmap_to_str(t_setup *setup)
 size_t			ft_generate_map(t_setup *setup)
 {
 	srand(time(NULL));
-	if (!(MAPG->map_str = ft_tabnewstr(MG_WIDTH * 2 + 1, MG_HEIGHT))) // for with complete with num char + ' '
+	if (!(MAPG->map_str = ft_tab3newstr(MG_WIDTH * 2 + 1, MG_HEIGHT))) // for with complete with num char + ' '
 		return (ERROR);
 	if (!(MAPG->map = ft_tabnewint(MG_WIDTH, MG_HEIGHT)))
 		return (ERROR);
