@@ -278,6 +278,7 @@ ft_convertmap_to_str	src/generate_map.c	/^static void		ft_convertmap_to_str(t_se
 ft_create_file	libs/libft/srcs/fd/ft_create_file.c	/^size_t		ft_create_file(t_fd *fd, int chmod)$/;"	f
 ft_delete_cam	src/setup_delete.c	/^static void		ft_delete_cam(t_setup *setup)$/;"	f	file:
 ft_delete_map	src/setup_delete.c	/^static void		ft_delete_map(t_setup *setup)$/;"	f	file:
+ft_delete_map_gen	src/setup_delete.c	/^static void		ft_delete_map_gen(t_setup *setup)$/;"	f	file:
 ft_delete_setup	src/setup_delete.c	/^t_setup			*ft_delete_setup(t_setup *setup)$/;"	f
 ft_depth_input	src/configure_map_depth.c	/^static int		ft_depth_input(t_setup *setup, size_t w_flag)$/;"	f	file:
 ft_dim_input	src/configure_map.c	/^static int		ft_dim_input(t_setup *setup, size_t w_flag)$/;"	f	file:
@@ -439,6 +440,7 @@ ft_strsub	libs/libft/srcs/str/ft_strsub.c	/^char	*ft_strsub(char const *s, unsig
 ft_strtol	libs/libft/srcs/stdlib/ft_strtol.c	/^long int				ft_strtol(const char *str, int base)$/;"	f
 ft_strtrim	libs/libft/srcs/str/ft_strtrim.c	/^char	*ft_strtrim(char const *s)$/;"	f
 ft_swap	libs/libft/srcs/perso/ft_swap.c	/^void				ft_swap(void *a, void *b, size_t nbytes)$/;"	f
+ft_tab3free	libs/libft/srcs/tab/ft_tab3free.c	/^void	ft_tab3free(void ***tab)$/;"	f
 ft_tab3newstr	libs/libft/srcs/tab/ft_tab3newstr.c	/^char	***ft_tab3newstr(size_t width, size_t height)$/;"	f
 ft_tabdepth	libs/libft/srcs/tab/ft_tabdepth.c	/^int			ft_tabdepth(void **tab)$/;"	f
 ft_tabfree	libs/libft/srcs/tab/ft_tabfree.c	/^void	ft_tabfree(void **tab)$/;"	f

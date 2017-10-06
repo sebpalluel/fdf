@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 15:34:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 17:31:34 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 13:57:24 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,12 @@ int				ft_configure_dim(t_setup *setup)
 
 size_t		ft_name_input(t_setup *setup)
 {
-	char		*tmp;
-
 	if (FD->name == NULL)
-		if (!(FD->name = ft_strnew(1)))
+{
+		if (!(FD->name = ft_strnew(666)))
 			return (ERROR);
+}
 	if (SETUP.key != ENTER && MAPG->yes_t && ft_mlx_printkeytochar(SETUP.key))
-	{
-		if (!(tmp = ft_strdup(FD->name)))
-			return (ERROR);
-		free(FD->name);
-		if (!(FD->name = ft_strnew(MAPG->name_i + 1)))
-			return (ERROR);
-		FD->name = tmp;
-		FD->name[MAPG->name_i] = ft_mlx_printkeytochar(SETUP.key);
-		FD->name[++MAPG->name_i] = '\0';
-	}
+		FD->name[MAPG->name_i++] = ft_mlx_printkeytochar(SETUP.key);
 	return (OK);
 }

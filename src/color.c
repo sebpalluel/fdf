@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:22:36 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 14:45:02 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 14:16:15 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 static t_color	*ft_color_parse(char *arg)
 {
 	char		**arg_color = NULL;
+	t_color		*color;
 
 	if (ft_strlen(arg) < 5 || ft_strlen(arg) > 11)
 		return (NULL);
 	arg_color = ft_strsplit(arg, ',');
 	if (!arg_color || !arg_color[0] || !arg_color[1] || !arg_color[2])
 		return (NULL);
-	return (ft_colornew((unsigned char)ft_atoi(arg_color[0]), \
+	color = ft_colornew((unsigned char)ft_atoi(arg_color[0]), \
 				(unsigned char)ft_atoi(arg_color[1]), \
-				(unsigned char)ft_atoi(arg_color[2])));
+				(unsigned char)ft_atoi(arg_color[2]));
+	ft_tabfree((void **)arg_color);
+	return (color);
 }
 
 int				ft_color_input(t_setup *setup)
