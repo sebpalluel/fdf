@@ -6,44 +6,60 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:39:27 by psebasti          #+#    #+#             */
-/*   Updated: 2017/04/11 15:41:42 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:15:30 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
+static int		usage2(int mode)
+{
+	if (mode == MAP_ERROR)
+		ft_putendl(MAP_ERROR_S);
+	else if (mode == DIM_ERROR)
+		ft_putendl(DIM_ERROR_S);
+	else if (mode == DEPTH_ERROR)
+	{
+		ft_putendl(DEPTH_ERROR_S);
+		ft_putendl(DEPTH_ERROR2_S);
+	}
+	else if (mode == FILE_ERROR)
+		ft_putendl(FILE_ERROR_S);
+	return (mode);
+}
+
 int				usage(int mode)
 {
-	if (mode == 1)
+	if (mode == OK)
 		ft_putendl("program exited normally");
-	else if (mode == 0)
+	else if (mode == ERROR)
 	{
 		ft_putendl("usage: ./fdf map_name.fdf");
 		ft_putendl("usage: can add color arg1 lerp_in, arg5 lerp_out");
 		ft_putendl("example: ./fdf map.fdf 0,0,0 255,255,255");
+		ft_putendl("to generate a map, type:");
+		ft_putendl("./fdf map_gen");
+		ft_putendl("you can add colors too");
 	}
-	else if (mode == -1)
+	else if (mode == COLOR_ERROR)
 	{
 		ft_putendl("error in alternate usage");
 		ft_putendl("example: ./fdf map.fdf \"0,0,0\" \"255,255,255\"");
 	}
-	else if (mode == -2)
-		ft_putendl("map error");
-	return (mode);
+	return (usage2(mode));
 }
 
 int				main(int argc, char **argv)
 {
-	t_setup 	*setup = NULL;
-	int			fd;
-	static int	usage_ret = 0;
+	t_setup		*setup;
+	static int	usage_ret = ERROR;
 
 	if (argc < 2 || argc > 4)
 		return (usage(usage_ret));
-	setup = ft_setup(argv, argc, &usage_ret);
-	fd = open(argv[1], O_RDONLY);
-	if (!setup || (fd < 3) || (usage_ret = ft_read_map(setup, fd)) != 1)
+	setup = ft_setup(argc, argv, &usage_ret);
+	if (!setup || usage_ret != OK)
 		return (usage(usage_ret));
-	if (ft_allocate_map(setup))
-		ft_mlx_process(setup);
+	SETUP.mode = STATE_START;
+	ft_mlx_process(setup);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/04 14:09:16 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:27:42 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int		ft_allocate_matrix_cam(t_setup *setup)
 	size_t		mat_inc;
 
 	CAM->to_cam = ft_matrixzero(4);
-	printf("%p %s: %d malloc\n", CAM->to_cam, __FUNCTION__, __LINE__);
 	CAM->tmp_mat = (double ***)(ft_memalloc(sizeof(double **) * 7));
 	if (!CAM->to_cam || !CAM->tmp_mat)
 		return (0);
@@ -52,12 +51,11 @@ static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, \
 
 static int		ft_setup_map_and_mlx(t_setup *setup)
 {
-	t_map		*map = NULL;
+	t_map		*map;
 
 	if ((map = (t_map*)ft_memalloc(sizeof(t_map))) && setup)
 	{
-		map->width = 0;
-		map->height = 0;
+		ft_memset(map, 0, sizeof(t_map));
 		map->pix = (t_pix *)ft_memalloc(sizeof(t_pix));
 		map->mid = (float *)ft_memalloc(sizeof(float) * 2);
 		if (!map->mid || !map->pix)
@@ -65,32 +63,38 @@ static int		ft_setup_map_and_mlx(t_setup *setup)
 		MAP = map;
 	}
 	MLX = ft_initwindow("fdf", setup->width, setup->height);
-	if (MLX && MAP)
+	IMG = ft_imgnew(MLX->mlx_ptr, setup->width, setup->height);
+	if (MLX && MAP && IMG)
 		return (1);
 	return (0);
 }
 
-static t_setup	*ft_allocate_setup()
+static t_setup	*ft_allocate_setup(int argc, char **argv)
 {
-	t_setup		*setup = NULL;
+	t_setup		*setup;
 
 	if (!(setup = (t_setup *)ft_memalloc(sizeof(t_setup))))
 		return (NULL);
+	ft_memset(setup, 0, sizeof(t_setup));
 	setup->width = WIDTH;
 	setup->height = HEIGHT;
+	SETUP.argc = argc;
+	SETUP.argv = argv;
+	FD = (t_fd *)ft_memalloc(sizeof(t_fd));
+	ft_memset(FD, 0, sizeof(t_fd));
 	if (ft_setup_cam(setup, ft_vec3new(0., 0., 1000.), \
 				ft_vec3new(0., 0., 0.), 200.) \
-			&& ft_setup_map_and_mlx(setup))
+			&& ft_setup_map_and_mlx(setup) && FD)
 		return (setup);
 	return (NULL);
 }
 
-t_setup			*ft_setup(char **argv, int argc, int *usage)
+t_setup			*ft_setup(int argc, char **argv, int *usage)
 {
-	t_setup 	*setup_tmp = NULL;
+	t_setup		*setup_tmp;
 
-	setup_tmp = ft_allocate_setup();
-	if ((*usage = ft_color_input(argv, argc, setup_tmp)) == -1)
+	setup_tmp = ft_allocate_setup(argc, argv);
+	if ((*usage = ft_color_input(setup_tmp)) == COLOR_ERROR)
 		return (ft_delete_setup(setup_tmp));
 	return (setup_tmp);
 }

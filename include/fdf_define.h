@@ -6,62 +6,89 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/04 14:09:42 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:06:16 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_DEFINE_H
 # define FDF_DEFINE_H
 
-# define WIDTH		1920
-# define HEIGHT		1080
+# define WIDTH			1920
+# define HEIGHT			1080
 
-# define MAX_STEP	400
-# define STEP		10
-# define AMP		20
-# define ENDIAN		0
-# define BBP		32
+# define MAX_STEP		400
+# define STEP			10
+# define AMP			20
+# define ENDIAN			0
+# define BBP			32
 
-# define ESC		53
-# define LEFT		123
-# define RIGHT		124
-# define DOWN		125
-# define UP			126
-# define MINUS		27
-# define EQUAL		24
-# define DOT_KEY	47
-# define SLASH_KEY	44
-# define CTRL		256
-# define STAR		67
-# define SLASH		75
-# define G_KEY		5
-# define W_KEY		13
-# define S_KEY		1
-# define A_KEY		0
-# define D_KEY		2
-# define Q_KEY		12
-# define E_KEY		14
-# define R_KEY		15
-# define F_KEY		3
-# define L_KEY		37
+# define BLUE			0x0000FF
+# define GREEN			0x00F611
+# define BROWN			0x541919
+# define WHITE			0xFFFFFF
 
-# define BLUE		0x0000FF
-# define GREEN		0x00F611
-# define BROWN		0x541919
-# define WHITE		0xFFFFFF
+# define MAX_SIZE		100000
+# define MG_MIN_SIZE	3
+# define MG_MAX_SIZE	2000
+# define MG_MIN_INT		-100
+# define MG_MAX_INT		100
 
-# define MAX_SIZE	100000
+# define SETUP			setup[0]
+# define S_WIDTH		setup[0].width
+# define S_HEIGHT		setup[0].height
+# define MAP			setup[0].map
+# define M_WIDTH		setup[0].map->width
+# define M_HEIGHT		setup[0].map->height
+# define M_DEPTH		setup[0].map->depth
+# define LERP_IN		setup[0].map->lerp_in
+# define LERP_OUT		setup[0].map->lerp_out
+# define CLR			setup[0].map->curr_clr
+# define MAPG			setup[0].map_gen
+# define MG_WIDTH		setup[0].map_gen->mapsize[0]
+# define MG_HEIGHT		setup[0].map_gen->mapsize[1]
+# define MG_PATH		setup[0].map_gen->path
+# define CAM			setup[0].cam
+# define MLX			setup[0].mlx
+# define IMG			setup[0].img
+# define FD				setup[0].fd
 
-# define MAP		setup->map
-# define M_WIDTH	setup->map->width
-# define M_HEIGHT	setup->map->height
-# define M_DEPTH	setup->map->depth
-# define LERP_IN	setup->map->lerp_in
-# define LERP_OUT	setup->map->lerp_out
-# define CLR		setup->map->curr_clr
-# define CAM		setup->cam
-# define MLX		setup->mlx
-# define IMG		setup->img
-//# define MAT		setup->cam->matrix
+# define STATE_RUN		0
+# define STATE_START	1
+# define STATE_GEN		2
+# define STATE_SAVE		3
+# define STATE_OPEN		4
+# define STATE_DRAW		5
+
+# define DEPTH_ERROR_S	"error: min_depth > max_depth or depth < -100"
+# define DEPTH_ERROR2_S	"or depth < -100 || depth > 100"
+# define DIM_ERROR_S	"error: width or height > 2000 || < 3"
+# define MAP_ERROR_S	"error: map is not in the correct format"
+# define FILE_ERROR_S	"error: file doesn't exist"
+# define COLOR_ERROR	-1
+# define MAP_ERROR		-2
+# define DIM_ERROR		-3
+# define DEPTH_ERROR	-4
+# define FILE_ERROR		-5
+
+# define CPOSX_S		" key LEFT/RIGHT    cam pos x:"
+# define CPOSY_S		" key UP/DOWN       cam pos y:"
+# define CPOSZ_S		" key DOT/SLASH     cam pos z:"
+# define CANGX_S		" key A/D           cam ang x:"
+# define CANGY_S		" key S/W           cam ang y:"
+# define CANGZ_S		" key Q/E           cam ang z:"
+# define CFOV_S			" key F/R           cam fov:"
+# define CSCALE_S		" key MINUS/EQUAL   cam scale:"
+# define CLMODE_S		" key L             line mode:"
+
+# define START_STR		"fdf by psebasti"
+# define ENTER_STR		"Press ENTER to start"
+# define MAPG_STR		"MAP GENERATOR MODE"
+# define WIDTHG_STR		"TYPE WIDTH OF MAP [ >= 3 && <= 2000] AND PRESS ENTER"
+# define HEIGHTG_STR	"TYPE HEIGHT OF MAP [ >= 3 && <= 2000] AND PRESS ENTER"
+# define MINDEPTHG_STR	"TYPE MIN DEPTH [ >= -100 && <= 100] AND PRESS ENTER"
+# define MAXDEPTHG_STR	"TYPE MAX DEPTH [ >= -100 && <= 100] AND PRESS ENTER"
+# define SAVE_STR		"WOULD YOU LIKE TO SAVE IT ?"
+# define YESORNO_STR	"y / n"
+# define NAME_STR		"TYPE A NAME FOR THIS FILE AND PRESS ENTER"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:22:36 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/03 18:24:13 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:11:05 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,40 @@
 
 static t_color	*ft_color_parse(char *arg)
 {
-	char		**arg_color = NULL;
+	char		**arg_color;
+	t_color		*color;
 
 	if (ft_strlen(arg) < 5 || ft_strlen(arg) > 11)
 		return (NULL);
 	arg_color = ft_strsplit(arg, ',');
 	if (!arg_color || !arg_color[0] || !arg_color[1] || !arg_color[2])
 		return (NULL);
-	return (ft_colornew((unsigned char)ft_atoi(arg_color[0]), \
+	color = ft_colornew((unsigned char)ft_atoi(arg_color[0]), \
 				(unsigned char)ft_atoi(arg_color[1]), \
-				(unsigned char)ft_atoi(arg_color[2])));
+				(unsigned char)ft_atoi(arg_color[2]));
+	ft_tabfree((void **)arg_color);
+	return (color);
 }
 
-int				ft_color_input(char **argv, int argc, t_setup *setup)
+int				ft_color_input(t_setup *setup)
 {
-	if (argc == 4)
+	if (SETUP.argc == 4)
 	{
-		if (!(LERP_IN = ft_color_parse(argv[2])) || \
-				!(LERP_OUT = ft_color_parse(argv[3])))
-			return (-1);
+		if (!(LERP_IN = ft_color_parse(SETUP.argv[2])) || \
+				!(LERP_OUT = ft_color_parse(SETUP.argv[3])))
+			return (COLOR_ERROR);
 	}
-	if (argc == 2)
+	if (SETUP.argc == 2)
 	{
 		LERP_IN = ft_colornew(0, 0, 0);
 		LERP_OUT = ft_colornew(255, 255, 255);
 	}
 	if (LERP_IN && LERP_OUT && (CLR = ft_colornew(0, 0, 0)))
-		return (0);
-	return (-1);
+		return (OK);
+	return (COLOR_ERROR);
 }
 
-void				ft_give_color(t_setup *setup, t_color *clr, int z)
+void			ft_give_color(t_setup *setup, t_color *clr, int z)
 {
 	double		coef;
 
