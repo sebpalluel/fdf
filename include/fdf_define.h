@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 16:39:15 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:06:16 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@
 # define STATE_OPEN		4
 # define STATE_DRAW		5
 
-# define DEPTH_ERROR_S	"error: min_depth > max_depth or depth < -100 || depth \
-	> 100"
+# define DEPTH_ERROR_S	"error: min_depth > max_depth or depth < -100"
+# define DEPTH_ERROR2_S	"or depth < -100 || depth > 100"
 # define DIM_ERROR_S	"error: width or height > 2000 || < 3"
 # define MAP_ERROR_S	"error: map is not in the correct format"
 # define FILE_ERROR_S	"error: file doesn't exist"

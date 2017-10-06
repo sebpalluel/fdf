@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 13:25:41 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 16:35:09 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:22:06 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,34 @@ int				ft_setup_menu(t_setup *setup)
 	if (MAPG->depth_t[1] && ft_generate_map(setup) == ERROR)
 		return (ERROR);
 	return (OK);
+}
+
+int				ft_setup_mode(t_setup *setup, int ret)
+{
+	if (SETUP.key == ENTER && SETUP.mode == STATE_START)
+	{
+		ret = ft_open_or_gen(setup);
+		mlx_put_image_to_window(MLX->mlx_ptr, MLX->win_ptr, IMG->image, 0, 0);
+	}
+	if (ret == OK && SETUP.mode == STATE_GEN)
+		ret = ft_setup_menu(setup);
+	if (ret == OK && SETUP.mode == STATE_SAVE)
+	{
+		if ((ft_save_map(setup)) == OK)
+			SETUP.mode = STATE_OPEN;
+	}
+	if (ret == OK && SETUP.mode == STATE_OPEN)
+	{
+		if (ft_read_map(setup) == OK && ft_allocate_map(setup) == OK\
+				&& ft_update_map_and_cam(setup) == OK)
+			SETUP.mode = STATE_DRAW;
+		else
+		{
+			SETUP.error = MAP_ERROR;
+			ret = ERROR;
+		}
+	}
+	return (ret);
 }
 
 void			ft_start(t_setup *setup)

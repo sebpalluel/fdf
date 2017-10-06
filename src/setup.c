@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 16:43:02 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:27:42 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, \
 
 static int		ft_setup_map_and_mlx(t_setup *setup)
 {
-	t_map		*map = NULL;
+	t_map		*map;
 
 	if ((map = (t_map*)ft_memalloc(sizeof(t_map))) && setup)
 	{
@@ -71,7 +71,7 @@ static int		ft_setup_map_and_mlx(t_setup *setup)
 
 static t_setup	*ft_allocate_setup(int argc, char **argv)
 {
-	t_setup		*setup = NULL;
+	t_setup		*setup;
 
 	if (!(setup = (t_setup *)ft_memalloc(sizeof(t_setup))))
 		return (NULL);
@@ -91,7 +91,7 @@ static t_setup	*ft_allocate_setup(int argc, char **argv)
 
 t_setup			*ft_setup(int argc, char **argv, int *usage)
 {
-	t_setup 	*setup_tmp = NULL;
+	t_setup		*setup_tmp;
 
 	setup_tmp = ft_allocate_setup(argc, argv);
 	if ((*usage = ft_color_input(setup_tmp)) == COLOR_ERROR)

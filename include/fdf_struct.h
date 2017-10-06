@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 15:52:59 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:06:35 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct		s_cam
 	double			**to_cam;
 }					t_cam;
 
-typedef struct		s_setup 
+typedef struct		s_setup
 {
 	unsigned int	width;
 	unsigned int	height;

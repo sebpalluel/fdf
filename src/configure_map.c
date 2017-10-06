@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 15:34:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 16:37:36 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:11:33 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				ft_configure_dim(t_setup *setup)
 	return (OK);
 }
 
-size_t		ft_name_input(t_setup *setup)
+size_t			ft_name_input(t_setup *setup)
 {
 	if (FD->name == NULL)
 		if (!(FD->name = ft_strnew(666)))

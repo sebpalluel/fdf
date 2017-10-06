@@ -6,13 +6,13 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 15:33:54 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 18:38:26 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:25:46 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int					ft_free_tmp(char **tab, int fd, int return_val)
+int				ft_free_tmp(char **tab, int fd, int return_val)
 {
 	if (tab && tab[0])
 		ft_tabfree((void **)tab);
@@ -21,7 +21,7 @@ int					ft_free_tmp(char **tab, int fd, int return_val)
 	return (return_val);
 }
 
-static int			ft_parse_map(t_setup *setup, char **tab)
+static int		ft_parse_map(t_setup *setup, char **tab)
 {
 	int			line;
 	static int	error_line = 1;
@@ -62,8 +62,8 @@ int				ft_read_map(t_setup *setup)
 	tab[M_HEIGHT] = NULL;
 	MAP->tmp_map = (int**)malloc(sizeof(int*) * M_HEIGHT + 1);
 	MAP->tmp_map[M_HEIGHT] = NULL;
-	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1  || !MAP->tmp_map || \
+	if ((!tab || !tab[0] || !tab[0][0]) || ret_gnl == -1 || !MAP->tmp_map || \
 			!ft_parse_map(setup, tab))
 		return (ft_free_tmp(tab, FD->fd, ERROR));
-	return (ft_free_tmp(tab, FD->fd, OK)); 
+	return (ft_free_tmp(tab, FD->fd, OK));
 }

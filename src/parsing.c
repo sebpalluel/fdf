@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 15:49:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 18:40:47 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:24:24 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void			ft_lerp_hexa(t_setup *setup, char **str, int line, int col)
 
 static int			ft_split_elem(t_setup *setup, char *str, int line, int col)
 {
-	char			**split_elem = NULL;
+	char			**split_elem;
 
 	if (str)
 	{
@@ -84,7 +84,7 @@ static int			ft_split_elem(t_setup *setup, char *str, int line, int col)
 
 static int			ft_have_hexa(t_setup *setup, char *str)
 {
-	size_t 			i;
+	size_t			i;
 	size_t			get_min;
 
 	i = 0;
@@ -114,11 +114,9 @@ int					ft_parse_line(t_setup *setup, char **tab, int line)
 		MAP->tmp_map[line] = NULL;
 		return (0);
 	}
-	if (!(MAP->tmp_map[line] = (int *)malloc(sizeof(int) * M_WIDTH)) )
-	{
+	if (!(MAP->tmp_map[line] = (int *)malloc(sizeof(int) * M_WIDTH)))
 		return (-1);
-	}
-	elem = 0; 
+	elem = 0;
 	while (tab[elem] != '\0')
 	{
 		if (!ft_have_hexa(setup, tab[elem]))

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 17:45:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 16:29:05 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:30:23 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int				ft_allocate_map(t_setup *setup)
 	int			array;
 
 	if (!(MAP->map = (t_pix**)malloc(sizeof(t_pix*) * M_HEIGHT + 1)))
-		return(ERROR);
+		return (ERROR);
 	MAP->mid[1] = (M_WIDTH * M_HEIGHT) / M_WIDTH;
 	MAP->mid[0] = M_HEIGHT / 2.;
 	array = -1;
 	while (MAP->tmp_map[++array])
-		if(!(MAP->map[array] = (t_pix*)malloc(sizeof(t_pix) * M_WIDTH)))
-			return(ERROR);
+		if (!(MAP->map[array] = (t_pix*)malloc(sizeof(t_pix) * M_WIDTH)))
+			return (ERROR);
 	MAP->map[M_HEIGHT] = NULL;
 	return (OK);
 }
@@ -55,12 +55,10 @@ static void		ft_vec3_to_pix(t_setup *setup, t_vec3 *vec3, int xy[2])
 				vec3->x), (int)((CAM->fov / vec3->z) * vec3->y), oldz);
 }
 
-
-
 int				ft_update_map_and_cam(t_setup *setup)
 {
 	int			xy[2];
-	t_vec3		*vec3 = NULL;
+	t_vec3		*vec3;
 
 	MAP->depth = 0;
 	ft_matrix_cam(setup);

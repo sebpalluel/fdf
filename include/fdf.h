@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 17:51:21 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 16:05:42 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:22:04 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include "../include/fdf_struct.h"
 # include "../include/fdf_define.h"
 
-
-#include <stdio.h>
 int		ft_color_input(t_setup *setup);
 void	ft_mlx_process(t_setup *setup);
 int		ft_read_map(t_setup *setup);
@@ -51,5 +49,7 @@ int		ft_setup_menu(t_setup *setup);
 void	ft_start(t_setup *setup);
 int		ft_configure_depth(t_setup *setup);
 int		ft_map_dim(t_setup *setup, size_t *c, char *str, size_t *flag);
+int		ft_setup_mode(t_setup *setup, int ret);
+int		ft_open_or_gen(t_setup *setup);
 
 #endif

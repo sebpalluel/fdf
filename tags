@@ -47,6 +47,7 @@ CTRL	libs/libft/includes/libft_define.h	/^# define CTRL	/;"	d
 CTYPEPATH	libs/libft/Makefile	/^CTYPEPATH = ctype\/$/;"	m
 C_KEY	libs/libft/includes/libft_define.h	/^# define C_KEY	/;"	d
 DEPTH_ERROR	include/fdf_define.h	/^# define DEPTH_ERROR	/;"	d
+DEPTH_ERROR2_S	include/fdf_define.h	/^# define DEPTH_ERROR2_S	/;"	d
 DEPTH_ERROR_S	include/fdf_define.h	/^# define DEPTH_ERROR_S	/;"	d
 DIM_ERROR	include/fdf_define.h	/^# define DIM_ERROR	/;"	d
 DIM_ERROR_S	include/fdf_define.h	/^# define DIM_ERROR_S	/;"	d
@@ -304,7 +305,7 @@ ft_expose_hook	src/mlx_process.c	/^static int	ft_expose_hook(t_setup *setup)$/;"
 ft_fd_delete	libs/libft/srcs/fd/ft_fd_delete.c	/^void		ft_fd_delete(t_fd *fd)$/;"	f
 ft_flipcolumn	libs/libft/srcs/tab/ft_v_flip.c	/^static void	ft_flipcolumn(void **array, size_t column, size_t rows,\\$/;"	f	file:
 ft_fliprow	libs/libft/srcs/tab/ft_h_flip.c	/^static void	ft_fliprow(void *row, size_t columns, size_t nbytes)$/;"	f	file:
-ft_free_tmp	src/read_map.c	/^int					ft_free_tmp(char **tab, int fd, int return_val)$/;"	f
+ft_free_tmp	src/read_map.c	/^int				ft_free_tmp(char **tab, int fd, int return_val)$/;"	f
 ft_ftoa	libs/libft/srcs/stdlib/ft_ftoa.c	/^char		*ft_ftoa(float f)$/;"	f
 ft_generate_map	src/generate_map.c	/^size_t			ft_generate_map(t_setup *setup)$/;"	f
 ft_getnbr	libs/libft/srcs/int/ft_getnbr.c	/^int		ft_getnbr(char *str)$/;"	f
@@ -377,12 +378,12 @@ ft_mlx_keytonumchar	libs/libft/srcs/gfx/ft_mlx_keytonumchar.c	/^char		ft_mlx_key
 ft_mlx_printkeytochar	libs/libft/srcs/gfx/ft_mlx_printkeytochar.c	/^char		ft_mlx_printkeytochar(int keycode)$/;"	f
 ft_mlx_process	src/mlx_process.c	/^void		ft_mlx_process(t_setup *setup)$/;"	f
 ft_mlxdelete	libs/libft/srcs/gfx/ft_mlxdelete.c	/^void		ft_mlxdelete(t_mlx *mlx, t_img *img)$/;"	f
-ft_name_input	src/configure_map.c	/^size_t		ft_name_input(t_setup *setup)$/;"	f
+ft_name_input	src/configure_map.c	/^size_t			ft_name_input(t_setup *setup)$/;"	f
 ft_open	libs/libft/srcs/fd/ft_open.c	/^size_t		ft_open(t_fd *fd, int flags, int rights)$/;"	f
-ft_open_or_gen	src/mlx_process.c	/^static int	ft_open_or_gen(t_setup *setup)$/;"	f	file:
+ft_open_or_gen	src/mlx_process.c	/^int			ft_open_or_gen(t_setup *setup)$/;"	f
 ft_orient_cam	src/cam.c	/^void		ft_orient_cam(t_setup *setup)$/;"	f
 ft_parse_line	src/parsing.c	/^int					ft_parse_line(t_setup *setup, char **tab, int line)$/;"	f
-ft_parse_map	src/read_map.c	/^static int			ft_parse_map(t_setup *setup, char **tab)$/;"	f	file:
+ft_parse_map	src/read_map.c	/^static int		ft_parse_map(t_setup *setup, char **tab)$/;"	f	file:
 ft_pixcpy	libs/libft/srcs/gfx/ft_pixcpy.c	/^void		ft_pixcpy(t_pix *pix_from, t_pix *pix_to)$/;"	f
 ft_pixnew	libs/libft/srcs/gfx/ft_pixnew.c	/^t_pix		*ft_pixnew(int x, int y, int z)$/;"	f
 ft_pixpopulate	libs/libft/srcs/gfx/ft_pixpopulate.c	/^void	ft_pixpopulate(t_pix *to_pix, int x, int y, int z)$/;"	f
@@ -420,6 +421,7 @@ ft_setup_depth	src/setup_gen.c	/^static int		ft_setup_depth(t_setup *setup)$/;"	
 ft_setup_dim	src/setup_gen.c	/^static int		ft_setup_dim(t_setup *setup)$/;"	f	file:
 ft_setup_map_and_mlx	src/setup.c	/^static int		ft_setup_map_and_mlx(t_setup *setup)$/;"	f	file:
 ft_setup_menu	src/setup_gen.c	/^int				ft_setup_menu(t_setup *setup)$/;"	f
+ft_setup_mode	src/setup_gen.c	/^int				ft_setup_mode(t_setup *setup, int ret)$/;"	f
 ft_specialchar	libs/libft/srcs/gfx/ft_mlx_printkeytochar.c	/^static char	ft_specialchar(int keycode)$/;"	f	file:
 ft_split_elem	src/parsing.c	/^static int			ft_split_elem(t_setup *setup, char *str, int line, int col)$/;"	f	file:
 ft_sqrt	libs/libft/srcs/math/ft_sqrt.c	/^int		ft_sqrt(int nb)$/;"	f
@@ -594,7 +596,7 @@ s_map	include/fdf_struct.h	/^typedef struct		s_map$/;"	s
 s_map_gen	include/fdf_struct.h	/^typedef struct		s_map_gen$/;"	s
 s_mlx	libs/libft/includes/libft_struct.h	/^typedef struct		s_mlx$/;"	s
 s_pix	libs/libft/includes/libft_struct.h	/^typedef struct		s_pix$/;"	s
-s_setup	include/fdf_struct.h	/^typedef struct		s_setup $/;"	s
+s_setup	include/fdf_struct.h	/^typedef struct		s_setup$/;"	s
 s_str	libs/libft/includes/libft_struct.h	/^typedef struct		s_str$/;"	s
 s_vec3	libs/libft/includes/libft_struct.h	/^typedef struct		s_vec3$/;"	s
 s_vec3u	libs/libft/includes/libft_struct.h	/^typedef struct		s_vec3u$/;"	s
@@ -621,6 +623,7 @@ tmp_mat	include/fdf_struct.h	/^	double			***tmp_mat;$/;"	m	struct:s_cam
 to_cam	include/fdf_struct.h	/^	double			**to_cam;$/;"	m	struct:s_cam
 ui	include/fdf_struct.h	/^	size_t			ui;$/;"	m	struct:s_setup
 usage	src/fdf.c	/^int				usage(int mode)$/;"	f
+usage2	src/fdf.c	/^static int		usage2(int mode)$/;"	f	file:
 vbuffer	libs/libft/minilibx/mlx_int.h	/^  GLuint		vbuffer;$/;"	m	struct:mlx_img_ctx_s
 vertexes	libs/libft/minilibx/mlx_int.h	/^  GLfloat		vertexes[8];$/;"	m	struct:mlx_img_list_s
 width	include/fdf_struct.h	/^	int				width;$/;"	m	struct:s_map

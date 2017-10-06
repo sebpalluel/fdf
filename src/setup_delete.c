@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 15:59:23 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 18:45:05 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 19:28:51 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void		ft_delete_map(t_setup *setup)
 	{
 		if (MAP->tmp_map)
 			ft_tabfree((void **)MAP->tmp_map);
-		if	(MAP->pix)
+		if (MAP->pix)
 			free(MAP->pix);
-		if	(MAP->map)
+		if (MAP->map)
 			ft_tabfree((void **)MAP->map);
 		if (LERP_IN)
 			free(LERP_IN);
@@ -38,7 +38,7 @@ static void		ft_delete_map_gen(t_setup *setup)
 {
 	if (MAPG)
 	{
-		if	(MAPG->map_str)
+		if (MAPG->map_str)
 			ft_tab3free((void ***)MAPG->map_str);
 		free(MAPG);
 	}
@@ -58,7 +58,7 @@ static void		ft_delete_cam(t_setup *setup)
 				if (CAM->tmp_mat[mat_inc])
 					ft_tabfree((void **)CAM->tmp_mat[mat_inc]);
 			}
-			free (CAM->tmp_mat);
+			free(CAM->tmp_mat);
 		}
 		if (CAM->to_cam)
 			ft_tabfree((void **)CAM->to_cam);
