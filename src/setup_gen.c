@@ -6,16 +6,14 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 13:25:41 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 19:17:56 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 16:35:09 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int				ft_setup_menu(t_setup *setup)
+static int		ft_setup_dim(t_setup *setup)
 {
-	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, SETUP.width / 50, \
-			SETUP.height / 50, 0x00611DE9, MAPG_STR);
 	if (!MAPG->dim_t[1])
 	{
 		mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, SETUP.width / 50, \
@@ -23,8 +21,16 @@ int				ft_setup_menu(t_setup *setup)
 		mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, SETUP.width / 50, \
 				SETUP.height / 5, 0x009999FF, HEIGHTG_STR);
 		if (ft_configure_dim(setup) == ERROR)
+		{
+			SETUP.error = DIM_ERROR;
 			return (ERROR);
+		}
 	}
+	return (OK);
+}
+
+static int		ft_setup_depth(t_setup *setup)
+{
 	if (MAPG->dim_t[1] && !MAPG->depth_t[1])
 	{
 		mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, SETUP.width / 50, \
@@ -32,11 +38,24 @@ int				ft_setup_menu(t_setup *setup)
 		mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, SETUP.width / 50, \
 				SETUP.height / 2.75, 0x009999FF, MAXDEPTHG_STR);
 		if (ft_configure_depth(setup) == ERROR)
+		{
+			SETUP.error = DEPTH_ERROR;
 			return (ERROR);
+		}
 	}
+	return (OK);
+}
+
+int				ft_setup_menu(t_setup *setup)
+{
+	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, SETUP.width / 50, \
+			SETUP.height / 50, 0x00611DE9, MAPG_STR);
+	if (ft_setup_dim(setup) == ERROR)
+		return (ERROR);
+	if (ft_setup_depth(setup) == ERROR)
+		return (ERROR);
 	if (MAPG->depth_t[1] && ft_generate_map(setup) == ERROR)
 		return (ERROR);
-	printf("setup_menu\n");
 	return (OK);
 }
 

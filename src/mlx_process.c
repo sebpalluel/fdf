@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:27:00 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 19:36:34 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 17:50:22 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	ft_open_or_gen(t_setup *setup)
 		setup->mode = STATE_OPEN;
 		if ((FD->fd = open(SETUP.argv[1], O_RDONLY)) <= 0)
 		{
-			usage(0);
+			SETUP.error = FILE_ERROR;
 			return (ERROR);
 		}
 	}
@@ -75,26 +75,28 @@ static int	ft_key_hook(int keycode, t_setup *setup)
 		ret = ft_open_or_gen(setup);
 		mlx_put_image_to_window(MLX->mlx_ptr, MLX->win_ptr, IMG->image, 0, 0);
 	}
-	if (SETUP.mode == STATE_GEN)
+	if (ret == OK && SETUP.mode == STATE_GEN)
 		ret = ft_setup_menu(setup);
-	if (SETUP.mode == STATE_SAVE)
+	if (ret == OK && SETUP.mode == STATE_SAVE)
 	{
 		if ((ft_save_map(setup)) == OK)
 			SETUP.mode = STATE_OPEN;
 	}
-	if (SETUP.mode == STATE_OPEN)
+	if (ret == OK && SETUP.mode == STATE_OPEN)
 	{
 		if (ft_read_map(setup) == OK && ft_allocate_map(setup) == OK\
 				&& ft_update_map_and_cam(setup) == OK)
 			SETUP.mode = STATE_DRAW;
 		else
+		{
+			SETUP.error = MAP_ERROR;
 			ret = ERROR;
+		}
 	}
-	if (SETUP.key == ESC || ret == ERROR)
+	if (SETUP.key == ESC || ret != OK)
 	{
 		ft_delete_setup(setup);
-		usage(1);
-		while (42);
+		usage(SETUP.error);
 		exit(0);
 	}
 	ft_expose_hook(setup);
@@ -105,7 +107,6 @@ void		ft_mlx_process(t_setup *setup)
 {
 	if (SETUP.mode == STATE_START)
 		ft_start(setup);
-	//ft_update_map_and_cam(setup);
 	mlx_key_hook(MLX->win_ptr, ft_key_hook, setup);
 	mlx_expose_hook(MLX->win_ptr, ft_expose_hook, setup);
 	mlx_do_sync(MLX->mlx_ptr);

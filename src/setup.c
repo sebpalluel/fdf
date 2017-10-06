@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/20 16:46:11 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 15:59:29 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 16:43:02 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_setup			*ft_setup(int argc, char **argv, int *usage)
 	t_setup 	*setup_tmp = NULL;
 
 	setup_tmp = ft_allocate_setup(argc, argv);
-	if ((*usage = ft_color_input(setup_tmp)) == -1)
+	if ((*usage = ft_color_input(setup_tmp)) == COLOR_ERROR)
 		return (ft_delete_setup(setup_tmp));
 	return (setup_tmp);
 }

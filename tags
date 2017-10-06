@@ -38,6 +38,7 @@ CLR	include/fdf_define.h	/^# define CLR	/;"	d
 CMP	Makefile	/^CMP			=	gcc$/;"	m
 CMP	libs/libft/Makefile	/^CMP		=	gcc$/;"	m
 COLORMAPCHANGEMASK	libs/libft/includes/libft_define.h	/^# define COLORMAPCHANGEMASK	/;"	d
+COLOR_ERROR	include/fdf_define.h	/^# define COLOR_ERROR	/;"	d
 CPOSX_S	include/fdf_define.h	/^# define CPOSX_S	/;"	d
 CPOSY_S	include/fdf_define.h	/^# define CPOSY_S	/;"	d
 CPOSZ_S	include/fdf_define.h	/^# define CPOSZ_S	/;"	d
@@ -45,6 +46,10 @@ CSCALE_S	include/fdf_define.h	/^# define CSCALE_S	/;"	d
 CTRL	libs/libft/includes/libft_define.h	/^# define CTRL	/;"	d
 CTYPEPATH	libs/libft/Makefile	/^CTYPEPATH = ctype\/$/;"	m
 C_KEY	libs/libft/includes/libft_define.h	/^# define C_KEY	/;"	d
+DEPTH_ERROR	include/fdf_define.h	/^# define DEPTH_ERROR	/;"	d
+DEPTH_ERROR_S	include/fdf_define.h	/^# define DEPTH_ERROR_S	/;"	d
+DIM_ERROR	include/fdf_define.h	/^# define DIM_ERROR	/;"	d
+DIM_ERROR_S	include/fdf_define.h	/^# define DIM_ERROR_S	/;"	d
 DOT_KEY	libs/libft/includes/libft_define.h	/^# define DOT_KEY	/;"	d
 DOWN	libs/libft/includes/libft_define.h	/^# define DOWN	/;"	d
 D_KEY	libs/libft/includes/libft_define.h	/^# define D_KEY	/;"	d
@@ -66,6 +71,8 @@ FDF_H	include/fdf.h	/^# define FDF_H$/;"	d
 FDF_STRUCT_H	include/fdf_struct.h	/^# define FDF_STRUCT_H$/;"	d
 FDPATH	libs/libft/Makefile	/^FDPATH = fd\/$/;"	m
 FD_MAX	libs/libft/includes/libft_define.h	/^# define FD_MAX	/;"	d
+FILE_ERROR	include/fdf_define.h	/^# define FILE_ERROR	/;"	d
+FILE_ERROR_S	include/fdf_define.h	/^# define FILE_ERROR_S	/;"	d
 FIVE	libs/libft/includes/libft_define.h	/^# define FIVE	/;"	d
 FLAGS	Makefile	/^FLAGS		=	-ggdb -Wall -Wextra -Werror$/;"	m
 FLAGS	libs/libft/Makefile	/^FLAGS	=	-ggdb -Wall -Wextra -Werror$/;"	m
@@ -107,6 +114,8 @@ L_KEY	libs/libft/includes/libft_define.h	/^# define L_KEY	/;"	d
 MAP	include/fdf_define.h	/^# define MAP	/;"	d
 MAPG	include/fdf_define.h	/^# define MAPG	/;"	d
 MAPG_STR	include/fdf_define.h	/^# define MAPG_STR	/;"	d
+MAP_ERROR	include/fdf_define.h	/^# define MAP_ERROR	/;"	d
+MAP_ERROR_S	include/fdf_define.h	/^# define MAP_ERROR_S	/;"	d
 MATHPATH	libs/libft/Makefile	/^MATHPATH = math\/$/;"	m
 MAXDEPTHG_STR	include/fdf_define.h	/^# define MAXDEPTHG_STR	/;"	d
 MAX_EVENT	libs/libft/minilibx/mlx_int.h	/^#define	MAX_EVENT	/;"	d
@@ -247,6 +256,7 @@ dim_i	include/fdf_struct.h	/^	size_t			dim_i[2];$/;"	m	struct:s_map_gen
 dim_t	include/fdf_struct.h	/^	size_t			dim_t[2];$/;"	m	struct:s_map_gen
 display_log	libs/libft/minilibx/mlx_shaders.c	/^void display_log(GLuint object, void (*param_func)(), void (*getlog_func)())$/;"	f
 endian	libs/libft/includes/libft_struct.h	/^	int				endian;$/;"	m	struct:s_img
+error	include/fdf_struct.h	/^	int				error;$/;"	m	struct:s_setup
 fd	include/fdf_struct.h	/^	t_fd			*fd;$/;"	m	struct:s_setup
 fd	libs/libft/includes/libft_struct.h	/^	int				fd;$/;"	m	struct:s_fd
 flags	libs/libft/includes/libft_struct.h	/^	int				flags;$/;"	m	struct:s_fd
@@ -261,6 +271,7 @@ ft_allocate_matrix_cam	src/setup.c	/^static int		ft_allocate_matrix_cam(t_setup 
 ft_allocate_setup	src/setup.c	/^static t_setup	*ft_allocate_setup(int argc, char **argv)$/;"	f	file:
 ft_atoi	libs/libft/srcs/stdlib/ft_atoi.c	/^int		ft_atoi(const char *str)$/;"	f
 ft_bzero	libs/libft/srcs/mem/ft_bzero.c	/^void		ft_bzero(void *s, size_t n)$/;"	f
+ft_bzerotab	libs/libft/srcs/mem/ft_bzerotab.c	/^void		ft_bzerotab(void **tab)$/;"	f
 ft_checkdigit	libs/libft/srcs/ctype/ft_checkdigit.c	/^int			ft_checkdigit(char *str)$/;"	f
 ft_checkhexa	libs/libft/srcs/ctype/ft_checkhexa.c	/^int					ft_checkhexa(char *str)$/;"	f
 ft_checkint	libs/libft/srcs/ctype/ft_checkint.c	/^int			ft_checkint(char *str)$/;"	f
@@ -290,13 +301,14 @@ ft_draw_map_point	src/draw.c	/^void				ft_draw_map_point(t_setup *setup)$/;"	f
 ft_draw_update	src/mlx_process.c	/^static int	ft_draw_update(t_setup *setup)$/;"	f	file:
 ft_evaluate_length	src/parsing.c	/^static int			ft_evaluate_length(t_setup *setup, char **tab)$/;"	f	file:
 ft_expose_hook	src/mlx_process.c	/^static int	ft_expose_hook(t_setup *setup)$/;"	f	file:
+ft_fd_delete	libs/libft/srcs/fd/ft_fd_delete.c	/^void		ft_fd_delete(t_fd *fd)$/;"	f
 ft_flipcolumn	libs/libft/srcs/tab/ft_v_flip.c	/^static void	ft_flipcolumn(void **array, size_t column, size_t rows,\\$/;"	f	file:
 ft_fliprow	libs/libft/srcs/tab/ft_h_flip.c	/^static void	ft_fliprow(void *row, size_t columns, size_t nbytes)$/;"	f	file:
 ft_free_tmp	src/read_map.c	/^int					ft_free_tmp(char **tab, int fd, int return_val)$/;"	f
 ft_ftoa	libs/libft/srcs/stdlib/ft_ftoa.c	/^char		*ft_ftoa(float f)$/;"	f
 ft_generate_map	src/generate_map.c	/^size_t			ft_generate_map(t_setup *setup)$/;"	f
 ft_getnbr	libs/libft/srcs/int/ft_getnbr.c	/^int		ft_getnbr(char *str)$/;"	f
-ft_give_color	src/color.c	/^void				ft_give_color(t_setup *setup, t_color *clr, int z)$/;"	f
+ft_give_color	src/color.c	/^void			ft_give_color(t_setup *setup, t_color *clr, int z)$/;"	f
 ft_h_flip	libs/libft/srcs/tab/ft_h_flip.c	/^void		ft_h_flip(void **array, size_t columns, size_t rows, size_t nbytes)$/;"	f
 ft_hash	libs/libft/srcs/rand/ft_hash.c	/^unsigned long		ft_hash(unsigned char *str)$/;"	f
 ft_hash32	libs/libft/srcs/rand/ft_hash32.c	/^uint32_t	ft_hash32(uint32_t val)$/;"	f
@@ -404,6 +416,8 @@ ft_save_map	src/save_map.c	/^int				ft_save_map(t_setup *setup)$/;"	f
 ft_scale_cam	src/cam.c	/^void		ft_scale_cam(t_setup *setup)$/;"	f
 ft_setup	src/setup.c	/^t_setup			*ft_setup(int argc, char **argv, int *usage)$/;"	f
 ft_setup_cam	src/setup.c	/^static int		ft_setup_cam(t_setup *setup, t_vec3 *pos, t_vec3 *rot, \\$/;"	f	file:
+ft_setup_depth	src/setup_gen.c	/^static int		ft_setup_depth(t_setup *setup)$/;"	f	file:
+ft_setup_dim	src/setup_gen.c	/^static int		ft_setup_dim(t_setup *setup)$/;"	f	file:
 ft_setup_map_and_mlx	src/setup.c	/^static int		ft_setup_map_and_mlx(t_setup *setup)$/;"	f	file:
 ft_setup_menu	src/setup_gen.c	/^int				ft_setup_menu(t_setup *setup)$/;"	f
 ft_specialchar	libs/libft/srcs/gfx/ft_mlx_printkeytochar.c	/^static char	ft_specialchar(int keycode)$/;"	f	file:

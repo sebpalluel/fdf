@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 12:45:38 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 19:40:31 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 16:39:15 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@
 # define STATE_SAVE		3
 # define STATE_OPEN		4
 # define STATE_DRAW		5
+
+# define DEPTH_ERROR_S	"error: min_depth > max_depth or depth < -100 || depth \
+	> 100"
+# define DIM_ERROR_S	"error: width or height > 2000 || < 3"
+# define MAP_ERROR_S	"error: map is not in the correct format"
+# define FILE_ERROR_S	"error: file doesn't exist"
+# define COLOR_ERROR	-1
+# define MAP_ERROR		-2
+# define DIM_ERROR		-3
+# define DEPTH_ERROR	-4
+# define FILE_ERROR		-5
 
 # define CPOSX_S		" key LEFT/RIGHT    cam pos x:"
 # define CPOSY_S		" key UP/DOWN       cam pos y:"

@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 13:10:42 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 17:34:23 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 16:31:11 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ int				ft_configure_depth(t_setup *setup)
 			S_HEIGHT / 2.5, dim_col[1], "DEPTH MAX : ");
 	mlx_string_put(MLX->mlx_ptr, MLX->win_ptr, S_WIDTH / 10, \
 			S_HEIGHT / 2.5, dim_col[1], MAPG->depth_str[1]);
+	if (MAPG->depth_t[1] && (MAPG->depth[0] >= MAPG->depth[1]))
+		return (ERROR);
 	return (OK);
 }

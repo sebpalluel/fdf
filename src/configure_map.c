@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 15:34:35 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 13:57:24 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 16:37:36 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,10 @@ int				ft_configure_dim(t_setup *setup)
 size_t		ft_name_input(t_setup *setup)
 {
 	if (FD->name == NULL)
-{
 		if (!(FD->name = ft_strnew(666)))
 			return (ERROR);
-}
-	if (SETUP.key != ENTER && MAPG->yes_t && ft_mlx_printkeytochar(SETUP.key))
+	if (MAPG->name_i < 666 && SETUP.key != ENTER && MAPG->yes_t && \
+			ft_mlx_printkeytochar(SETUP.key))
 		FD->name[MAPG->name_i++] = ft_mlx_printkeytochar(SETUP.key);
 	return (OK);
 }

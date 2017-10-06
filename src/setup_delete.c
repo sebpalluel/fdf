@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 15:59:23 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 14:11:06 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 18:45:05 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		ft_delete_map(t_setup *setup)
 {
 	if (MAP)
 	{
-		if (MAP->tmp_map && MAP->tmp_map[M_HEIGHT - 1])
+		if (MAP->tmp_map)
 			ft_tabfree((void **)MAP->tmp_map);
 		if	(MAP->pix)
 			free(MAP->pix);
@@ -72,12 +72,14 @@ static void		ft_delete_cam(t_setup *setup)
 
 t_setup			*ft_delete_setup(t_setup *setup)
 {
-	ft_delete_map(setup);
-	ft_delete_map_gen(setup);
-	ft_delete_cam(setup);
-	if (FD)
-		free(FD);
-	ft_mlxdelete(MLX, IMG);
-	free((void *)setup);
+	if (setup)
+	{
+		ft_delete_map(setup);
+		ft_delete_map_gen(setup);
+		ft_delete_cam(setup);
+		ft_fd_delete(FD);
+		ft_mlxdelete(MLX, IMG);
+		free((void *)setup);
+	}
 	return (NULL);
 }

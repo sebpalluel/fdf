@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 15:49:57 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 15:53:57 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 18:40:47 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,14 @@ int					ft_parse_line(t_setup *setup, char **tab, int line)
 	size_t			elem;
 
 	if (!ft_evaluate_length(setup, tab))
+	{
+		MAP->tmp_map[line] = NULL;
 		return (0);
-	if(!(MAP->tmp_map[line] = (int *)malloc(sizeof(int) * M_WIDTH + 1)))
+	}
+	if (!(MAP->tmp_map[line] = (int *)malloc(sizeof(int) * M_WIDTH)) )
+	{
 		return (-1);
-	MAP->tmp_map[line][M_WIDTH] = 0;
+	}
 	elem = 0; 
 	while (tab[elem] != '\0')
 	{
@@ -122,6 +126,6 @@ int					ft_parse_line(t_setup *setup, char **tab, int line)
 		if (!ft_split_elem(setup, tab[elem], line, elem))
 			return (0);
 		elem++;
-	}	
+	}
 	return (1);
 }

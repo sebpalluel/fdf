@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 18:25:09 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/05 16:47:02 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/06 15:52:59 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct		s_setup
 	int				key;
 	size_t			line;
 	size_t			mode;
+	int				error;
 	int				argc;
 	char			**argv;
 	t_mlx			*mlx;
