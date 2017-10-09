@@ -14,8 +14,6 @@ ANSI_COLOR_RESET	libs/libft/includes/libft_define.h	/^# define ANSI_COLOR_RESET	
 ANSI_COLOR_YELLOW	libs/libft/includes/libft_define.h	/^# define ANSI_COLOR_YELLOW	/;"	d
 A_KEY	libs/libft/includes/libft_define.h	/^# define A_KEY	/;"	d
 BBP	include/fdf_define.h	/^# define BBP	/;"	d
-BLUE	include/fdf_define.h	/^# define BLUE	/;"	d
-BROWN	include/fdf_define.h	/^# define BROWN	/;"	d
 BUFF_SIZE	libs/libft/includes/libft_define.h	/^# define BUFF_SIZE /;"	d
 BUTTON1MOTIONMASK	libs/libft/includes/libft_define.h	/^# define BUTTON1MOTIONMASK	/;"	d
 BUTTON2MOTIONMASK	libs/libft/includes/libft_define.h	/^# define BUTTON2MOTIONMASK	/;"	d
@@ -83,7 +81,6 @@ FONT_WIDTH	libs/libft/minilibx/mlx_int.h	/^#define FONT_WIDTH	/;"	d
 FOUR	libs/libft/includes/libft_define.h	/^# define FOUR	/;"	d
 F_KEY	libs/libft/includes/libft_define.h	/^# define F_KEY	/;"	d
 GFXPATH	libs/libft/Makefile	/^GFXPATH = gfx\/$/;"	m
-GREEN	include/fdf_define.h	/^# define GREEN	/;"	d
 G_KEY	libs/libft/includes/libft_define.h	/^# define G_KEY	/;"	d
 HEIGHT	include/fdf_define.h	/^# define HEIGHT	/;"	d
 HEIGHTG_STR	include/fdf_define.h	/^# define HEIGHTG_STR	/;"	d
@@ -145,6 +142,12 @@ MOUSE_SIDE	libs/libft/includes/libft_define.h	/^# define MOUSE_SIDE	/;"	d
 M_DEPTH	include/fdf_define.h	/^# define M_DEPTH	/;"	d
 M_HEIGHT	include/fdf_define.h	/^# define M_HEIGHT	/;"	d
 M_KEY	libs/libft/includes/libft_define.h	/^# define M_KEY	/;"	d
+M_ROT_X	include/fdf_define.h	/^# define M_ROT_X	/;"	d
+M_ROT_Y	include/fdf_define.h	/^# define M_ROT_Y	/;"	d
+M_ROT_Z	include/fdf_define.h	/^# define M_ROT_Z	/;"	d
+M_ROT_ZY	include/fdf_define.h	/^# define M_ROT_ZY	/;"	d
+M_ROT_ZYX	include/fdf_define.h	/^# define M_ROT_ZYX	/;"	d
+M_TRANS	include/fdf_define.h	/^# define M_TRANS	/;"	d
 M_WIDTH	include/fdf_define.h	/^# define M_WIDTH	/;"	d
 NAME	Makefile	/^NAME = fdf$/;"	m
 NAME	libs/libft/Makefile	/^NAME	=	libft.a$/;"	m
@@ -221,7 +224,6 @@ VISIBILITYCHANGEMASK	libs/libft/includes/libft_define.h	/^# define VISIBILITYCHA
 V_KEY	libs/libft/includes/libft_define.h	/^# define V_KEY	/;"	d
 WHEEL_DOWN	libs/libft/includes/libft_define.h	/^# define WHEEL_DOWN	/;"	d
 WHEEL_UP	libs/libft/includes/libft_define.h	/^# define WHEEL_UP	/;"	d
-WHITE	include/fdf_define.h	/^# define WHITE	/;"	d
 WIDTH	include/fdf_define.h	/^# define WIDTH	/;"	d
 WIDTHG_STR	include/fdf_define.h	/^# define WIDTHG_STR	/;"	d
 W_KEY	libs/libft/includes/libft_define.h	/^# define W_KEY	/;"	d
@@ -351,14 +353,14 @@ ft_lstnew	libs/libft/srcs/list/ft_lstnew.c	/^t_list		*ft_lstnew(void const *cont
 ft_lsttoarray	libs/libft/srcs/list/ft_lsttoarray.c	/^void	**ft_lsttoarray(t_list *lst)$/;"	f
 ft_map_dim	src/configure_map.c	/^int				ft_map_dim(t_setup *setup, size_t *c, char *str, size_t *flag)$/;"	f
 ft_matrix_cam	src/update_map.c	/^static void		ft_matrix_cam(t_setup *setup)$/;"	f	file:
-ft_matrixadd	libs/libft/srcs/gfx/ft_matrixadd.c	/^void		ft_matrixadd(double **ret, double **m, double **n, int size)$/;"	f
-ft_matrixhomothety	libs/libft/srcs/gfx/ft_matrixhomothety.c	/^void		ft_matrixhomothety(double **ret, int factor)$/;"	f
-ft_matrixmult	libs/libft/srcs/gfx/ft_matrixmult.c	/^void		ft_matrixmult(double **ret, double **m, double **n, int size)$/;"	f
-ft_matrixonpoint	libs/libft/srcs/gfx/ft_matrixonpoint.c	/^void		ft_matrixonpoint(double **m, t_vec3 *vec3)$/;"	f
-ft_matrixrotx	libs/libft/srcs/gfx/ft_matrixrotx.c	/^void		ft_matrixrotx(double **ret, double deg)$/;"	f
-ft_matrixroty	libs/libft/srcs/gfx/ft_matrixroty.c	/^void		ft_matrixroty(double **ret, double deg)$/;"	f
-ft_matrixrotz	libs/libft/srcs/gfx/ft_matrixrotz.c	/^void		ft_matrixrotz(double **ret, double deg)$/;"	f
-ft_matrixtranslate	libs/libft/srcs/gfx/ft_matrixtranslate.c	/^void		ft_matrixtranslate(double **ret, t_vec3 *vec)$/;"	f
+ft_matrixadd	libs/libft/srcs/gfx/ft_matrixadd.c	/^void		ft_matrixadd(double **mat, double **m, double **n, int size)$/;"	f
+ft_matrixhomothety	libs/libft/srcs/gfx/ft_matrixhomothety.c	/^void		ft_matrixhomothety(double **mat, int factor)$/;"	f
+ft_matrixmult	libs/libft/srcs/gfx/ft_matrixmult.c	/^void		ft_matrixmult(double **mat, double **m, double **n, int size)$/;"	f
+ft_matrixonpoint	libs/libft/srcs/gfx/ft_matrixonpoint.c	/^void		ft_matrixonpoint(double **mat, t_vec3 *vec3)$/;"	f
+ft_matrixrotx	libs/libft/srcs/gfx/ft_matrixrotx.c	/^void		ft_matrixrotx(double **mat, double deg)$/;"	f
+ft_matrixroty	libs/libft/srcs/gfx/ft_matrixroty.c	/^void		ft_matrixroty(double **mat, double deg)$/;"	f
+ft_matrixrotz	libs/libft/srcs/gfx/ft_matrixrotz.c	/^void		ft_matrixrotz(double **mat, double deg)$/;"	f
+ft_matrixtranslate	libs/libft/srcs/gfx/ft_matrixtranslate.c	/^void		ft_matrixtranslate(double **mat, t_vec3 *vec)$/;"	f
 ft_matrixzero	libs/libft/srcs/gfx/ft_matrixzero.c	/^double		**ft_matrixzero(int size)$/;"	f
 ft_memalloc	libs/libft/srcs/mem/ft_memalloc.c	/^void	*ft_memalloc(size_t size)$/;"	f
 ft_memccpy	libs/libft/srcs/mem/ft_memccpy.c	/^void	*ft_memccpy(void *dest, const void *src, int c, size_t n)$/;"	f
