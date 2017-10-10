@@ -6,7 +6,7 @@
 /*   By: psebasti <sebpalluel@free.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 15:42:31 by psebasti          #+#    #+#             */
-/*   Updated: 2017/10/06 19:14:46 by psebasti         ###   ########.fr       */
+/*   Updated: 2017/10/10 15:13:54 by psebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void			ft_draw_line(t_setup *setup, t_pix *a, t_pix *b)
 	int				step;
 
 	xyzi[3] = 0;
-	ft_pixcpy(a, MAP->pix);
 	if (abs(a->x - b->x) <= abs(a->y - b->y))
 		step = 1 + abs(a->y - b->y);
 	else
